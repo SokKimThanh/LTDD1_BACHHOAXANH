@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/image"
+    android:layout_width="200sp"
+    android:layout_height="200sp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:background="#F6F6F6"
+    android:orientation="vertical">
+    <!-- Auto layout, variables, and unit scale are not yet supported -->
+    <ImageView
+        android:id="@+id/ivHinhDonHang"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:background="@drawable/ic_launcher_foreground" />
+
+
+    <!-- Auto layout, variables, and unit scale are not yet supported -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="1sp"
+        android:paddingRight="1sp">
+
+        <TextView
+            android:id="@+id/tvNgayHoaDon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/th_t"
+            android:layout_gravity="center"
+            android:textAppearance="@style/th_t" />
+        <!-- Auto layout, variables, and unit scale are not yet supported -->
+
+    </LinearLayout>
+
+</LinearLayout>

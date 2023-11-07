@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mnThem"
+        android:icon="@drawable/btn_add"
+        android:tooltipText="Thêm"
+        android:title="Thêm"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/mnThoat"
+        android:icon="@drawable/btn_exit"
+        android:title="Thoat"
+        app:showAsAction="always"/>
+
+</menu>
