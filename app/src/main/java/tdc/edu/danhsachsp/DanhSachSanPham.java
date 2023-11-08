@@ -43,7 +43,7 @@ public class DanhSachSanPham extends AppCompatActivity {
    
     //hien thi danh sach
     private void setControl() {
-        this.lvDanhSachSp = findViewById(R.id.lvDanhSachSp);
+        this.lvDanhSachSp = findViewById(R.id.lvDanhSachDM);
     }
     // gan menu bar
     private void setEvent() {

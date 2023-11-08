@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DanhSachSanPham">
+    tools:context="tdc.edu.danhmucsp.ViewDanhMucList">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh sách sản phẩm"
+        android:text="Danh sách danh mục"
         android:gravity="center"
         android:textSize="30sp"
-        android:background="#00BCD4"
+        android:background="#2196F3"
         android:textColor="#FFC107" />
     <ListView
         android:layout_width="match_parent"

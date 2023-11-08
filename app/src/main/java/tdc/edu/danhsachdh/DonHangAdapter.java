@@ -38,7 +38,7 @@ public class DonHangAdapter extends ArrayAdapter {
          // dau vao position set gia tri cho control
         DonHang sp = data.get(position);
         // hien thi ngay lap hoa don
-        tvNgayHoaDon.setText(sp.get_NgayDatHang().toString());
+//        tvNgayHoaDon.setText(sp.get_NgayDatHang());
 
         // hien thi toan bo du lieu len view hop le
         return convertView;
