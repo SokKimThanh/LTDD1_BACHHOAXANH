@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tdc.edu.danhmucsp.ViewDanhMucEdit">
+    <!--    ma, ten, ghi chu-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:text="DANH MỤC SẢN PHẨM"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="start"
+        android:text="Thông tin danh mục"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="start"
+        android:text="Mã danh mục"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDMEditMa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập mã danh mục"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="start"
+        android:text="Tên danh mục"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDMEditTen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập tên danh mục"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="start"
+        android:text="Ghi chú"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDMGhiChu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Nhập ghi chú"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnDMEditAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/greenPrimary"
+            android:text="THÊM MỚI"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnDMEditLamMoi"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/pinkPrimary"
+            android:text="LÀM MỚI"
+            android:textColor="@color/danger"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnDMEditThoat"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/pinkPrimary"
+            android:text="THOÁT"
+            android:textColor="@color/danger"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>

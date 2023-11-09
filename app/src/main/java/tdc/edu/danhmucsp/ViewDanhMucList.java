@@ -1,6 +1,9 @@
 package tdc.edu.danhmucsp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -14,8 +17,8 @@ public class ViewDanhMucList extends AppCompatActivity {
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static ListDanhMucSP dataDM = new ListDanhMucSP();
-    static DanhMucArrayAdapter adapter;
+    static DanhMucList dataDM = new DanhMucList();
+    static DanhMucListAdapter adapter;
 
     ListView lvDanhMucList;
 
@@ -42,31 +45,31 @@ public class ViewDanhMucList extends AppCompatActivity {
         // khoi tao san pham
         KhoiTao();
         // gan san pham bang menu item layout(gan template item)
-        adapter = new DanhMucArrayAdapter(this, R.layout.danhmuc_layout, dataDM.danhMucSPList);
+        adapter = new DanhMucListAdapter(this, R.layout.danhmuc_layout, dataDM.danhMucList);
         // hien thi len listview
         lvDanhMucList.setAdapter(adapter);
 
         // su kien click vao item de update
-//        lvDanhMucList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(ViewDanhMucList.this, ChiTietDanhMuc.class);
-//                // bạn cần phải chắc chắn rằng SanPham
-//                // có thể được chuyển đổi thành CharSequence,
-//                // hoặc bạn cần thay đổi cách bạn chuyển dữ liệu
-//                // giữa các hoạt động.
-//                // Một cách để làm điều này là để làm cho lớp
-//                // SanPham triển khai Serializable hoặc Parcelable,
-//                // sau đó bạn có thể chuyển toàn bộ đối tượng qua Intent.
-//                /**
-//                 * public class SanPham implements Serializable {
-//                 *     // các trường và phương thức của bạn ở đây
-//                 * }
-//                 * */
-//                intent.putExtra("item",  dataSp.get(position));
-//                startActivity(intent);
-//            }
-//        });
+        lvDanhMucList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ViewDanhMucList.this, ViewDanhMucEdit.class);
+                // bạn cần phải chắc chắn rằng SanPham
+                // có thể được chuyển đổi thành CharSequence,
+                // hoặc bạn cần thay đổi cách bạn chuyển dữ liệu
+                // giữa các hoạt động.
+                // Một cách để làm điều này là để làm cho lớp
+                // SanPham triển khai Serializable hoặc Parcelable,
+                // sau đó bạn có thể chuyển toàn bộ đối tượng qua Intent.
+                /**
+                 * public class SanPham implements Serializable {
+                 *     // các trường và phương thức của bạn ở đây
+                 * }
+                 * */
+                intent.putExtra("item",  dataDM.danhMucList.get(position));
+                startActivity(intent);
+            }
+        });
 
         //su kien long click de xoa item
 //        lvDanhMucList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

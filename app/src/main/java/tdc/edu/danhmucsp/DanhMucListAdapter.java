@@ -14,17 +14,15 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import tdc.edu.danhsachdh.HangHoa;
 import tdc.edu.danhsachsp.R;
-import tdc.edu.danhsachsp.SanPham;
 
-public class DanhMucArrayAdapter extends ArrayAdapter<DanhMucSP> {
+public class DanhMucListAdapter extends ArrayAdapter<DanhMucSP> {
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
     int resource;//id cua control
 
     List<DanhMucSP> data;// danh sach san pham (dau vao+ dau ra)
-    public DanhMucArrayAdapter(Context context, int resource,List<DanhMucSP> data){
+    public DanhMucListAdapter(Context context, int resource, List<DanhMucSP> data){
         super(context,resource,data);
         this.context = context;
         this.resource = resource;
