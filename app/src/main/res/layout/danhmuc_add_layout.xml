@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tdc.edu.danhsachdm.ViewDanhMucEdit">
+    tools:context="tdc.edu.danhsachdm.ViewDanhMucAdd">
     <!--    ma, ten, ghi chu-->
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:gravity="center"
-        android:text="SỬA DANH MỤC"
+        android:text="THÊM DANH MỤC"
         android:textSize="30sp" />
 
     <TextView
@@ -31,14 +31,13 @@
         android:text="Mã danh mục"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvMaDM"
+    <EditText
+        android:id="@+id/edtDMEditMa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hiển thị mã danh mục"
+        android:hint="Nhập mã danh mục"
         android:inputType="text"
         android:padding="16dp"
-        android:enabled="false"
         android:textSize="16sp" />
 
     <TextView
@@ -84,26 +83,26 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnDMEditCapNhat"
+            android:id="@+id/btnDMEditAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/greenPrimary"
-            android:text="CẬP NHẬT"
+            android:text="THÊM MỚI"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/btnDMEditXoa"
+            android:id="@+id/btnDMEditRefresh"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:backgroundTint="@color/pinkPrimary"
-            android:text="XÓA"
+            android:text="LÀM MỚI"
             android:textColor="@color/danger"
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/btnDMEditQuayVe"
+            android:id="@+id/btnDMEditBack"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

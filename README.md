@@ -10,7 +10,7 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Menu add đi vào màn hình add
     - Menu Exit thoát khỏi ứng dụng
     - Click vào item trên danh sách đi vào màn hình edit
-+ Thêm màn hình add
++ Thêm màn hình add 10/11/2023 6:53 CH
     - Thực hiện chức năng add
     - Thực hiện chức năng làm mới
     - Thực hiện chức năng quay lại

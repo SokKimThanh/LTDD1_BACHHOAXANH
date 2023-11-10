@@ -1,23 +1,25 @@
-package tdc.edu.danhmucsp;
+package tdc.edu.danhsachdm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import tdc.edu.danhsachsp.R;
 
 public class ViewDanhMucList extends AppCompatActivity {
-//3 thanh phan hien thi danh sach
-
+    //ba thanh phan hien thi danh sach
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static DanhMucList dataDM = new DanhMucList();
+    static DanhMucList danhMucList;
     static DanhMucListAdapter adapter;
 
     ListView lvDanhMucList;
@@ -45,7 +47,7 @@ public class ViewDanhMucList extends AppCompatActivity {
         // khoi tao san pham
         KhoiTao();
         // gan san pham bang menu item layout(gan template item)
-        adapter = new DanhMucListAdapter(this, R.layout.danhmuc_layout, dataDM.danhMucList);
+        adapter = new DanhMucListAdapter(this, R.layout.danhmuc_layout, danhMucList.getDanhMucList());
         // hien thi len listview
         lvDanhMucList.setAdapter(adapter);
 
@@ -66,7 +68,7 @@ public class ViewDanhMucList extends AppCompatActivity {
                  *     // các trường và phương thức của bạn ở đây
                  * }
                  * */
-                intent.putExtra("item",  dataDM.danhMucList.get(position));
+                intent.putExtra("item", danhMucList.getDanhMucList().get(position));
                 startActivity(intent);
             }
         });
@@ -86,33 +88,33 @@ public class ViewDanhMucList extends AppCompatActivity {
 
     // khoi tao danh sach san pham
     private void KhoiTao() {
-        dataDM.Them(new DanhMucSP("dm001", "Thịt", "Ghi chu danh muc 1"));
-        dataDM.Them(new DanhMucSP("dm002", "Cá", "Ghi chu danh muc 2"));
-        dataDM.Them(new DanhMucSP("dm003", "Trứng", "Ghi chu danh muc 2"));
-        dataDM.Them(new DanhMucSP("dm004", "Sữa", "Ghi chu danh muc 2"));
+        danhMucList = new DanhMucList();
+        danhMucList.Them(new DanhMuc("dm001", "Thịt", "Ghi chu danh muc 1"));
+        danhMucList.Them(new DanhMuc("dm002", "Cá", "Ghi chu danh muc 2"));
+        danhMucList.Them(new DanhMuc("dm003", "Trứng", "Ghi chu danh muc 2"));
+        danhMucList.Them(new DanhMuc("dm004", "Sữa", "Ghi chu danh muc 2"));
     }
 
     // gan menu vao danh sach
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_layout,menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_layout, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     // gan su kien cho menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // TH: click menu them
+        if (item.getItemId() == R.id.mnThem) {
+            Intent intent = new Intent(this, ViewDanhMucAdd.class);
+            startActivity(intent);
+        }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        // TH: click menu them
-//        if(item.getItemId()==R.id.mnThem){
-//            Intent intent = new Intent(this, ThemSanPham.class);
-//            startActivity(intent);
-//        }
-//
-//        // TH: click menu thoat
-//        if(item.getItemId()==R.id.mnThoat){
-//            finish();// ket thuc chuong trinh
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+        // TH: click menu thoat
+        if (item.getItemId() == R.id.mnThoat) {
+            finish();// ket thuc chuong trinh
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

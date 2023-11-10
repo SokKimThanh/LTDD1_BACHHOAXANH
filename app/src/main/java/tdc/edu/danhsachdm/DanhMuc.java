@@ -1,14 +1,14 @@
-package tdc.edu.danhmucsp;
+package tdc.edu.danhsachdm;
 
 import java.io.Serializable;
 
-public class DanhMucSP implements Serializable {
+public class DanhMuc implements Serializable {
     private String ma, ten, ghichu;
-    public DanhMucSP() {
+    public DanhMuc() {
     }
 
 
-    public DanhMucSP(String ma, String ten, String ghichu) {
+    public DanhMuc(String ma, String ten, String ghichu) {
         this.ma = ma;
         this.ten = ten;
         this.ghichu = ghichu;
@@ -40,7 +40,7 @@ public class DanhMucSP implements Serializable {
 
     @Override
     public String toString() {
-        return "DanhMucSP{" +
+        return "DanhMuc{" +
                 "ma='" + ma + '\'' +
                 ", ten='" + ten + '\'' +
                 ", ghichu='" + ghichu + '\'' +

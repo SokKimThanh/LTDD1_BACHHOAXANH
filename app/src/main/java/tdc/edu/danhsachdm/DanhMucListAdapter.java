@@ -1,4 +1,4 @@
-package tdc.edu.danhmucsp;
+package tdc.edu.danhsachdm;
 
 
 import android.content.Context;
@@ -16,13 +16,13 @@ import java.util.List;
 
 import tdc.edu.danhsachsp.R;
 
-public class DanhMucListAdapter extends ArrayAdapter<DanhMucSP> {
+public class DanhMucListAdapter extends ArrayAdapter<DanhMuc> {
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
     int resource;//id cua control
 
-    List<DanhMucSP> data;// danh sach san pham (dau vao+ dau ra)
-    public DanhMucListAdapter(Context context, int resource, List<DanhMucSP> data){
+    List<DanhMuc> data;// danh sach san pham (dau vao+ dau ra)
+    public DanhMucListAdapter(Context context, int resource, List<DanhMuc> data){
         super(context,resource,data);
         this.context = context;
         this.resource = resource;
@@ -39,7 +39,7 @@ public class DanhMucListAdapter extends ArrayAdapter<DanhMucSP> {
         TextView tvMaDM = convertView.findViewById(R.id.tvMaDM);
         TextView tvGhiChuDM = convertView.findViewById(R.id.tvGhiChuDM);
         // dau vao position set gia tri cho control
-        DanhMucSP dm = data.get(position);
+        DanhMuc dm = data.get(position);
         // hien thi ten san pham
         tvTenDM.setText(dm.getTen());
         // hien thi gia san pham
