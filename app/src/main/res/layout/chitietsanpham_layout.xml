@@ -1,80 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChiTietSanPham">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chi Tiết Sản Phẩm"
-        android:textSize="30sp"
-        android:textColor="#ff0000"
+        android:background="#7BD8FF"
         android:gravity="center"
-        android:background="#7BD8FF"/>
+        android:text="Chi Tiết Sản Phẩm"
+        android:textColor="#ff0000"
+        android:textSize="30sp" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/tvMaSp"
-        android:textSize="20sp"
-        android:hint="Mã sản phẩm"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Mã sản phẩm"
+        android:textSize="20sp" />
+
+    <EditText
         android:id="@+id/edtTenSP"
-        android:hint="Nhập tên sản phẩm"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nhập tên sản phẩm" />
+
+    <EditText
         android:id="@+id/edtGiaSP"
-        android:hint="Nhập giá sản phẩm"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:hint="Nhập giá sản phẩm" />
+
+    <EditText
         android:id="@+id/edtSoLuongSPNhapKho"
-        android:hint="Nhập số lượng sản phẩm"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập số lượng sản phẩm"
+        android:inputType="number" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Spinner
+            android:id="@+id/spLoaiSP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/spLoaiSP"/>
+            android:layout_weight="1" />
+
         <ImageView
+            android:id="@+id/ivHinhChiTietSP"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/ivHinhChiTietSP"/>
+            android:layout_height="100dp" />
     </LinearLayout>
 
     <!--    layout thu 2-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/btnUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sửa"
             android:layout_margin="3dp"
-            android:id="@+id/btnUpdate"/>
+            android:text="Sửa" />
+
         <Button
+            android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="làm mới"
             android:layout_margin="3dp"
-            android:id="@+id/btnDelete"/>
+            android:text="làm mới" />
+
         <Button
+            android:id="@+id/btnBackChiTiet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quay lại"
             android:layout_margin="3dp"
-            android:id="@+id/btnBackChiTiet"/>
+            android:text="Quay lại" />
 
     </LinearLayout>
 
