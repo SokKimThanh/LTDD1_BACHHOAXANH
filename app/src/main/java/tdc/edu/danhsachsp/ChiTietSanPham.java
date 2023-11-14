@@ -89,7 +89,7 @@ public class ChiTietSanPham extends AppCompatActivity {
         //hiển thị dữ liệu lên màn hình sửa
         tvMaSp.setText(sanPham.getMaSp());// mã sp
         edtTenSP.setText(sanPham.getTenSp());// tên sp
-        edtGiaSP.setText(sanPham.getGiaSp());// giá sp
+        edtGiaSP.setText(Integer.parseInt(sanPham.getGiaSp()));// giá sp
         String soluong = String.valueOf(sanPham.getSoluongNhapkho());
 
         edtSoLuongSPNhapKho.setText(soluong);// soluong sp nhập kho

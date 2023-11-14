@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mnThem"
+        android:icon="@drawable/btn_add"
+        android:title="Thêm" />
+    <item
+        android:id="@+id/mnDanhSach"
+        android:icon="@drawable/list_navigation"
+        android:title="Danh sách" />
+    <item
+        android:id="@+id/mnCaiDat"
+        android:icon="@drawable/setting_navigation"
+        android:title="Cài đặt" />
+</menu>
