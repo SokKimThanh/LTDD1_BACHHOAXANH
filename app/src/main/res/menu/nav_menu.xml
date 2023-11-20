@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/mnThem"
-        android:icon="@drawable/btn_add"
-        android:title="Thêm" />
+
     <item
         android:id="@+id/mnDanhSachDanhMuc"
         android:icon="@drawable/list_navigation"
-        android:title="Danh sách" />
+        android:title="Danh sách danh mục" />
     <item
         android:id="@+id/mnDanhSachSanPham"
-        android:icon="@drawable/setting_navigation"
-        android:title="Cài đặt" />
+        android:icon="@drawable/list_navigation"
+        android:title="Danh sách sản phẩm" />
 </menu>
