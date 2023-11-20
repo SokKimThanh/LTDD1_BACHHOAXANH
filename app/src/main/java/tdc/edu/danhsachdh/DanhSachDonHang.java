@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tdc.edu.danhsachsp.R;
-import tdc.edu.danhsachsp.SanPhamAdapter;
 
 public class DanhSachDonHang extends AppCompatActivity {
 

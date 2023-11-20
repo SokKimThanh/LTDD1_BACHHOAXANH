@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChiTietSanPham">
+    tools:context=".ViewSanPhamEdit">
 
     <TextView
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/ivHinhChiTietSP"
+            android:id="@+id/ivHinhSuaSP"
             android:layout_width="100dp"
             android:layout_height="100dp" />
     </LinearLayout>
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:text="làm mới" />
+            android:text="Xóa" />
 
         <Button
             android:id="@+id/btnBackChiTiet"

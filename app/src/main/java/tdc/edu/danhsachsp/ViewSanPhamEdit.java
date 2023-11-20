@@ -16,22 +16,26 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import tdc.edu.danhsachdh.HangHoa;
+import tdc.edu.danhsachdm.DBDanhMuc;
+import tdc.edu.danhsachdm.DanhMuc;
 
-public class ChiTietSanPham extends AppCompatActivity {
+public class ViewSanPhamEdit extends AppCompatActivity {
     EditText   edtGiaSP, edtTenSP, edtSoLuongSPNhapKho;
     TextView tvMaSp;
     Spinner spLoaiSP;
     Button btnUpdate, btnDelete, btnBack;
 
 
-    ImageView ivHinh;
+    ImageView ivHinhEdit;
 
     List<String> data_lsp = new ArrayList<>();
     ArrayAdapter adapter_lsp;
 
     // lấy 1 dữ liệu sản phẩm để cập nhật
     HangHoa sanPham;
+
+    DBDanhMuc dbDanhMuc;
+    DBHangHoa dbHangHoa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,7 @@ public class ChiTietSanPham extends AppCompatActivity {
         this.btnUpdate = findViewById(R.id.btnUpdate);
         this.btnDelete = findViewById(R.id.btnDelete);
         this.btnBack = findViewById(R.id.btnBackChiTiet);
-        this.ivHinh = findViewById(R.id.ivHinhThemSP);
+        this.ivHinhEdit = findViewById(R.id.ivHinhSuaSP);
      }
 
     /**
@@ -63,17 +67,21 @@ public class ChiTietSanPham extends AppCompatActivity {
         spLoaiSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(spLoaiSP.getSelectedItem().toString().equals("Thịt")){
+                if(spLoaiSP.getSelectedItem().toString().equals("Thit")){
                     spLoaiSP.setSelection(0);
+                    ivHinhEdit.setImageResource(R.drawable.thit);
                 }
-                if(spLoaiSP.getSelectedItem().toString().equals("Cá")){
+                if(spLoaiSP.getSelectedItem().toString().equals("Ca")){
                     spLoaiSP.setSelection(1);
+                    ivHinhEdit.setImageResource(R.drawable.ca);
                 }
-                if(spLoaiSP.getSelectedItem().toString().equals("Trứng")){
+                if(spLoaiSP.getSelectedItem().toString().equals("Trung")){
                     spLoaiSP.setSelection(2);
+                    ivHinhEdit.setImageResource(R.drawable.trung);
                 }
-                if(spLoaiSP.getSelectedItem().toString().equals("Sữa")){
-                    spLoaiSP.setSelection(2);
+                if(spLoaiSP.getSelectedItem().toString().equals("Sua")){
+                    spLoaiSP.setSelection(3);
+                    ivHinhEdit.setImageResource(R.drawable.sua);
                 }
             }
 
@@ -89,27 +97,27 @@ public class ChiTietSanPham extends AppCompatActivity {
         //hiển thị dữ liệu lên màn hình sửa
         tvMaSp.setText(sanPham.getMaSp());// mã sp
         edtTenSP.setText(sanPham.getTenSp());// tên sp
-        edtGiaSP.setText(Integer.parseInt(sanPham.getGiaSp()));// giá sp
+        edtGiaSP.setText(sanPham.getGiaSp());// giá sp
         String soluong = String.valueOf(sanPham.getSoluongNhapkho());
 
         edtSoLuongSPNhapKho.setText(soluong);// soluong sp nhập kho
 
         // loại sản phẩm
-        if(sanPham.getLoaiSp().equals("Thịt"))
+        if(sanPham.getLoaiSp().equals("Thit"))
             spLoaiSP.setSelection(0);
-        if(sanPham.getLoaiSp().equals("Cá"))
+        if(sanPham.getLoaiSp().equals("Ca"))
             spLoaiSP.setSelection(1);
-        if(sanPham.getLoaiSp().equals("Trứng"))
+        if(sanPham.getLoaiSp().equals("Trung"))
             spLoaiSP.setSelection(2);
-        if(sanPham.getLoaiSp().equals("Sữa"))
-            spLoaiSP.setSelection(2);
+        if(sanPham.getLoaiSp().equals("Sua"))
+            spLoaiSP.setSelection(3);
         // sự kiện update
         // Sử dụng dữ liệu tĩnh của chính nó(adapter_lsp)
         // Sự kiện xóa
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : DanhSachSanPham.dataSp){
+                for (HangHoa sp : ViewSanPhamList.dataSp){
                     //tim ma san pham de cap nhat
                     if(sp.getMaSp().equals(sanPham.getMaSp())){
                         // sua
@@ -118,8 +126,9 @@ public class ChiTietSanPham extends AppCompatActivity {
                         sp.setSoluongNhapkho(Integer.parseInt(edtSoLuongSPNhapKho.getText().toString()));
                         sp.setLoaiSp(spLoaiSP.getSelectedItem().toString());
                         // thong bao
-                        DanhSachSanPham.spAdapter.notifyDataSetChanged();
-                        Toast.makeText(ChiTietSanPham.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        dbHangHoa.SuaDL(sp);
+                        ViewSanPhamList.spAdapter.notifyDataSetChanged();
+                        Toast.makeText(ViewSanPhamEdit.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -129,14 +138,16 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : DanhSachSanPham.dataSp){
+                for (HangHoa sp : ViewSanPhamList.dataSp){
                     //tim ma san pham de cap nhat
                     if(sp.getMaSp().equals(sanPham.getMaSp())){
                         // xoa
-                        DanhSachSanPham.dataSp.remove(sp);
+
+                        ViewSanPhamList.dataSp.remove(sp);
                         // thong bao
-                        DanhSachSanPham.spAdapter.notifyDataSetChanged();
-                        Toast.makeText(ChiTietSanPham.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        dbHangHoa.XoaDL(sp);
+                        ViewSanPhamList.spAdapter.notifyDataSetChanged();
+                        Toast.makeText(ViewSanPhamEdit.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -148,14 +159,20 @@ public class ChiTietSanPham extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+                Toast.makeText(ViewSanPhamEdit.this, "Quay lai Thành công", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
 
     private void KhoiTao() {
-        data_lsp.add("Thịt");
-        data_lsp.add("Cá");
-        data_lsp.add("Trứng");
-        data_lsp.add("Sữa");
+        // dbHangHoa truy cập dữ liệu DB
+        dbHangHoa = new DBHangHoa(this);
+
+        // dbDanhMuc truy cập dữ liệu DB
+        dbDanhMuc = new DBDanhMuc(this);
+        for (DanhMuc danhmuc : dbDanhMuc.DocDL()) {
+            data_lsp.add(danhmuc.getTen());
+        }
     }
 }

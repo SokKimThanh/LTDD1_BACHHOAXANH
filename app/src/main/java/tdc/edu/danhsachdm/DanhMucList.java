@@ -27,6 +27,7 @@ public class DanhMucList {
 
 
     public boolean Them(DanhMuc item) {
+
         return danhMucList.add(item);
     }
 

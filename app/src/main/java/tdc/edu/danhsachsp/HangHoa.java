@@ -1,4 +1,4 @@
-package tdc.edu.danhsachdh;
+package tdc.edu.danhsachsp;
 
 import tdc.edu.danhsachsp.SanPham;
 

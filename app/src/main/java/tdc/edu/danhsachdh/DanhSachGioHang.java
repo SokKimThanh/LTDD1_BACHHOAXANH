@@ -3,8 +3,7 @@ package tdc.edu.danhsachdh;
 import java.util.ArrayList;
 import java.util.List;
 
-import tdc.edu.danhsachdh.GioHangItem;
-import tdc.edu.danhsachdh.HangHoa;
+import tdc.edu.danhsachsp.HangHoa;
 
 public class DanhSachGioHang {
 

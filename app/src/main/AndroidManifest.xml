@@ -42,13 +42,13 @@
             android:name="tdc.edu.danhsachdh.DanhSachDonHang"
             android:exported="true" />
         <activity
-            android:name=".ThemSanPham"
+            android:name=".ViewSanPhamAdd"
             android:exported="false" />
         <activity
-            android:name=".ChiTietSanPham"
+            android:name=".ViewSanPhamEdit"
             android:exported="false" />
         <activity
-            android:name=".DanhSachSanPham"
+            android:name=".ViewSanPhamList"
             android:exported="true">
 
         </activity>

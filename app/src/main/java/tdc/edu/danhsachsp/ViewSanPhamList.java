@@ -1,12 +1,9 @@
-package tdc.edu.danhsachdm;
+package tdc.edu.danhsachsp;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -14,27 +11,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import tdc.edu.danhsachsp.R;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ViewDanhMucList extends AppCompatActivity {
+import tdc.edu.danhsachdm.DBDanhMuc;
+import tdc.edu.danhsachdm.DanhMuc;
+import tdc.edu.danhsachdm.DanhMucList;
+import tdc.edu.danhsachdm.DanhMucListAdapter;
 
-    DBDanhMuc dbDanhMuc;
-    //ba thanh phan hien thi danh sach
+public class ViewSanPhamList extends AppCompatActivity {
+    //3 thanh phan hien thi danh sach
+
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static DanhMucList danhMucList;
-    static DanhMucListAdapter adapter;
+    static List<HangHoa> dataSp = new ArrayList<>();
+    static SanPhamListAdapter spAdapter;
 
-    ListView lvDanhMucList;
+    ListView lvDanhSachSp;
 
-    ImageView ivHinhDM;
+    ImageView ivHinh;
 
+    DBHangHoa dbSanPham;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhmuc_list_layout);
+        setContentView(R.layout.danhsachsanpham_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
 
         // anh xa
@@ -44,72 +47,69 @@ public class ViewDanhMucList extends AppCompatActivity {
 
     //hien thi danh sach
     private void setControl() {
-
-        this.lvDanhMucList = findViewById(R.id.lvDanhSachDM);
+        this.lvDanhSachSp = findViewById(R.id.lvDanhSachDM);
     }
 
     // gan menu bar
     private void setEvent() {
         // khoi tao san pham
         KhoiTao();
-        
+
+
         // su kien click vao item de update
-        lvDanhMucList.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(ViewDanhMucList.this, ViewDanhMucEdit.class);
-            // bạn cần phải chắc chắn rằng DanhMuc
+        lvDanhSachSp.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(ViewSanPhamList.this, ViewSanPhamEdit.class);
+            // bạn cần phải chắc chắn rằng SanPham
             // có thể được chuyển đổi thành CharSequence,
             // hoặc bạn cần thay đổi cách bạn chuyển dữ liệu
             // giữa các hoạt động.
             // Một cách để làm điều này là để làm cho lớp
-            // DanhMuc triển khai Serializable hoặc Parcelable,
+            // SanPham triển khai Serializable hoặc Parcelable,
             // sau đó bạn có thể chuyển toàn bộ đối tượng qua Intent.
-            /**
-             * public class DanhMuc implements Serializable {
-             *     // các trường và phương thức của bạn ở đây
-             * }
-             * */
-            intent.putExtra("item", danhMucList.getDanhMucList().get(position));
+
+            //public class SanPham implements Serializable {
+            // các trường và phương thức của bạn ở đây
+            // }
+
+            intent.putExtra("item", dataSp.get(position));
             startActivity(intent);
         });
 
         //su kien long click de xoa item
-//        lvDanhMucList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//        lvDanhSachSp.setOnItemLongClickListener((parent, view, position, id) -> {
 //
-//                dataSp.remove(position);
-//                spAdapter.notifyDataSetChanged();
-//                Toast.makeText(DanhSachDanhMuc.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
+//            dataSp.remove(position);
+//            spAdapter.notifyDataSetChanged();
+//            Toast.makeText(ViewSanPhamList.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+//            return false;
 //        });
     }
 
     // khoi tao danh sach san pham
     private void KhoiTao() {
 
-        danhMucList = new DanhMucList();
-        // dbsinhvien truy cập dữ liệu DB
-        dbDanhMuc = new DBDanhMuc(this);
 
-        danhMucList.getDanhMucList().clear();
+        // dbsinhvien truy cập dữ liệu DB
+        dbSanPham = new DBHangHoa(this);
+
+        dataSp.clear();
 
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
-        if ((long) dbDanhMuc.DocDL().size() <= 0) {
+        if ((long) dbSanPham.DocDL().size() <= 0) {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (DanhMuc danhMuc: dbDanhMuc.DocDL()) {
-            danhMucList.Them(danhMuc);
+        for (HangHoa sanpham: dbSanPham.DocDL()) {
+            dataSp.add(sanpham);
         }
 
         // gan san pham bang menu item layout(gan template item)
-        adapter = new DanhMucListAdapter(this, R.layout.danhmuc_layout, danhMucList.getDanhMucList());
+        spAdapter = new SanPhamListAdapter(this, R.layout.sanpham_layout, dataSp);
         // hien thi len listview
-        lvDanhMucList.setAdapter(adapter);
+        lvDanhSachSp.setAdapter(spAdapter);
 
-        adapter.notifyDataSetChanged();
+        spAdapter.notifyDataSetChanged();
     }
 
     // gan menu vao danh sach
@@ -120,11 +120,12 @@ public class ViewDanhMucList extends AppCompatActivity {
     }
 
     // gan su kien cho menu
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // TH: click menu them
         if (item.getItemId() == R.id.mnThem) {
-            Intent intent = new Intent(this, ViewDanhMucAdd.class);
+            Intent intent = new Intent(this, ViewSanPhamAdd.class);
             startActivity(intent);
         }
 
@@ -132,10 +133,9 @@ public class ViewDanhMucList extends AppCompatActivity {
         if (item.getItemId() == R.id.mnThoat) {
             finish();// ket thuc chuong trinh
         }
-        // Xử lý sự kiện khi nhấn vào nút hỗ trợ
-        // Nếu id của item là android.R.id.home, tức là nút hỗ trợ
-        if(item.getItemId() == android.R.id.home){
-            // Gọi phương thức onBackPressed() để quay về màn hình trước đó
+
+        // hỗ trợ quay lại màn hình chính
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

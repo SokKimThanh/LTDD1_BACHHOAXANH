@@ -1,5 +1,7 @@
 package tdc.edu.danhsachdh;
 
+import tdc.edu.danhsachsp.HangHoa;
+
 public class GioHangItem {
 
     private HangHoa hangHoa;

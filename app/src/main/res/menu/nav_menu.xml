@@ -5,11 +5,11 @@
         android:icon="@drawable/btn_add"
         android:title="Thêm" />
     <item
-        android:id="@+id/mnDanhSach"
+        android:id="@+id/mnDanhSachDanhMuc"
         android:icon="@drawable/list_navigation"
         android:title="Danh sách" />
     <item
-        android:id="@+id/mnCaiDat"
+        android:id="@+id/mnDanhSachSanPham"
         android:icon="@drawable/setting_navigation"
         android:title="Cài đặt" />
 </menu>
