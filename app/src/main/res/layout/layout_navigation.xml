@@ -18,10 +18,13 @@
             android:gravity="center"
             android:text="Nhóm 10: SOK KIM THANH NAVIGATION"
             android:textSize="30sp" />
-        <FrameLayout
+         
+        <include
+            layout="@layout/layout_protype_product_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

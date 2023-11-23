@@ -26,6 +26,7 @@ public class ViewNavigation extends AppCompatActivity {
 
     ConvertViewProductItemAdapter protypeProductItemAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
