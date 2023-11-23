@@ -45,12 +45,15 @@ public class SanPhamListAdapter extends ArrayAdapter {
         ImageView ivHinh = convertView.findViewById(R.id.ivHinh);
         TextView tvTenSp = convertView.findViewById(R.id.tvTenSp);
         TextView tvGiaSp = convertView.findViewById(R.id.tvGiaSp);
+        TextView tvSoLuong = convertView.findViewById(R.id.tvSoLuongNhapKho);
         // dau vao position set gia tri cho control
-        SanPham sp = data.get(position);
+        HangHoa sp = data.get(position);
         // hien thi ten san pham
         tvTenSp.setText(sp.getTenSp());
         // hien thi gia san pham
         tvGiaSp.setText(sp.getGiaSp());
+        // hien thi số lượng sản phẩm
+        tvSoLuong.setText(String.valueOf(sp.getSoluongNhapkho()));
 
         // hien thi hinh`
         if(sp.getLoaiSp().equals("Thit")){
