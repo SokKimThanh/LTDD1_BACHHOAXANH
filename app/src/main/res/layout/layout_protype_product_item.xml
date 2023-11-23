@@ -5,7 +5,7 @@
     android:orientation="horizontal">
     <!-- Auto layout, variables, and unit scale are not yet supported -->
     <ImageView
-        android:id="@+id/ivProtype"
+        android:id="@+id/ivProduct"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/ic_launcher_foreground" />

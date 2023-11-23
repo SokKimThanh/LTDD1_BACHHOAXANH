@@ -3,6 +3,7 @@ package tdc.edu.navigation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,10 @@ public class ViewNavigation extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
+
+    ListView dsLoaiSPNavigation, dsSanPhamNavigation;
+
+    ConvertViewProductItemAdapter protypeProductItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +69,10 @@ public class ViewNavigation extends AppCompatActivity {
     private void setControl() {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
+        ControlTimKiem();
+    }
+
+    private void ControlTimKiem() {
+
     }
 }

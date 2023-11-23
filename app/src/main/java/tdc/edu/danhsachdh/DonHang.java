@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import tdc.edu.danhsachsp.HangHoa;
+import tdc.edu.giohang.GioHang;
+
 public class DonHang {
 
 
@@ -99,20 +102,17 @@ public class DonHang {
     /// <summary>
     /// ham Tao don hang moi
     /// </summary>
-    /// <param name="dsGioHang"></param>
-    public void NhapDonHang(DanhSachGioHang dsGioHang) {
+    /// <param name="gioHang"></param>
+    public void NhapDonHang(GioHang gioHang) {
         // khai bao
         Random d = new Random();
         String maHang = "";
         int tongcong = 0;
         // xu ly ma hang
-        for (GioHangItem gioHangItem : dsGioHang.getList()) {
-            maHang += gioHangItem.getHangHoa().getMaSp() + ",";
-            tongcong = this.getTongSoLuongGioHang() + gioHangItem.getSoLuong();
-            this.setTongSoLuongGioHang(tongcong);
-            this.set_TongTien(gioHangItem.ThanhTien());
+        for (HangHoa hangHoa : gioHang.getHangHoaList()) {
+            maHang += hangHoa.getMaSp() + ",";
         }
-        this.set_MaHang(dsGioHang.GetMaHang().split(","));
+
         String[] arr = {"Le Duy Anh Tu", "Sok Kim Thanh", "Hoang Van Dung"};
 
         this.set_TenKH(arr[d.nextInt(arr.length)]) ;
