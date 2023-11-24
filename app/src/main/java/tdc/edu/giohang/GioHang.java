@@ -67,4 +67,12 @@ public class GioHang {
         }
         this.tongSoLuong --;
      }
+
+    public boolean contains(HangHoa hangHoa) {
+        boolean flag = false;
+        if(this.hangHoaList.contains(hangHoa)){
+            flag = true;
+        }
+        return flag;
+    }
 }

@@ -43,17 +43,17 @@ public class ViewNavigation extends AppCompatActivity {
                 if (item.getItemId() == R.id.mnDanhSachDanhMuc) {
                     Intent intent = new Intent(ViewNavigation.this, ViewDanhMucList.class);
                     startActivity(intent);
-                    Toast.makeText(ViewNavigation.this, "Danh sách danh mục", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ViewNavigation.this, "Danh sách danh mục", Toast.LENGTH_SHORT).show();
                 }
                 if (item.getItemId() == R.id.mnDanhSachSanPham) {
                     Intent intent = new Intent(ViewNavigation.this, ViewSanPhamList.class);
                     startActivity(intent);
-                    Toast.makeText(ViewNavigation.this, "Danh sách sản phẩm", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ViewNavigation.this, "Danh sách sản phẩm", Toast.LENGTH_SHORT).show();
                 }
                 if (item.getItemId() == R.id.mnSearchSanPham) {
                     Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
                     startActivity(intent);
-                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
                 }
                 drawerLayout.closeDrawers();
                 return false;
