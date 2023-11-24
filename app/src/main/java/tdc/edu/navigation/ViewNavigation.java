@@ -54,7 +54,7 @@ public class ViewNavigation extends AppCompatActivity {
                     Toast.makeText(ViewNavigation.this, "Danh sách sản phẩm", Toast.LENGTH_SHORT).show();
                 }
                 if (item.getItemId() == R.id.mnSearchSanPham) {
-                    Intent intent = new Intent(ViewNavigation.this, ViewSanPhamList.class);
+                    Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
                     startActivity(intent);
                     Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
                 }

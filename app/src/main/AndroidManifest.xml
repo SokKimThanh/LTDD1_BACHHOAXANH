@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="tdc.edu.navigation.ViewProtypeProductSearch"
+            android:exported="true" />
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucAdd"
             android:exported="false" />

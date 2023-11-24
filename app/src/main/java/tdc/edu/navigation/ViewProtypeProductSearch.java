@@ -39,16 +39,9 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
         btnTimKiem.setOnClickListener(v -> {
             // Xử lý sự kiện khi nhấn nút tìm kiếm
             int selectedId = rgSearchBy.getCheckedRadioButtonId();
-            String selectedText = "";
-            if (selectedId == radMaLoaiSP.getId()) {
-                selectedText = radMaLoaiSP.getText().toString();
-                Toast.makeText(this, selectedText + selectedId, Toast.LENGTH_SHORT).show();
-
-            } else {
-                // Không có RadioButton nào được chọn
-
-            }
-            rgSearchBy.clearCheck();
+            RadioButton radioButton = findViewById(selectedId);
+            String selectedText = radioButton.getText().toString();
+            Toast.makeText(ViewProtypeProductSearch.this, selectedText , Toast.LENGTH_SHORT).show();
         });
 
         // kiểm tra chọn tiêu chí
@@ -61,7 +54,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
                 // Xử lý sự kiện khi chọn radio button khác nhau
                 RadioButton radioButton = findViewById(checkedId);
                 String selectedText = radioButton.getText().toString();
-                Toast.makeText(ViewProtypeProductSearch.this, selectedText + checkedId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProtypeProductSearch.this, selectedText , Toast.LENGTH_SHORT).show();
             }
         });
     }
