@@ -9,4 +9,8 @@
         android:id="@+id/mnDanhSachSanPham"
         android:icon="@drawable/list_navigation"
         android:title="Danh sách sản phẩm" />
+    <item
+        android:id="@+id/mnSearchSanPham"
+        android:icon="@drawable/list_navigation"
+        android:title="Tìm kiếm sản phẩm" />
 </menu>
