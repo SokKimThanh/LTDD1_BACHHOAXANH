@@ -6,8 +6,9 @@
     <!-- Auto layout, variables, and unit scale are not yet supported -->
     <ImageView
         android:id="@+id/ivProduct"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
         android:background="@drawable/ic_launcher_foreground" />
 
 
@@ -18,9 +19,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="4sp"
-        android:paddingRight="4sp"
-
-        >
+        android:paddingRight="4sp">
 
         <TextView
             android:id="@+id/tvProductName"
@@ -48,7 +47,7 @@
             android:textSize="16sp"
             android:backgroundTint="@color/greenPrimary"
             android:layout_marginBottom="0dp"
-            android:text="Thêm vào giỏ hàng"/>
+            android:text="Thêm"/>
     </LinearLayout>
 
 </LinearLayout>

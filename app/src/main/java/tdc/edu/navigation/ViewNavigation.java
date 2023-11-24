@@ -22,9 +22,6 @@ public class ViewNavigation extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
 
-    ListView dsLoaiSPNavigation, dsSanPhamNavigation;
-
-    ConvertViewProductItemAdapter protypeProductItemAdapter;
 
 
     @Override
@@ -75,10 +72,7 @@ public class ViewNavigation extends AppCompatActivity {
     private void setControl() {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
-        ControlTimKiem();
-    }
-
-    private void ControlTimKiem() {
 
     }
+
 }

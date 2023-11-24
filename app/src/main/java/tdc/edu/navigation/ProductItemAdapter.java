@@ -21,7 +21,7 @@ import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 import tdc.edu.giohang.GioHang;
 
-public class ConvertViewProductItemAdapter extends ArrayAdapter {
+public class ProductItemAdapter extends ArrayAdapter {
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
@@ -32,7 +32,7 @@ public class ConvertViewProductItemAdapter extends ArrayAdapter {
     GioHang cart;
 
 
-    public ConvertViewProductItemAdapter(Context context, int resource, List<HangHoa> hangHoaList){
+    public ProductItemAdapter(Context context, int resource, List<HangHoa> hangHoaList){
         super(context,resource, hangHoaList);
         this.context = context;
         this.resource = resource;
