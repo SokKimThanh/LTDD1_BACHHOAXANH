@@ -23,3 +23,5 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Menu add đi vào màn hình add
     - Menu Exit thoát khỏi ứng dụng
     - Click vào item trên danh sách đi vào màn hình edit
+25/11/2023 1:14 SA
+- Thực hiện chức năng search sản phẩm
