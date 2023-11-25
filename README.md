@@ -25,3 +25,5 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Click vào item trên danh sách đi vào màn hình edit
 25/11/2023 1:14 SA
 - Thực hiện chức năng search sản phẩm
+25/11/2023 7:50 CH
+- Thực hiện chức năng add giỏ hàng và đếm số sản phẩm đã add
