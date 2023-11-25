@@ -62,7 +62,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edtTimKiem"
+                android:id="@+id/edtSearchKeyword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"

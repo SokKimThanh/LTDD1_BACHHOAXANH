@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -18,8 +19,6 @@ import java.util.List;
 
 import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
-import tdc.edu.danhsachdm.DanhMucList;
-import tdc.edu.danhsachdm.DanhMucListAdapter;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
@@ -31,6 +30,8 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
     Button btnTimKiem;
 
     ListView dsLoaiSPNavigation, dsSanPhamNavigation;
+
+    EditText edtSearchKeyword;
 
     ProductItemAdapter productItemAdapter;
     ProtypeItemAdapter protypeItemAdapter;
@@ -50,7 +51,8 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
     DBHangHoa dbSanPham;
     DBDanhMuc dbDanhMuc;
-    ImageView ivHinhDM;
+    ImageView ivProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,10 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             int selectedId = rgSearchBy.getCheckedRadioButtonId();
             RadioButton radioButton = findViewById(selectedId);
             String selectedText = radioButton.getText().toString();
-            Toast.makeText(ViewProtypeProductSearch.this, selectedText , Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
+            if(selectedText.equals("Loại sản phẩm")){
+                listHangHoa = dbSanPham.DocDLBy(edtSearchKeyword.getText().toString());
+            }
         });
 
         // kiểm tra chọn tiêu chí
@@ -84,7 +89,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
                 // Xử lý sự kiện khi chọn radio button khác nhau
                 RadioButton radioButton = findViewById(checkedId);
                 String selectedText = radioButton.getText().toString();
-                Toast.makeText(ViewProtypeProductSearch.this, selectedText , Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -106,7 +111,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (DanhMuc danhMuc: dbDanhMuc.DocDL()) {
+        for (DanhMuc danhMuc : dbDanhMuc.DocDL()) {
             listDanhMuc.add(danhMuc);
         }
 
@@ -130,7 +135,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (HangHoa sanpham: dbSanPham.DocDL()) {
+        for (HangHoa sanpham : dbSanPham.DocDL()) {
             listHangHoa.add(sanpham);
         }
 
@@ -143,18 +148,23 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
     }
 
     private void setControl() {
-         //2 nút radio
-        radMaLoaiSP =  findViewById(R.id.radMaLoaiSP);
-        radTenSP =  findViewById(R.id.radTenSP);
-        rgSearchBy =  findViewById(R.id.rgSearchBy);
-        btnTimKiem =  findViewById(R.id.btnTimKiem);
+        // tim kiem
+
+        //2 nút radio
+        radMaLoaiSP = findViewById(R.id.radMaLoaiSP);
+        radTenSP = findViewById(R.id.radTenSP);
+        rgSearchBy = findViewById(R.id.rgSearchBy);
+        btnTimKiem = findViewById(R.id.btnTimKiem);
         dsSanPhamNavigation = findViewById(R.id.dsSanPhamNavigation);
         dsLoaiSPNavigation = findViewById(R.id.dsLoaiSPNavigation);
+        ivProduct = findViewById(R.id.ivProduct);
+        // anh xa ô tìm kiếm theo loại từ khóa
+        edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu,menu);
+        getMenuInflater().inflate(R.menu.search_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
