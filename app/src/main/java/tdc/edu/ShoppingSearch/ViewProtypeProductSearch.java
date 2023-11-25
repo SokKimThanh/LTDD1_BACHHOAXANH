@@ -1,4 +1,4 @@
-package tdc.edu.navigation;
+package tdc.edu.ShoppingSearch;
 
 import android.os.Bundle;
 import android.view.Menu;

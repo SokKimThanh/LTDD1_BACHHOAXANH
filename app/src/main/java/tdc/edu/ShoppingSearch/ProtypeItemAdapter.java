@@ -1,4 +1,4 @@
-package tdc.edu.navigation;
+package tdc.edu.ShoppingSearch;
 
 import android.content.Context;
 import android.view.LayoutInflater;

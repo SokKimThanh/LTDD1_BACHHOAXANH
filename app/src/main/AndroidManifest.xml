@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name="tdc.edu.navigation.ViewProtypeProductSearch"
+            android:name="tdc.edu.ShoppingSearch.ViewProtypeProductSearch"
             android:exported="true" >
 
         </activity>

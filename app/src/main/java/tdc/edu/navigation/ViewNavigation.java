@@ -3,8 +3,6 @@ package tdc.edu.navigation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
 import tdc.edu.danhsachdm.ViewDanhMucList;
 import tdc.edu.danhsachsp.ViewSanPhamList;
 import tdc.edu.danhsachsp.R;
