@@ -138,19 +138,122 @@ public class DBHangHoa extends SQLiteOpenHelper {
 
     }
 
-    public List<HangHoa> DocDLBy(String keyword) {
+    public List<HangHoa> DocDLByLoaiSP(String loaisp) {
         // Khởi tạo danh sách hàng hóa
         List<HangHoa> listHangHoa = new ArrayList<>();
 
         // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
-        String sql = "Select * from HangHoa where ten like N'%" + keyword+ "%'" + "or loaisp like N'%" + keyword + "%'";
+        String sql = "Select * from HangHoa where loaisp like ?";
 
         // Mở cơ sở dữ liệu để đọc
         SQLiteDatabase db = getReadableDatabase();
 
 
         // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
-        Cursor cursor = db.rawQuery(sql, null);
+        String[] selectionArgs = new String[] {
+                "%" + loaisp + "%"
+        };
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+
+
+        // Kiểm tra xem con trỏ có dữ liệu không
+        if (cursor.moveToFirst()) {
+            do {
+                // Khởi tạo đối tượng hàng hóa mới
+                HangHoa hanghoa = new HangHoa();
+
+                // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
+                hanghoa.setMaSp(cursor.getString(0).toString());
+
+                // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
+                hanghoa.setTenSp(cursor.getString(1).toString());
+
+                // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
+                hanghoa.setGiaSp(cursor.getString(2).toString());
+
+                // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
+                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+
+                // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
+                hanghoa.setLoaiSp(cursor.getString(4).toString());
+
+                // Thêm đối tượng hàng hóa vào danh sách
+                listHangHoa.add(hanghoa);
+            } while (cursor.moveToNext()); // Di chuyển con trỏ đến hàng tiếp theo
+        }
+
+
+        // Trả về danh sách hàng hóa
+        return listHangHoa;
+    }
+
+    public List<HangHoa> DocDLByTenSP(String tensp) {
+        // Khởi tạo danh sách hàng hóa
+        List<HangHoa> listHangHoa = new ArrayList<>();
+
+        // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
+        String sql = "Select * from HangHoa where ten like ?";
+
+        // Mở cơ sở dữ liệu để đọc
+        SQLiteDatabase db = getReadableDatabase();
+
+
+
+        // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
+        String[] selectionArgs = new String[] {
+                "%" + tensp + "%"
+        };
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+
+        // Kiểm tra xem con trỏ có dữ liệu không
+        if (cursor.moveToFirst()) {
+            do {
+                // Khởi tạo đối tượng hàng hóa mới
+                HangHoa hanghoa = new HangHoa();
+
+                // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
+                hanghoa.setMaSp(cursor.getString(0).toString());
+
+                // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
+                hanghoa.setTenSp(cursor.getString(1).toString());
+
+                // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
+                hanghoa.setGiaSp(cursor.getString(2).toString());
+
+                // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
+                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+
+                // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
+                hanghoa.setLoaiSp(cursor.getString(4).toString());
+
+                // Thêm đối tượng hàng hóa vào danh sách
+                listHangHoa.add(hanghoa);
+            } while (cursor.moveToNext()); // Di chuyển con trỏ đến hàng tiếp theo
+        }
+
+
+        // Trả về danh sách hàng hóa
+        return listHangHoa;
+    }
+
+    public List<HangHoa> DocDLByTenSPVaLoaiSP(String tensp, String loaisp) {
+        // Khởi tạo danh sách hàng hóa
+        List<HangHoa> listHangHoa = new ArrayList<>();
+
+        // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
+        String sql = "Select * from HangHoa where ten like ? or loaisp like ?";
+
+        // Mở cơ sở dữ liệu để đọc
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
+        String[] selectionArgs = new String[] {
+                "%" + tensp + "%",
+                "%" + loaisp + "%"
+        };
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+
 
         // Kiểm tra xem con trỏ có dữ liệu không
         if (cursor.moveToFirst()) {

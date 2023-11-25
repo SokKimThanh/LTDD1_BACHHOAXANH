@@ -3,6 +3,7 @@ package tdc.edu.navigation;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,23 +17,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
+import tdc.edu.danhsachsp.SanPham;
 
 public class ViewProtypeProductSearch extends AppCompatActivity {
 
-    RadioButton radMaLoaiSP, radTenSP;
+    RadioButton radMaLoaiSP, radTenSP, radSearchBy;
     RadioGroup rgSearchBy;
     Button btnTimKiem;
 
-    ListView dsLoaiSPNavigation, dsSanPhamNavigation;
+    ListView listViewDanhMucSearch, listviewSanPhamSearch;
 
     EditText edtSearchKeyword;
+    ImageView ivProduct;
 
+    // cập nhật lại listview bằng adapter
     ProductItemAdapter productItemAdapter;
     ProtypeItemAdapter protypeItemAdapter;
 
@@ -51,13 +56,18 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
     DBHangHoa dbSanPham;
     DBDanhMuc dbDanhMuc;
-    ImageView ivProduct;
+
+    // xác nhận dữ liệu tìm kiếm (selector)
+    DanhMuc danhMucSelector;
+
+
+    String radioSearchByText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_protype_product_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
         Toast.makeText(ViewProtypeProductSearch.this, "search view here", Toast.LENGTH_SHORT).show();
 
         setControl();
@@ -67,35 +77,51 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
     private void setEvent() {
         KhoiTao();
-        // kiem tra click search
-        btnTimKiem.setOnClickListener(v -> {
-            // Xử lý sự kiện khi nhấn nút tìm kiếm
-            int selectedId = rgSearchBy.getCheckedRadioButtonId();
-            RadioButton radioButton = findViewById(selectedId);
-            String selectedText = radioButton.getText().toString();
-//            Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
-            if(edtSearchKeyword.getText().length() <= 0){
-                edtSearchKeyword.setError("chưa có từ khóa");
-                return;
-            }
-            listHangHoa = dbSanPham.DocDLBy(edtSearchKeyword.getText().toString());
-        });
-
         // kiểm tra chọn tiêu chí
         rgSearchBy.clearCheck();
         radMaLoaiSP.setChecked(true);
         radTenSP.setChecked(false);
-        rgSearchBy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Xử lý sự kiện khi chọn radio button khác nhau
-                RadioButton radioButton = findViewById(checkedId);
-                String selectedText = radioButton.getText().toString();
-                Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
+        radioSearchByText = radMaLoaiSP.getText().toString();
+        rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
+            // Xử lý sự kiện khi chọn radio button khác nhau
+            radSearchBy = findViewById(checkedId);
+            radioSearchByText = radSearchBy.getText().toString();
+            if(radioSearchByText.equals("Loại sản phẩm")){
+                // Hiện ListView khi RadioButton được nhấn
+                listViewDanhMucSearch.setVisibility(View.VISIBLE);
+            }
+            if(radioSearchByText.equals("Tên sản phẩm")){
+                // Ẩn ListView khi RadioButton được nhấn
+                listViewDanhMucSearch.setVisibility(View.GONE);
             }
         });
 
+        listViewDanhMucSearch.setOnItemClickListener((parent, view, position, id) -> {
+            // Xử lý sự kiện khi item được chọn ở đây
+            // 'position' là vị trí của item đã chọn trong ListView
+            // 'id' là ID dòng của item đã chọn (nếu Adapter có)
+            this.danhMucSelector = (DanhMuc) parent.getItemAtPosition(position);
 
+        });
+        // kiem tra click search
+        btnTimKiem.setOnClickListener(v -> {
+            // Xử lý sự kiện khi nhấn nút tìm kiếm
+            // Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
+
+            if(radioSearchByText.equals("Loại sản phẩm")){
+                //            if (edtSearchKeyword.getText().length() <= 0) {
+//                edtSearchKeyword.setError("chưa có từ khóa");
+//                return;
+//            }
+                if (Objects.isNull(danhMucSelector)) {
+                    danhMucSelector = listDanhMuc.get(0);
+                }
+                GetDanhSachSanPhamListTheoTenVaLoai();
+            }
+            if(radioSearchByText.equals("Tên sản phẩm")){
+                GetDanhSachSanPhamListTheoTen();
+            }
+        });
     }
 
     private void KhoiTao() {
@@ -117,14 +143,12 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (DanhMuc danhMuc : dbDanhMuc.DocDL()) {
-            listDanhMuc.add(danhMuc);
-        }
+        listDanhMuc.addAll(dbDanhMuc.DocDL());
 
         // gan san pham bang menu item layout(gan template item)
         protypeItemAdapter = new ProtypeItemAdapter(this, R.layout.layout_protype_item, listDanhMuc);
         // hien thi len listview
-        dsLoaiSPNavigation.setAdapter(protypeItemAdapter);
+        listViewDanhMucSearch.setAdapter(protypeItemAdapter);
 
         protypeItemAdapter.notifyDataSetChanged();
     }
@@ -141,29 +165,69 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (HangHoa sanpham : dbSanPham.DocDL()) {
-            listHangHoa.add(sanpham);
-        }
+        listHangHoa.addAll(dbSanPham.DocDL());
 
         // gan san pham bang menu item layout(gan template item)
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa);
         // hien thi len listview
-        dsSanPhamNavigation.setAdapter(productItemAdapter);
+        listviewSanPhamSearch.setAdapter(productItemAdapter);
 
         productItemAdapter.notifyDataSetChanged();
     }
+    private void GetDanhSachSanPhamListTheoTenVaLoai() {
+        // dbsinhvien truy cập dữ liệu DB
+        dbSanPham = new DBHangHoa(this);
 
+        listHangHoa.clear();
+
+        // Kiểm tra xem cơ sở dữ liệu có rỗng không
+        if ((long) dbSanPham.DocDL().size() <= 0) {
+            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+        listHangHoa.addAll(dbSanPham.DocDLByTenSPVaLoaiSP(edtSearchKeyword.getText().toString(),danhMucSelector.getMa()));
+
+        // gan san pham bang menu item layout(gan template item)
+        productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa);
+        // hien thi len listview
+        listviewSanPhamSearch.setAdapter(productItemAdapter);
+
+        productItemAdapter.notifyDataSetChanged();
+    }
+    private void GetDanhSachSanPhamListTheoTen() {
+        // dbsinhvien truy cập dữ liệu DB
+        dbSanPham = new DBHangHoa(this);
+
+        listHangHoa.clear();
+
+        // Kiểm tra xem cơ sở dữ liệu có rỗng không
+        if ((long) dbSanPham.DocDL().size() <= 0) {
+            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+        listHangHoa.addAll(dbSanPham.DocDLByTenSP(edtSearchKeyword.getText().toString()));
+
+        // gan san pham bang menu item layout(gan template item)
+        productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa);
+        // hien thi len listview
+        listviewSanPhamSearch.setAdapter(productItemAdapter);
+
+        productItemAdapter.notifyDataSetChanged();
+    }
     private void setControl() {
-        // tim kiem
-
-        //2 nút radio
+        // ánh xạ các nút điều khiển
         radMaLoaiSP = findViewById(R.id.radMaLoaiSP);
         radTenSP = findViewById(R.id.radTenSP);
         rgSearchBy = findViewById(R.id.rgSearchBy);
         btnTimKiem = findViewById(R.id.btnTimKiem);
-        dsSanPhamNavigation = findViewById(R.id.dsSanPhamNavigation);
-        dsLoaiSPNavigation = findViewById(R.id.dsLoaiSPNavigation);
         ivProduct = findViewById(R.id.ivProduct);
+
+        // ánh xạ listview hiển thị danh sách
+        listviewSanPhamSearch = findViewById(R.id.dsSanPhamNavigation);
+        listViewDanhMucSearch = findViewById(R.id.dsLoaiSPNavigation);
+
         // anh xa ô tìm kiếm theo loại từ khóa
         edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
     }

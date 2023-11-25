@@ -49,6 +49,10 @@ public class ProductItemAdapter extends ArrayAdapter {
         TextView tvProductName = convertView.findViewById(R.id.tvProductName);
         TextView tvProductDescription = convertView.findViewById(R.id.tvProductDescription);
         Button btnAddToCart = convertView.findViewById(R.id.btnAddToCart);
+        if(position> hangHoaList.size()){
+            Toast.makeText(context, "Hết dữ liệu", Toast.LENGTH_SHORT).show();
+            return convertView;
+        }
         // dau vao position set gia tri cho control
         HangHoa hangHoa = hangHoaList.get(position);
         // hien thi ten san pham
@@ -121,5 +125,9 @@ public class ProductItemAdapter extends ArrayAdapter {
     private void updateCartIcon() {
         // xử lý icon giỏ hàng đếm số lượng sản phẩm trong giỏ hàng
 
+    }
+
+    public void UpdateData(List<HangHoa> hangHoaList) {
+        this.hangHoaList = hangHoaList;
     }
 }
