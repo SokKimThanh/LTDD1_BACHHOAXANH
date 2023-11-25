@@ -25,5 +25,9 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Click vào item trên danh sách đi vào màn hình edit
 25/11/2023 1:14 SA
 - Thực hiện chức năng search sản phẩm
+    - Viết câu query tìm theo tên
+    - Viết câu query tìm theo loại và tên sản phẩm(chỉ một trong hai hoặc không có cái nào hoặc có cả hai)
+    - Viết sự kiện tìm theo điều kiện tên sản phẩm để thực hiện câu truy vấn tìm theo tên sản phẩm
+    - Viết sự kiện tìm theo điều kiện loại sản phẩm để thực hiện câu truy vấn tìm theo loại và tên sản phẩm
 25/11/2023 7:50 CH
 - Thực hiện chức năng add giỏ hàng và đếm số sản phẩm đã add
