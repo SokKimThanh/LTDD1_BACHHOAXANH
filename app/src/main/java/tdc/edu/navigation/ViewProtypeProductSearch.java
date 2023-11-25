@@ -24,7 +24,6 @@ import tdc.edu.danhsachdm.DanhMuc;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
-import tdc.edu.danhsachsp.SanPham;
 
 public class ViewProtypeProductSearch extends AppCompatActivity {
 
@@ -68,8 +67,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_protype_product_list);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
-        Toast.makeText(ViewProtypeProductSearch.this, "search view here", Toast.LENGTH_SHORT).show();
-
         setControl();
         setEvent();
     }
@@ -86,14 +83,18 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             // Xử lý sự kiện khi chọn radio button khác nhau
             radSearchBy = findViewById(checkedId);
             radioSearchByText = radSearchBy.getText().toString();
-            if(radioSearchByText.equals("Loại sản phẩm")){
+            if (radioSearchByText.equals("Loại sản phẩm")) {
                 // Hiện ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.VISIBLE);
             }
-            if(radioSearchByText.equals("Tên sản phẩm")){
+            if (radioSearchByText.equals("Tên sản phẩm")) {
                 // Ẩn ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.GONE);
             }
+            // clear danh sach chon lai
+            listViewDanhMucSearch.clearChoices();
+            protypeItemAdapter.notifyDataSetChanged();
+
         });
 
         listViewDanhMucSearch.setOnItemClickListener((parent, view, position, id) -> {
@@ -101,24 +102,18 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             // 'position' là vị trí của item đã chọn trong ListView
             // 'id' là ID dòng của item đã chọn (nếu Adapter có)
             this.danhMucSelector = (DanhMuc) parent.getItemAtPosition(position);
-
         });
         // kiem tra click search
         btnTimKiem.setOnClickListener(v -> {
             // Xử lý sự kiện khi nhấn nút tìm kiếm
-            // Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
-
-            if(radioSearchByText.equals("Loại sản phẩm")){
-                //            if (edtSearchKeyword.getText().length() <= 0) {
-//                edtSearchKeyword.setError("chưa có từ khóa");
-//                return;
-//            }
+            if (radioSearchByText.equals("Loại sản phẩm")) {
                 if (Objects.isNull(danhMucSelector)) {
-                    danhMucSelector = listDanhMuc.get(0);
+                    Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 GetDanhSachSanPhamListTheoTenVaLoai();
             }
-            if(radioSearchByText.equals("Tên sản phẩm")){
+            if (radioSearchByText.equals("Tên sản phẩm")) {
                 GetDanhSachSanPhamListTheoTen();
             }
         });
@@ -174,6 +169,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
         productItemAdapter.notifyDataSetChanged();
     }
+
     private void GetDanhSachSanPhamListTheoTenVaLoai() {
         // dbsinhvien truy cập dữ liệu DB
         dbSanPham = new DBHangHoa(this);
@@ -186,7 +182,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        listHangHoa.addAll(dbSanPham.DocDLByTenSPVaLoaiSP(edtSearchKeyword.getText().toString(),danhMucSelector.getMa()));
+        listHangHoa.addAll(dbSanPham.DocDLByTenSPVaLoaiSP(edtSearchKeyword.getText().toString(), danhMucSelector.getMa()));
 
         // gan san pham bang menu item layout(gan template item)
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa);
@@ -195,6 +191,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
         productItemAdapter.notifyDataSetChanged();
     }
+
     private void GetDanhSachSanPhamListTheoTen() {
         // dbsinhvien truy cập dữ liệu DB
         dbSanPham = new DBHangHoa(this);
@@ -216,6 +213,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
         productItemAdapter.notifyDataSetChanged();
     }
+
     private void setControl() {
         // ánh xạ các nút điều khiển
         radMaLoaiSP = findViewById(R.id.radMaLoaiSP);

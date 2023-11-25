@@ -241,9 +241,10 @@ public class DBHangHoa extends SQLiteOpenHelper {
         String sql = "";
         String[] selectionArgs;
         // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
+        boolean isLoaiSPNullOrEmpty = String.valueOf(loaisp).isEmpty() || loaisp == null;
         if (String.valueOf(tensp).isEmpty()) {
             // không có tên sp
-            if (String.valueOf(loaisp).isEmpty()) {
+            if (isLoaiSPNullOrEmpty) {
                 // không có loại sp
                 sql = "Select * from HangHoa";
                 selectionArgs = new String[]{
@@ -257,7 +258,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
             }
         } else {
             // có tên sp
-            if (String.valueOf(loaisp).isEmpty()) {
+            if (isLoaiSPNullOrEmpty) {
                 // không có loại sp
                 sql = "Select * from HangHoa where ten like ?";
                 selectionArgs = new String[]{

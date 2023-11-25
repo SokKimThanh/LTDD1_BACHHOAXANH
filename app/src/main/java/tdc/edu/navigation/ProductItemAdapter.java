@@ -47,7 +47,8 @@ public class ProductItemAdapter extends ArrayAdapter {
         // danh sach hien thi len tung item
         ImageView ivProduct = convertView.findViewById(R.id.ivProduct);
         TextView tvProductName = convertView.findViewById(R.id.tvProductName);
-        TextView tvProductDescription = convertView.findViewById(R.id.tvProductDescription);
+        TextView tvGiaSPSearch = convertView.findViewById(R.id.tvGiaSPSearch);
+        TextView tvSoLuongSPSearch = convertView.findViewById(R.id.tvSoLuongSPSearch);
         Button btnAddToCart = convertView.findViewById(R.id.btnAddToCart);
         if(position> hangHoaList.size()){
             Toast.makeText(context, "Hết dữ liệu", Toast.LENGTH_SHORT).show();
@@ -58,8 +59,9 @@ public class ProductItemAdapter extends ArrayAdapter {
         // hien thi ten san pham
         tvProductName.setText(hangHoa.getTenSp());
         // hien thi gia san pham va so luong
-        tvProductDescription.setText("Giá: " + String.valueOf(hangHoa.getGiaSp()) + "Số lượng: " + hangHoa.getSoluongNhapkho());
+        tvGiaSPSearch.setText("Giá: " + hangHoa.getGiaSp());
 
+        tvSoLuongSPSearch.setText("Số lượng: " + hangHoa.getSoluongNhapkho());
         // hien thi hinh`
         if (hangHoa.getLoaiSp().equals("dm001")) {
             ivProduct.setImageResource(R.drawable.thit);
