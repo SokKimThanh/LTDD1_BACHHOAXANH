@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <!--tieu de-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,12 +13,12 @@
         android:text="Tìm kiếm sản phẩm theo loại"
         android:textColor="@color/pinkPrimary"
         android:textSize="30sp" />
-
+    <!--tim kiem-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <!--dieu kien tim kiem-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                     android:textSize="16sp" />
             </RadioGroup>
         </LinearLayout>
-
+        <!--keyword tim kiem-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
-
+    <!--danh sach ket qua tim kiem-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -100,5 +100,4 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
-
 </LinearLayout>

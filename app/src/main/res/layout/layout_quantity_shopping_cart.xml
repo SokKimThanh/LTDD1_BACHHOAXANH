@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_quantity_shopping_cart"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- Biểu tượng giỏ hàng -->
+        <ImageView
+            android:id="@+id/imageview_cart_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:src="@drawable/giohang" />
+
+        <!-- Số lượng -->
+        <TextView
+            android:id="@+id/textview_cart_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/textview_quantity_shoppingcart"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>
