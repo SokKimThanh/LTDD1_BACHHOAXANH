@@ -1,12 +1,16 @@
 package tdc.edu.danhsachdm;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Objects;
 
 import tdc.edu.danhsachsp.R;
 
@@ -20,6 +24,8 @@ public class ViewDanhMucAdd extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // hiển thị nút quay lại trang chủ
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.danhmuc_add_layout);
         setControl();
         setEvent();
@@ -83,5 +89,14 @@ public class ViewDanhMucAdd extends AppCompatActivity {
         this.btnThem = findViewById(R.id.btnDMEditAdd);
         this.btnLamMoi = findViewById(R.id.btnDMEditRefresh);
         this.btnQuayVe = findViewById(R.id.btnDMEditBack);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // hỗ trợ quay lại màn hình chính
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

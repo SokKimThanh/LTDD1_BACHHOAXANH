@@ -1,6 +1,7 @@
 package tdc.edu.danhsachsp;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,30 +11,36 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
 
 public class ViewSanPhamAdd extends AppCompatActivity {
     EditText edtMaSp, edtGiaSP, edtTenSP, edtSoLuongSP;
-    Spinner spLoaiSP;
+    Spinner spinnerDanhMuc;
     Button btnAdd, btnRefresh, btnBack;
 
 
     ImageView ivHinhAdd;
 
     List<String> data_lsp = new ArrayList<>();
-    ArrayAdapter adapter_lsp;
+
+    ArrayAdapter<DanhMuc> adapter_lsp;
     DBHangHoa dbHangHoa;
     DBDanhMuc dbDanhMuc;
 
+    DanhMuc selectedDanhmucSpinner = new DanhMuc();
+    String selectedMaDM = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
         setContentView(R.layout.themsanpham_layout);
         // ánh xạ
         setControl();
@@ -44,7 +51,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
         this.edtMaSp = findViewById(R.id.edtMaSP);
         this.edtGiaSP = findViewById(R.id.edtGiaSP);
         this.edtTenSP = findViewById(R.id.edtTenSP);
-        this.spLoaiSP = findViewById(R.id.spLoaiSP);
+        this.spinnerDanhMuc = findViewById(R.id.spinnerDanhMuc);
         this.edtSoLuongSP = findViewById(R.id.edtSoLuongSP);
         this.btnAdd = findViewById(R.id.btnAdd);
         this.btnRefresh = findViewById(R.id.btnRefresh);
@@ -57,27 +64,30 @@ public class ViewSanPhamAdd extends AppCompatActivity {
      */
     private void setEvent() {
         KhoiTao();
-        adapter_lsp = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data_lsp);
-        spLoaiSP.setAdapter(adapter_lsp);
-        spLoaiSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        spinnerDanhMuc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spLoaiSP.getSelectedItem().toString().equals("Thit")) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
+                selectedMaDM = selectedDanhmucSpinner.getMa();
+                // Xử lý mã đã chọn...
+                if (spinnerDanhMuc.getSelectedItem().toString().equals("Thit")) {
                     ivHinhAdd.setImageResource(R.drawable.thit);
                 }
-                if (spLoaiSP.getSelectedItem().toString().equals("Ca")) {
+                if (spinnerDanhMuc.getSelectedItem().toString().equals("Ca")) {
                     ivHinhAdd.setImageResource(R.drawable.ca);
                 }
-                if (spLoaiSP.getSelectedItem().toString().equals("Trung")) {
+                if (spinnerDanhMuc.getSelectedItem().toString().equals("Trung")) {
                     ivHinhAdd.setImageResource(R.drawable.trung);
                 }
-                if (spLoaiSP.getSelectedItem().toString().equals("Sua")) {
+                if (spinnerDanhMuc.getSelectedItem().toString().equals("Sua")) {
                     ivHinhAdd.setImageResource(R.drawable.sua);
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -97,20 +107,24 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                     edtTenSP.setError("Vui long ghi ten");
                     return;
                 }
+                if (edtSoLuongSP.getText().length() <= 0) {
+                    edtTenSP.setError("Vui long nhập số lượng");
+                    return;
+                }
 
                 // Tạo sản phẩm mới
                 HangHoa sanPham = new HangHoa();
                 // thêm mã sp
                 sanPham.setMaSp(edtMaSp.getText().toString());
-                // thêm giá sp
-                sanPham.setGiaSp(edtGiaSP.getText().toString());
                 // thêm tên sp
                 sanPham.setTenSp(edtTenSP.getText().toString());
-                // thêm loại sp
-                sanPham.setLoaiSp(spLoaiSP.getSelectedItem().toString());
-
+                // thêm giá sp
+                sanPham.setGiaSp(edtGiaSP.getText().toString());
                 // Thêm số lượng nhập kho
                 sanPham.setSoluongNhapkho(Integer.parseInt(edtSoLuongSP.getText().toString()));
+                // thêm loại sp(lưu mã loại sản phẩm)
+                sanPham.setLoaiSp(selectedMaDM);
+
 
                 // Dữ liệu tĩnh tham gia
                 if (ViewSanPhamList.dataSp.add(sanPham)) {
@@ -127,7 +141,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 edtMaSp.setText("");
                 edtGiaSP.setText("");
                 edtTenSP.setText("");
-                spLoaiSP.setSelection(0);
+                spinnerDanhMuc.setSelection(0);
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -146,9 +160,19 @@ public class ViewSanPhamAdd extends AppCompatActivity {
 
         // dbDanhMuc truy cập dữ liệu DB
         dbDanhMuc = new DBDanhMuc(this);
-        for (DanhMuc danhmuc : dbDanhMuc.DocDL()) {
-            data_lsp.add(danhmuc.getTen());
-        }
 
+        // Danh sách các đối tượng DanhMuc
+        List<DanhMuc> list =  dbDanhMuc.DocDL();
+        adapter_lsp  = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
+        spinnerDanhMuc.setAdapter(adapter_lsp);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

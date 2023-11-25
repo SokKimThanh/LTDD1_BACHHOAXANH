@@ -76,13 +76,14 @@ public class ViewSanPhamList extends AppCompatActivity {
         });
 
         //su kien long click de xoa item
-//        lvDanhSachSp.setOnItemLongClickListener((parent, view, position, id) -> {
-//
-//            dataSp.remove(position);
-//            spAdapter.notifyDataSetChanged();
-//            Toast.makeText(ViewSanPhamList.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-//            return false;
-//        });
+        lvDanhSachSp.setOnItemLongClickListener((parent, view, position, id) -> {
+            HangHoa hh = dataSp.get(position);
+            dbSanPham.XoaDL(hh);
+            dataSp.remove(position);
+            spAdapter.notifyDataSetChanged();
+            Toast.makeText(ViewSanPhamList.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+            return false;
+        });
     }
 
     // khoi tao danh sach san pham

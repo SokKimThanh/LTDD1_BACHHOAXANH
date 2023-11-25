@@ -56,16 +56,16 @@ public class SanPhamListAdapter extends ArrayAdapter {
         tvSoLuong.setText(String.valueOf(sp.getSoluongNhapkho()));
 
         // hien thi hinh`
-        if(sp.getLoaiSp().equals("Thit")){
+        if(sp.getLoaiSp().equals("dm001")){
             ivHinh.setImageResource(R.drawable.thit);
         }
-        if(sp.getLoaiSp().equals("Ca")){
+        if(sp.getLoaiSp().equals("dm002")){
             ivHinh.setImageResource(R.drawable.ca);
         }
-        if(sp.getLoaiSp().equals("Trung")){
+        if(sp.getLoaiSp().equals("dm003")){
             ivHinh.setImageResource(R.drawable.trung);
         }
-        if(sp.getLoaiSp().equals("Sua")){
+        if(sp.getLoaiSp().equals("dm004")){
             ivHinh.setImageResource(R.drawable.sua);
         }
         // hien thi toan bo du lieu len view hop le

@@ -150,7 +150,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
 
 
         // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
-        String[] selectionArgs = new String[] {
+        String[] selectionArgs = new String[]{
                 "%" + loaisp + "%"
         };
         Cursor cursor = db.rawQuery(sql, selectionArgs);
@@ -198,9 +198,8 @@ public class DBHangHoa extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
 
-
         // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
-        String[] selectionArgs = new String[] {
+        String[] selectionArgs = new String[]{
                 "%" + tensp + "%"
         };
         Cursor cursor = db.rawQuery(sql, selectionArgs);
@@ -239,19 +238,48 @@ public class DBHangHoa extends SQLiteOpenHelper {
     public List<HangHoa> DocDLByTenSPVaLoaiSP(String tensp, String loaisp) {
         // Khởi tạo danh sách hàng hóa
         List<HangHoa> listHangHoa = new ArrayList<>();
-
+        String sql = "";
+        String[] selectionArgs;
         // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
-        String sql = "Select * from HangHoa where ten like ? or loaisp like ?";
+        if (String.valueOf(tensp).isEmpty()) {
+            // không có tên sp
+            if (String.valueOf(loaisp).isEmpty()) {
+                // không có loại sp
+                sql = "Select * from HangHoa";
+                selectionArgs = new String[]{
+                };
+            } else {
+                // có loại sp
+                sql = "Select * from HangHoa where loaisp like ?";
+                selectionArgs = new String[]{
+                        "%" + loaisp + "%",
+                };
+            }
+        } else {
+            // có tên sp
+            if (String.valueOf(loaisp).isEmpty()) {
+                // không có loại sp
+                sql = "Select * from HangHoa where ten like ?";
+                selectionArgs = new String[]{
+                        "%" + tensp + "%"
+                };
+            } else {
+                // có loại sp
+                sql = "Select * from HangHoa where ten like ? and loaisp like ?";
+                selectionArgs = new String[]{
+                        "%" + tensp + "%",
+                        "%" + loaisp + "%"
+                };
+            }
+        }
+
 
         // Mở cơ sở dữ liệu để đọc
         SQLiteDatabase db = getReadableDatabase();
 
 
         // Thực hiện truy vấn SQL và lưu kết quả vào Cursor
-        String[] selectionArgs = new String[] {
-                "%" + tensp + "%",
-                "%" + loaisp + "%"
-        };
+
         Cursor cursor = db.rawQuery(sql, selectionArgs);
 
 

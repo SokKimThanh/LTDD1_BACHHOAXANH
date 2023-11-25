@@ -40,12 +40,6 @@ public class DanhMuc implements Serializable {
 
     @Override
     public String toString() {
-        return "DanhMuc{" +
-                "ma='" + ma + '\'' +
-                ", ten='" + ten + '\'' +
-                ", ghichu='" + ghichu + '\'' +
-                '}';
+        return ten;
     }
-
-
 }
