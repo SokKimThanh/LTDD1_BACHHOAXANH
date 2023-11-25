@@ -1,6 +1,8 @@
 package tdc.edu.navigation;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -8,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -147,5 +150,21 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
         btnTimKiem =  findViewById(R.id.btnTimKiem);
         dsSanPhamNavigation = findViewById(R.id.dsSanPhamNavigation);
         dsLoaiSPNavigation = findViewById(R.id.dsLoaiSPNavigation);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // hỗ trợ quay lại màn hình chính
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
