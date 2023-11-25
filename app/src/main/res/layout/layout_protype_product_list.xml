@@ -84,13 +84,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
+        <!--        danh sach loai san pham-->
         <ListView
             android:id="@+id/dsLoaiSPNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
-
+            android:layout_weight="2"
+            android:choiceMode="singleChoice"
+            android:listSelector="@drawable/layout_protype_selector" />
+        <!--danh sách sản phẩm-->
         <ListView
             android:id="@+id/dsSanPhamNavigation"
             android:layout_width="match_parent"

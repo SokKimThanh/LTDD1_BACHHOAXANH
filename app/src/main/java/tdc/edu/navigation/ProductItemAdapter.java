@@ -28,8 +28,8 @@ public class ProductItemAdapter extends ArrayAdapter {
     int resource;//id cua control
 
     List<HangHoa> hangHoaList;//danh sách hàng hóa
-
-    GioHang cart;
+    // Tạo giỏ hàng mới để thêm sản phẩm
+    GioHang cart = new GioHang();
 
 
     public ProductItemAdapter(Context context, int resource, List<HangHoa> hangHoaList) {
@@ -55,7 +55,7 @@ public class ProductItemAdapter extends ArrayAdapter {
         tvProductName.setText(hangHoa.getTenSp());
         // hien thi gia san pham va so luong
         tvProductDescription.setText("Giá: " + String.valueOf(hangHoa.getGiaSp()) + "Số lượng: " + hangHoa.getSoluongNhapkho());
-        cart = new GioHang();
+
         // hien thi hinh`
         if (hangHoa.getLoaiSp().equals("dm001")) {
             ivProduct.setImageResource(R.drawable.thit);
@@ -69,6 +69,7 @@ public class ProductItemAdapter extends ArrayAdapter {
         if (hangHoa.getLoaiSp().equals("dm004")) {
             ivProduct.setImageResource(R.drawable.sua);
         }
+
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

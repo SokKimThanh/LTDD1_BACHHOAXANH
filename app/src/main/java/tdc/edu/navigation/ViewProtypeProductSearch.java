@@ -66,17 +66,19 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
 
 
     private void setEvent() {
-
+        KhoiTao();
         // kiem tra click search
         btnTimKiem.setOnClickListener(v -> {
             // Xử lý sự kiện khi nhấn nút tìm kiếm
             int selectedId = rgSearchBy.getCheckedRadioButtonId();
             RadioButton radioButton = findViewById(selectedId);
             String selectedText = radioButton.getText().toString();
-            Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
-            if(selectedText.equals("Loại sản phẩm")){
-                listHangHoa = dbSanPham.DocDLBy(edtSearchKeyword.getText().toString());
+//            Toast.makeText(ViewProtypeProductSearch.this, selectedText, Toast.LENGTH_SHORT).show();
+            if(edtSearchKeyword.getText().length() <= 0){
+                edtSearchKeyword.setError("chưa có từ khóa");
+                return;
             }
+            listHangHoa = dbSanPham.DocDLBy(edtSearchKeyword.getText().toString());
         });
 
         // kiểm tra chọn tiêu chí
@@ -93,6 +95,10 @@ public class ViewProtypeProductSearch extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void KhoiTao() {
         // Thêm dữ liệu vào lưới dsLoaiSPNavigation
         GetDanhSachSanPhamList();
         // Thêm dữ liệu vào lưới dsLoaiSPNavigation
