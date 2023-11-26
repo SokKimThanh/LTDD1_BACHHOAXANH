@@ -1,8 +1,5 @@
 package tdc.edu.danhsachsp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
 
 public class ViewSanPhamEdit extends AppCompatActivity {
-    EditText   edtGiaSP, edtTenSP, edtSoLuongSPNhapKho;
+    EditText edtGiaSP, edtTenSP, edtSoLuongSPNhapKho;
     TextView tvMaSp;
     Spinner spinnerDanhMuc;
     Button btnUpdate, btnDelete, btnBack;
@@ -64,11 +64,11 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         this.btnDelete = findViewById(R.id.btnDelete);
         this.btnBack = findViewById(R.id.btnBackChiTiet);
         this.ivHinhEdit = findViewById(R.id.ivHinhSuaSP);
-     }
+    }
 
     /**
      * Đổ dữ liệu vào spinner loại sản phẩm
-     * */
+     */
     private void setEvent() {
         KhoiTao();
         spinnerDanhMuc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,20 +76,20 @@ public class ViewSanPhamEdit extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                 selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
                 selectedMaDM = selectedDanhmucSpinner.getMa();
-
-                if(spinnerDanhMuc.getSelectedItem().toString().equals("Thit")){
+// Xử lý mã đã chọn...
+                if (selectedMaDM.equals("dm001")) {
                     spinnerDanhMuc.setSelection(0);
                     ivHinhEdit.setImageResource(R.drawable.thit);
                 }
-                if(spinnerDanhMuc.getSelectedItem().toString().equals("Ca")){
+                if (selectedMaDM.equals("dm002")) {
                     spinnerDanhMuc.setSelection(1);
                     ivHinhEdit.setImageResource(R.drawable.ca);
                 }
-                if(spinnerDanhMuc.getSelectedItem().toString().equals("Trung")){
+                if (selectedMaDM.equals("dm003")) {
                     spinnerDanhMuc.setSelection(2);
                     ivHinhEdit.setImageResource(R.drawable.trung);
                 }
-                if(spinnerDanhMuc.getSelectedItem().toString().equals("Sua")){
+                if (selectedMaDM.equals("dm004")) {
                     spinnerDanhMuc.setSelection(3);
                     ivHinhEdit.setImageResource(R.drawable.sua);
                 }
@@ -102,7 +102,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         });
 
         // Khởi tạo item để chuyển đối tượng lên màn hình
-        sanPham= (HangHoa) getIntent().getSerializableExtra("item");
+        sanPham = (HangHoa) getIntent().getSerializableExtra("item");
 
         //hiển thị dữ liệu lên màn hình sửa
         tvMaSp.setText(sanPham.getMaSp());// mã sp
@@ -113,13 +113,13 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         edtSoLuongSPNhapKho.setText(soluong);// soluong sp nhập kho
 
         // loại sản phẩm
-        if(sanPham.getLoaiSp().equals("dm001"))
+        if (sanPham.getLoaiSp().equals("dm001"))
             spinnerDanhMuc.setSelection(0);
-        if(sanPham.getLoaiSp().equals("dm002"))
+        if (sanPham.getLoaiSp().equals("dm002"))
             spinnerDanhMuc.setSelection(1);
-        if(sanPham.getLoaiSp().equals("dm003"))
+        if (sanPham.getLoaiSp().equals("dm003"))
             spinnerDanhMuc.setSelection(2);
-        if(sanPham.getLoaiSp().equals("dm004"))
+        if (sanPham.getLoaiSp().equals("dm004"))
             spinnerDanhMuc.setSelection(3);
         // sự kiện update
         // Sử dụng dữ liệu tĩnh của chính nó(adapter_lsp)
@@ -127,9 +127,9 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : ViewSanPhamList.dataSp){
+                for (HangHoa sp : ViewSanPhamList.dataSp) {
                     //tim ma san pham de cap nhat
-                    if(sp.getMaSp().equals(sanPham.getMaSp())){
+                    if (sp.getMaSp().equals(sanPham.getMaSp())) {
                         // sua
                         sp.setTenSp(edtTenSP.getText().toString());
                         sp.setGiaSp(Double.valueOf(edtGiaSP.getText().toString()));
@@ -148,9 +148,9 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : ViewSanPhamList.dataSp){
+                for (HangHoa sp : ViewSanPhamList.dataSp) {
                     //tim ma san pham de cap nhat
-                    if(sp.getMaSp().equals(sanPham.getMaSp())){
+                    if (sp.getMaSp().equals(sanPham.getMaSp())) {
                         // xoa
 
                         ViewSanPhamList.dataSp.remove(sp);
@@ -182,10 +182,11 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         dbDanhMuc = new DBDanhMuc(this);
 
         // Danh sách các đối tượng DanhMuc
-        List<DanhMuc> list =  dbDanhMuc.DocDL();
-        adapter_lsp  = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
+        List<DanhMuc> list = dbDanhMuc.DocDL();
+        adapter_lsp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
         spinnerDanhMuc.setAdapter(adapter_lsp);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 

@@ -64,6 +64,8 @@ public class ViewSanPhamAdd extends AppCompatActivity {
     private void setEvent() {
         KhoiTao();
 
+        // loại sản phẩm
+
 
         spinnerDanhMuc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -71,16 +73,16 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
                 selectedMaDM = selectedDanhmucSpinner.getMa();
                 // Xử lý mã đã chọn...
-                if (spinnerDanhMuc.getSelectedItem().toString().equals("Thit")) {
+                if (selectedMaDM.equals("dm001")) {
                     ivHinhAdd.setImageResource(R.drawable.thit);
                 }
-                if (spinnerDanhMuc.getSelectedItem().toString().equals("Ca")) {
+                if (selectedMaDM.equals("dm002")) {
                     ivHinhAdd.setImageResource(R.drawable.ca);
                 }
-                if (spinnerDanhMuc.getSelectedItem().toString().equals("Trung")) {
+                if (selectedMaDM.equals("dm003")) {
                     ivHinhAdd.setImageResource(R.drawable.trung);
                 }
-                if (spinnerDanhMuc.getSelectedItem().toString().equals("Sua")) {
+                if (selectedMaDM.equals("dm004")) {
                     ivHinhAdd.setImageResource(R.drawable.sua);
                 }
             }
@@ -134,6 +136,9 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 }
             }
         });
+
+
+
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +169,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
         List<DanhMuc> list =  dbDanhMuc.DocDL();
         adapter_lsp  = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
         spinnerDanhMuc.setAdapter(adapter_lsp);
+
 
     }
 
