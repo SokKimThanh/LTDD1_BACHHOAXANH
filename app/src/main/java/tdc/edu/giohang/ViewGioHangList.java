@@ -2,7 +2,9 @@ package tdc.edu.giohang;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class ViewGioHangList extends AppCompatActivity {
     ListView listView;
     TextView tvTongThanhTien;
     Button btnThanhToan;
+    ImageView ivGioHangNull;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +43,21 @@ public class ViewGioHangList extends AppCompatActivity {
     private void setEvent() {
         KhoiTao();
         // xử lý cộng trừ gio hàng
+        if(hangHoaList.size() == 0){
+            //hiển thị thông báo không có dữ liệu
+            ivGioHangNull.setVisibility(View.VISIBLE);
+            // khóa thao tác thanh toán
+            btnThanhToan.setEnabled(false);
+        }else {
+            // tắt thông báo
+            ivGioHangNull.setVisibility(View.GONE);
+            // mở khóa thao tác thanh toán
+            btnThanhToan.setEnabled(true);
+        }
     }
 
     private void KhoiTao() {
-
-
+        ivGioHangNull = findViewById(R.id.ivGioHangNull);
         // Lấy danh sách hàng hóa từ giỏ hàng
         hangHoaList = ViewProtypeProductSearch.gioHang.getHangHoaList();
 

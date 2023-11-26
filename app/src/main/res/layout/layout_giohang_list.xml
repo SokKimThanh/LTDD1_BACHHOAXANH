@@ -15,7 +15,12 @@
         android:text="Giỏ hàng"
         android:textColor="@color/pinkPrimary"
         android:textSize="30sp" />
-
+    <ImageView
+        android:id="@+id/ivGioHangNull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/giohangnull"/>
     <ListView
         android:id="@+id/cartListView"
         android:layout_width="match_parent"
