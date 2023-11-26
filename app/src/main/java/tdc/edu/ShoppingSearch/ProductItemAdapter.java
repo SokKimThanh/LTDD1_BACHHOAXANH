@@ -51,7 +51,7 @@ public class ProductItemAdapter extends ArrayAdapter {
 
         // danh sach hien thi len tung item
         ImageView ivProduct = convertView.findViewById(R.id.ivProduct);
-        TextView tvProductName = convertView.findViewById(R.id.tvProductName);
+        TextView tvProductName = convertView.findViewById(R.id.tvProductCartName);
         TextView tvGiaSPSearch = convertView.findViewById(R.id.tvGiaSPSearch);
         TextView tvSoLuongSPSearch = convertView.findViewById(R.id.tvSoLuongSPSearch);
         Button btnAddToCart = convertView.findViewById(R.id.btnAddToCartProductItemAdapter);

@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/ivProduct"
+        android:id="@+id/ivProductCartItem"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginRight="8dp"
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvProductName"
+            android:id="@+id/tvProductCartName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên sản phẩm"
@@ -39,7 +39,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvProductStock"
+                android:id="@+id/tvProductCartStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -60,7 +60,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/tvProductPrice"
+                android:id="@+id/tvProductCartPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Giá tiền"

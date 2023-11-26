@@ -30,11 +30,11 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         }
 
         // Tìm kiếm view cho dữ liệu trong layout
-        TextView tvName = convertView.findViewById(R.id.tvProductName);
-        TextView tvPrice = convertView.findViewById(R.id.tvProductPrice);
-        TextView tvProductStock = convertView.findViewById(R.id.tvProductStock);
+        TextView tvName = convertView.findViewById(R.id.tvProductCartName);
+        TextView tvPrice = convertView.findViewById(R.id.tvProductCartPrice);
+        TextView tvProductStock = convertView.findViewById(R.id.tvProductCartStock);
         TextView tvQuantity = convertView.findViewById(R.id.tvQuantity);
-        ImageView ivProduct =  convertView.findViewById(R.id.ivProduct);
+        ImageView ivProduct =  convertView.findViewById(R.id.ivProductCartItem);
 
         // Điền dữ liệu vào các view
         tvName.setText(hangHoa.getTenSp());
