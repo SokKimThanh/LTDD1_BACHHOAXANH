@@ -90,11 +90,6 @@ public class DanhSachDonHang extends AppCompatActivity {
             Intent intent = new Intent(this, ThemDonHang.class);
             startActivity(intent);
         }
-
-        // TH: click menu thoat
-        if (item.getItemId() == R.id.mnThoat) {
-            finish();// ket thuc chuong trinh
-        }
         return super.onOptionsItemSelected(item);
     }
 }

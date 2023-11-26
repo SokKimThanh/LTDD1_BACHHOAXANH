@@ -124,12 +124,6 @@ public class ViewSanPhamList extends AppCompatActivity {
             Intent intent = new Intent(this, ViewSanPhamAdd.class);
             startActivity(intent);
         }
-
-        // TH: click menu thoat
-        if (item.getItemId() == R.id.mnThoat) {
-            finish();// ket thuc chuong trinh
-        }
-
         // hỗ trợ quay lại màn hình chính
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();

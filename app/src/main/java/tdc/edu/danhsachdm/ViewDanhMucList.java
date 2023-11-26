@@ -125,10 +125,7 @@ public class ViewDanhMucList extends AppCompatActivity {
             startActivity(intent);
         }
 
-        // TH: click menu thoat
-        if (item.getItemId() == R.id.mnThoat) {
-            finish();// ket thuc chuong trinh
-        }
+
         // Xử lý sự kiện khi nhấn vào nút hỗ trợ
         // Nếu id của item là android.R.id.home, tức là nút hỗ trợ
         if(item.getItemId() == android.R.id.home){
