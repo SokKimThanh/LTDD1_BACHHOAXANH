@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ViewSanPhamAdd">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm Sản Phẩm"
-        android:textSize="30sp"
-        android:textColor="#ff0000"
+        android:background="@color/greenPrimary"
         android:gravity="center"
-        android:background="#22ffaa"/>
+        android:text="Thêm Sản Phẩm"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

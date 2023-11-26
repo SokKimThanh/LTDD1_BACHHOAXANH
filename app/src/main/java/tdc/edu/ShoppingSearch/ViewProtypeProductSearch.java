@@ -237,15 +237,21 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
                 builder.create().show();
             } else {
                 // Nếu không, thêm sản phẩm vào giỏ hàng
-                gioHang.add(hangHoa);
-                // Giảm số lượng tồn kho
-                hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
-                // Cập nhật biểu tượng giỏ hàng
-                updateCartIcon(customMenu);
-                // Thông báo cho người dùng
-                Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                if (hangHoa.getSoLuongTonKho() >= 1) {
+                    // đủ số lượng cung cấp
+                    gioHang.add(hangHoa);
+                    // Giảm số lượng tồn kho
+                    hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
+                    // Cập nhật biểu tượng giỏ hàng
+                    updateCartIcon(customMenu);
+                    // Thông báo cho người dùng
+                    Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                } else {
+                    // không đủ số lượng cung cấp
+                    // Thông báo cho người dùng
+                    Toast.makeText(ViewProtypeProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
+                }
             }
-
         }
     }
 
@@ -270,7 +276,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
         // hien thi len listview
         listviewSanPhamSearch.setAdapter(productItemAdapter);
-
         productItemAdapter.notifyDataSetChanged();
     }
 
@@ -295,7 +300,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
         // hien thi len listview
         listviewSanPhamSearch.setAdapter(productItemAdapter);
-
         productItemAdapter.notifyDataSetChanged();
     }
 
@@ -309,21 +313,19 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         rgSearchBy = findViewById(R.id.rgSearchBy);
         btnTimKiem = findViewById(R.id.btnTimKiem);
         ivProduct = findViewById(R.id.ivProduct);
-        // Khởi tạo adapter với this làm listener
-        productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
-
-        // ánh xạ listview hiển thị danh sách
-        listviewSanPhamSearch = findViewById(R.id.dsSanPhamNavigation);
-        listviewSanPhamSearch.setAdapter(productItemAdapter);
-
-        // ánh xạ listview hiển thị danh sách
-        listViewDanhMucSearch = findViewById(R.id.dsLoaiSPNavigation);
-
         // anh xa ô tìm kiếm theo loại từ khóa
         edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
-
         // ánh xạ view holder button add to cart
         btnAddToCartViewHolder = findViewById(R.id.btnAddToCartProductItemAdapter);
+        // ánh xạ listview hiển thị danh sách
+        listViewDanhMucSearch = findViewById(R.id.dsLoaiSPNavigation);
+        // ánh xạ listview hiển thị danh sách
+        listviewSanPhamSearch = findViewById(R.id.dsSanPhamNavigation);
+
+        // Khởi tạo adapter với this làm listener
+        // hien thi len listview
+        productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
+        listviewSanPhamSearch.setAdapter(productItemAdapter);
     }
 
 

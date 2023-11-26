@@ -9,10 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
+        android:background="@color/greenPrimary"
         android:gravity="center"
         android:text="Danh sách danh mục"
-        android:textColor="#FFC107"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <ListView

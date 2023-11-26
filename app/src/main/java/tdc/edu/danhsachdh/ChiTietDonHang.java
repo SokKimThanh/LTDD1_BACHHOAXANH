@@ -11,6 +11,6 @@ public class ChiTietDonHang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chitietdonhang_layout);
+        setContentView(R.layout.layout_donhang_edit);
     }
 }

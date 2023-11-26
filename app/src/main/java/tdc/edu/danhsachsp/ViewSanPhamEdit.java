@@ -48,7 +48,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
-        setContentView(R.layout.chitietsanpham_layout);
+        setContentView(R.layout.layout_sanpham_edit);
         // ánh xạ
         setControl();
         setEvent();

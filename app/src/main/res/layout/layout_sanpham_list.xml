@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ViewSanPhamList">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00BCD4"
+        android:background="@color/greenPrimary"
         android:gravity="center"
         android:text="Danh sách sản phẩm"
-        android:textColor="#FFC107"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <ListView

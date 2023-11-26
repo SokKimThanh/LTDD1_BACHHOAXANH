@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Objects;
-
 import tdc.edu.danhsachsp.R;
 
 public class ViewDanhMucAdd extends AppCompatActivity {
@@ -26,7 +24,7 @@ public class ViewDanhMucAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // hiển thị nút quay lại trang chủ
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.danhmuc_add_layout);
+        setContentView(R.layout.layout_danhmuc_add);
         setControl();
         setEvent();
     }

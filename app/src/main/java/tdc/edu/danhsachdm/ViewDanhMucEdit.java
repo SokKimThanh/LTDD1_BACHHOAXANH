@@ -24,7 +24,7 @@ public class ViewDanhMucEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhmuc_edit_layout);
+        setContentView(R.layout.layout_danhmuc_edit);
         setControl();
         setEvent();
     }
