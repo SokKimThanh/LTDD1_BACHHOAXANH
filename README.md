@@ -25,8 +25,8 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Click vào item trên danh sách đi vào màn hình edit
 25/11/2023 1:14 SA
 - Thực hiện chức năng search sản phẩm
-26/11/2023 9:21 SA
-- Thực hiện chức năng hiển thị danh sách giỏ hàng (offline: số lượng sản phẩm trong db không giảm)
-- 26/11/2023 10:03 SA 
-    - Thực hiện việc tăng giảm số lượng trong giỏ hàng khi nhấn vào nút thêm vào giỏ hàng
+26/11/2023 6:21 SA
+- 26/11/2023 9:21 SA Thực hiện chức năng hiển thị danh sách giỏ hàng (offline: số lượng sản phẩm trong db không giảm)
+- 26/11/2023 10:03 SA Thực hiện việc tăng giảm số lượng trong giỏ hàng khi nhấn vào nút thêm vào giỏ hàng
+- 26/11/2023 1:57 CH Cài đặt hiển thị hình ảnh sản phẩm trong giỏ hàng
 
