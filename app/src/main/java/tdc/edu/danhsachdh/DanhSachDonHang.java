@@ -33,7 +33,7 @@ public class DanhSachDonHang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhsachdonhang_layout);
+        setContentView(R.layout.layout_donhang_list);
         // anh xa
         setControl();
         setEvent();
@@ -50,7 +50,7 @@ public class DanhSachDonHang extends AppCompatActivity {
         // khoi tao san pham
         KhoiTao();
         // gan san pham bang menu item layout(gan template item)
-        donhangAdapter = new DonHangAdapter(this, R.layout.donhang_layout, dataDonHang);
+        donhangAdapter = new DonHangAdapter(this, R.layout.layout_donhang_item, dataDonHang);
         // hien thi len listview
         lvDanhSachDonhang.setAdapter(donhangAdapter);
     }

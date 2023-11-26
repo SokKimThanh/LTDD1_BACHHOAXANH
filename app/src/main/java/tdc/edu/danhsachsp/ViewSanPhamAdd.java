@@ -40,7 +40,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
-        setContentView(R.layout.themsanpham_layout);
+        setContentView(R.layout.layout_sanpham_add);
         // ánh xạ
         setControl();
         setEvent();

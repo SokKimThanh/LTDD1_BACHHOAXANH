@@ -35,14 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:text="Số lượng tồn kho"
+                android:text="SL:"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvProductStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Số lượng tồn kho"
+                android:text="0"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -74,11 +74,11 @@
 
             <Button
                 android:id="@+id/btnDecreaseQuantity"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:backgroundTint="@color/greenPrimary"
-                android:drawableLeft="@drawable/btndecreasequantity"
+                android:drawableRight="@drawable/btndecreasequantity"
                 android:textColor="@color/greenPrimary" />
 
             <TextView
@@ -94,11 +94,11 @@
 
             <Button
                 android:id="@+id/btnIncreaseQuantity"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:backgroundTint="@color/greenPrimary"
-                android:drawableRight="@drawable/btnincreasequantity"
+                android:drawableLeft="@drawable/btnincreasequantity"
                 android:textColor="@color/greenPrimary" />
         </LinearLayout>
     </LinearLayout>

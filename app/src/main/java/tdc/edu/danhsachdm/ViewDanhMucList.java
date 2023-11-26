@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,7 +31,7 @@ public class ViewDanhMucList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhmuc_list_layout);
+        setContentView(R.layout.layout_danhmuc_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
 
         // anh xa
@@ -105,7 +102,7 @@ public class ViewDanhMucList extends AppCompatActivity {
         }
 
         // gan san pham bang menu item layout(gan template item)
-        adapter = new DanhMucListAdapter(this, R.layout.danhmuc_layout, danhMucList.getDanhMucList());
+        adapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, danhMucList.getDanhMucList());
         // hien thi len listview
         lvDanhMucList.setAdapter(adapter);
 

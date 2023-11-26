@@ -21,7 +21,7 @@ public class ThemDonHang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.themdonhang_layout);
+        setContentView(R.layout.layout_donhang_add);
         setControl();
         setEvent();
     }

@@ -66,7 +66,7 @@ public class ProductItemAdapter extends ArrayAdapter {
         // Hiển thị thông tin hàng hóa
         tvProductName.setText(hangHoa.getTenSp());
         tvGiaSPSearch.setText("Giá: " + hangHoa.getGiaSp());
-        tvSoLuongSPSearch.setText("Số lượng: " + hangHoa.getSoLuongTonKho());
+        tvSoLuongSPSearch.setText("SL: " + hangHoa.getSoLuongTonKho());
 
 
         // hien thi hinh`

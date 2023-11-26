@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,12 +34,24 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         TextView tvPrice = convertView.findViewById(R.id.tvProductPrice);
         TextView tvProductStock = convertView.findViewById(R.id.tvProductStock);
         TextView tvQuantity = convertView.findViewById(R.id.tvQuantity);
+        ImageView ivProduct =  convertView.findViewById(R.id.ivProduct);
 
         // Điền dữ liệu vào các view
         tvName.setText(hangHoa.getTenSp());
         tvPrice.setText(String.valueOf(hangHoa.getGiaSp()));
         tvProductStock.setText(String.valueOf(hangHoa.getSoLuongTonKho()));
         tvQuantity.setText(String.valueOf(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)));
+
+        // hien thi hinh`
+        if (hangHoa.getLoaiSp().equals("dm001")) {
+            ivProduct.setImageResource(R.drawable.thit);
+        } else if (hangHoa.getLoaiSp().equals("dm002")) {
+            ivProduct.setImageResource(R.drawable.ca);
+        } else if (hangHoa.getLoaiSp().equals("dm003")) {
+            ivProduct.setImageResource(R.drawable.trung);
+        } else if (hangHoa.getLoaiSp().equals("dm004")) {
+            ivProduct.setImageResource(R.drawable.sua);
+        }
         // Trả về view hoàn thiện để hiển thị trên màn hình
         return convertView;
     }

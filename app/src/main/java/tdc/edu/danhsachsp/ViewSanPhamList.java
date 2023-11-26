@@ -14,11 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import tdc.edu.danhsachdm.DBDanhMuc;
-import tdc.edu.danhsachdm.DanhMuc;
-import tdc.edu.danhsachdm.DanhMucList;
-import tdc.edu.danhsachdm.DanhMucListAdapter;
-
 public class ViewSanPhamList extends AppCompatActivity {
     //3 thanh phan hien thi danh sach
 
@@ -37,7 +32,7 @@ public class ViewSanPhamList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhsachsanpham_layout);
+        setContentView(R.layout.layout_sanpham_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
 
         // anh xa
@@ -106,7 +101,7 @@ public class ViewSanPhamList extends AppCompatActivity {
         }
 
         // gan san pham bang menu item layout(gan template item)
-        spAdapter = new SanPhamListAdapter(this, R.layout.sanpham_layout, dataSp);
+        spAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, dataSp);
         // hien thi len listview
         lvDanhSachSp.setAdapter(spAdapter);
 
