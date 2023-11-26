@@ -9,13 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#7BD8FF"
+        android:background="@color/greenPrimary"
         android:gravity="center"
-        android:text="Chi Tiết Sản Phẩm"
-        android:textColor="#ff0000"
-        android:textSize="30sp"
-        tools:ignore="HardcodedText" />
-
+        android:text="Sửa Sản Phẩm"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
     <TextView
         android:id="@+id/tvMaSp"
         android:layout_width="match_parent"

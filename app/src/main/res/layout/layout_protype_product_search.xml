@@ -9,9 +9,8 @@
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
         android:gravity="center"
-        android:padding="8dp"
         android:text="Tìm kiếm sản phẩm theo loại"
-        android:textColor="@color/pinkPrimary"
+        android:textColor="@color/white"
         android:textSize="30sp" />
     <!--tim kiem-->
     <LinearLayout

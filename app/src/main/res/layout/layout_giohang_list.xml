@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
         android:gravity="center"
-        android:padding="8dp"
         android:text="Giỏ hàng"
-        android:textColor="@color/pinkPrimary"
+        android:textColor="@color/white"
         android:textSize="30sp" />
+
     <ImageView
         android:id="@+id/ivGioHangNull"
         android:layout_width="match_parent"
