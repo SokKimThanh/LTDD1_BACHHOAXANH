@@ -24,12 +24,6 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Menu Exit thoát khỏi ứng dụng
     - Click vào item trên danh sách đi vào màn hình edit
 25/11/2023 1:14 SA
-- Thực hiện chức năng search sản phẩm
-26/11/2023 6:21 SA
-- 26/11/2023 9:21 SA Thực hiện chức năng hiển thị danh sách giỏ hàng (offline: số lượng sản phẩm trong db không giảm)
-- 26/11/2023 10:03 SA Thực hiện việc tăng giảm số lượng trong giỏ hàng khi nhấn vào nút thêm vào giỏ hàng
-- 26/11/2023 1:57 CH Cài đặt hiển thị hình ảnh sản phẩm trong giỏ hàng
-
 - Thực hiện chức năng search sản phẩm 25/11/2023 7:50 CH
     - Viết câu query tìm theo tên
     - Viết câu query tìm theo loại và tên sản phẩm(chỉ một trong hai hoặc không có cái nào hoặc có cả hai)
@@ -37,3 +31,8 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
     - Viết sự kiện tìm theo điều kiện loại sản phẩm để thực hiện câu truy vấn tìm theo loại và tên sản phẩm
     - hoàn thành 25/11/2023 5:00 CH
 - Thực hiện chức năng add giỏ hàng và đếm số sản phẩm đã add
+26/11/2023 6:21 SA
+- 26/11/2023 9:21 SA Thực hiện chức năng hiển thị danh sách giỏ hàng (offline: số lượng sản phẩm trong db không giảm)
+- 26/11/2023 10:03 SA Thực hiện việc tăng giảm số lượng trong giỏ hàng khi nhấn vào nút thêm vào giỏ hàng
+- 26/11/2023 1:57 CH Cài đặt hiển thị hình ảnh sản phẩm trong giỏ hàng
+- 4:50 CH Đổi tên layout file name, thêm thông bao gio hàng null
