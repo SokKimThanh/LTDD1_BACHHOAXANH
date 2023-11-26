@@ -3,6 +3,7 @@ package tdc.edu.navigation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,7 +22,7 @@ public class ViewNavigation extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
 
-
+    Button btnTimKiemSanPham;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,10 @@ public class ViewNavigation extends AppCompatActivity {
                 return false;
             }
         });
+        btnTimKiemSanPham.setOnClickListener(v->{
+            Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -74,7 +79,7 @@ public class ViewNavigation extends AppCompatActivity {
     private void setControl() {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
-
+        btnTimKiemSanPham = findViewById(R.id.btnTimKiemSanPham);
     }
 
 }

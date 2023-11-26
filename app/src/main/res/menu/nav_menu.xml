@@ -16,7 +16,7 @@
         android:title="Tìm kiếm sản phẩm" />
     <item
         android:id="@+id/mnExit"
-        android:icon="@drawable/btn_exit"
+        android:icon="@drawable/btn_exit_green"
         android:title="Thoát"
         tools:ignore="HardcodedText" />
 </menu>

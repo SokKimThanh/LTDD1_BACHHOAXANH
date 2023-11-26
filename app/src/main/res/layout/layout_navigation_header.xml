@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nhóm 10: Sok Kim Thanh"
+        android:text="BÁCH HÓA XANH"
         android:textSize="34sp"
         android:textColor="@color/pinkPrimary"
         android:textAlignment="center"
