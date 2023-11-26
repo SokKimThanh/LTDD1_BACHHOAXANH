@@ -1,7 +1,6 @@
 package tdc.edu.ShoppingSearch;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
-import tdc.edu.giohang.GioHang;
 
 public class ProductItemAdapter extends ArrayAdapter {
 
@@ -44,6 +41,9 @@ public class ProductItemAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        // Khởi tạo giá hàng hóa khi getView
+        HangHoa hangHoa = hangHoaList.get(position);
+
         // Inflate layout, get references to views, etc.
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(resource, null);
@@ -56,20 +56,17 @@ public class ProductItemAdapter extends ArrayAdapter {
         TextView tvSoLuongSPSearch = convertView.findViewById(R.id.tvSoLuongSPSearch);
         Button btnAddToCart = convertView.findViewById(R.id.btnAddToCartProductItemAdapter);
 
-        //kiểm tra xem position có lớn hơn hoặc bằng kích thước của hangHoaList hay không, vì chỉ số của danh sách bắt đầu từ 0
+        // kiểm tra xem position có lớn hơn hoặc bằng kích thước của hangHoaList hay không, vì chỉ số của danh sách bắt đầu từ 0
         if (position >= hangHoaList.size()) {
             Toast.makeText(context, "Hết dữ liệu", Toast.LENGTH_SHORT).show();
             return convertView;
         }
 
-        // dau vao position set gia tri cho control
-        HangHoa hangHoa = hangHoaList.get(position);
-        // hien thi ten san pham
-        tvProductName.setText(hangHoa.getTenSp());
-        // hien thi gia san pham va so luong
-        tvGiaSPSearch.setText("Giá: " + hangHoa.getGiaSp());
 
-        tvSoLuongSPSearch.setText("Số lượng: " + hangHoa.getSoluongNhapkho());
+        // Hiển thị thông tin hàng hóa
+        tvProductName.setText(hangHoa.getTenSp());
+        tvGiaSPSearch.setText("Giá: " + hangHoa.getGiaSp());
+        tvSoLuongSPSearch.setText("Số lượng: " + hangHoa.getSoLuongTonKho());
 
 
         // hien thi hinh`
@@ -86,8 +83,8 @@ public class ProductItemAdapter extends ArrayAdapter {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HangHoa product = (HangHoa) getItem(position);
-                listener.onAddToCartClicked(product);
+//                HangHoa product = (HangHoa) getItem(position);
+                listener.onAddToCartClicked(hangHoa);
             }
         });
 

@@ -48,6 +48,6 @@ public class ThemDonHang extends AppCompatActivity {
         btnAddHoaDon = findViewById(R.id.btnAddHoaDon);
         btnLamMoiHoaDon = findViewById(R.id.btnLamMoi);
         btnExit = findViewById(R.id.btnExit);
-        lvDanhSachGioHang = findViewById(R.id.lvDanhSachGioHang);
+        lvDanhSachGioHang = findViewById(R.id.cartListView);
     }
 }

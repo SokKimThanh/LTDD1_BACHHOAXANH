@@ -1,78 +1,69 @@
 package tdc.edu.giohang;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tdc.edu.danhsachsp.HangHoa;
 
 public class GioHang {
-
-    //danh sách sản phẩm, tổng số lượng, tổng giá tiền
-    private List<HangHoa> hangHoaList;
-
-
-    private int tongSoLuong;
-
-    private double tongThanhTien;
+    private HashMap<HangHoa, Integer> hangHoaMap;
 
     public GioHang() {
-        hangHoaList = new ArrayList<>();
-        this.tongThanhTien = 0;
-        this.tongSoLuong = hangHoaList.size();
-    }
-
-
-    public List<HangHoa> getHangHoaList() {
-        return hangHoaList;
-    }
-
-    public void setHangHoaList(List<HangHoa> hangHoaList) {
-        this.hangHoaList = hangHoaList;
-    }
-
-    public int getTongSoLuong() {
-        return tongSoLuong;
-    }
-
-
-    public double getTongThanhTien() {
-        double sum = 0;
-        for (HangHoa hh : hangHoaList) {
-            sum += ThanhTien(hh);
-        }
-        this.tongThanhTien = sum;
-        return this.tongThanhTien;
-    }
-
-    public double ThanhTien(HangHoa hangHoa) {
-        return hangHoa.getSoluongNhapkho() * Double.parseDouble(hangHoa.getGiaSp());
-    }
-
-    public void increaseQuantity(HangHoa hangHoa) {
-        hangHoaList.add(hangHoa);
-        this.tongSoLuong++;
+        hangHoaMap = new HashMap<>();
     }
 
     public void add(HangHoa hangHoa) {
-        hangHoaList.add(hangHoa);
-        this.tongSoLuong++;
+        int quantity = hangHoaMap.containsKey(hangHoa) ? hangHoaMap.get(hangHoa) : 0;
+        hangHoaMap.put(hangHoa, quantity + 1);
     }
 
-    public void remove(HangHoa hangHoa) {
-        for (HangHoa hh : this.hangHoaList) {
-            if (hh.getMaSp().equals(hangHoa.getMaSp())) {
-                this.hangHoaList.remove(hh);
-                break;
-            }
+    /**
+     * Phương thức này nhận vào một đối tượng HangHoa và trả về số lượng của sản phẩm đó trong giỏ hàng
+     * @param hangHoa
+     * @return Phương thức này nhận vào một đối tượng HangHoa và trả về số lượng của sản phẩm đó trong giỏ hàng
+     */
+    public int getQuantity(HangHoa hangHoa) {
+        return hangHoaMap.containsKey(hangHoa) ? hangHoaMap.get(hangHoa) : 0;
+    }
+
+    /**
+     * Phương thức này không nhận tham số nào và trả về tổng số lượng tất cả các sản phẩm trong giỏ hàng.
+     * @return Phương thức này không nhận tham số nào và trả về tổng số lượng tất cả các sản phẩm trong giỏ hàng.
+     */
+    public int getQuantity() {
+        int totalQuantity = 0;
+        for (int quantity : hangHoaMap.values()) {
+            totalQuantity += quantity;
         }
-        this.tongSoLuong --;
-     }
+        return totalQuantity;
+    }
+    // Các phương thức khác...
+    public List<HangHoa> getHangHoaList() {
+        // Trả về một danh sách các sản phẩm trong giỏ hàng
+        return new ArrayList<>(hangHoaMap.keySet());
+    }
 
     public boolean contains(HangHoa hangHoa) {
-        boolean flag = false;
-        if(this.hangHoaList.contains(hangHoa)){
-            flag = true;
+        // Kiểm tra xem một sản phẩm có trong giỏ hàng hay không
+        return hangHoaMap.containsKey(hangHoa);
+    }
+
+    public void increaseQuantity(HangHoa hangHoa) {
+        // Tăng số lượng của một sản phẩm trong giỏ hàng
+        int quantity = getQuantity(hangHoa);
+        hangHoaMap.put(hangHoa, quantity + 1);
+    }
+
+    public double getTongThanhTien() {
+        double tongThanhTien = 0;
+        for (Map.Entry<HangHoa, Integer> entry : hangHoaMap.entrySet()) {
+            HangHoa hangHoa = entry.getKey();
+            int quantity = entry.getValue();
+            tongThanhTien += hangHoa.getGiaSp() * quantity;
         }
-        return flag;
+        return tongThanhTien;
     }
 }
+

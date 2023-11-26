@@ -1,6 +1,7 @@
 package tdc.edu.ShoppingSearch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +31,12 @@ import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 import tdc.edu.giohang.GioHang;
+import tdc.edu.giohang.ViewGioHangList;
 
 public class ViewProtypeProductSearch extends AppCompatActivity implements OnAddToCartClickListener {
+
+    public static GioHang gioHang = new GioHang();
+
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
     RadioButton radMaLoaiSP, radTenSP, radSearchBy;
@@ -42,7 +47,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     EditText edtSearchKeyword;
     ImageView ivProduct;
-
 
 
     // cập nhật lại listview bằng adapter
@@ -71,15 +75,12 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     String radioSearchByText;
 
-    static GioHang cart = new GioHang();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_protype_product_search);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
-
 
 
         setControl();
@@ -197,6 +198,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     /**
      * Xử lý nút add to cart của mỗi view con
+     *
      * @param hangHoa sản phẩm thêm vào giỏ hàng
      */
     @Override
@@ -206,18 +208,27 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         String ketqua = "Sản phẩm đã có trong giỏ hàng bạn muốn thêm nữa không?";
         // xử lý nút thêm vào giỏ hàng
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-        if (cart.getHangHoaList() != null) {
-            if (cart.contains(hangHoa)) {
+        if (gioHang.getHangHoaList() != null) {
+            if (gioHang.contains(hangHoa)) {
                 // Nếu có, hiển thị một hộp thoại xác nhận
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewProtypeProductSearch.this);
                 builder.setMessage(ketqua);
                 builder.setPositiveButton("Có", (dialog, which) -> {
-                    // Nếu người dùng chọn có, tăng số lượng sản phẩm trong giỏ hàng
-                    cart.increaseQuantity(hangHoa);
-                    // Cập nhật biểu tượng giỏ hàng
-                    updateCartIcon(customMenu);
-                    // Thông báo cho người dùng
-                    Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    if (hangHoa.getSoLuongTonKho() >= 1) {
+                        // đủ số lượng cung cấp
+                        // Nếu người dùng chọn có, tăng số lượng sản phẩm trong giỏ hàng
+                        gioHang.increaseQuantity(hangHoa);
+                        // Giảm số lượng tồn kho
+                        hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
+                        // Cập nhật biểu tượng giỏ hàng
+                        updateCartIcon(customMenu);
+                        // Thông báo cho người dùng
+                        Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // không đủ số lượng cung cấp
+                        // Thông báo cho người dùng
+                        Toast.makeText(ViewProtypeProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
+                    }
                 });
                 builder.setNegativeButton("Không", (dialog, which) -> {
                     // Nếu người dùng chọn không, đóng hộp thoại
@@ -226,12 +237,15 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
                 builder.create().show();
             } else {
                 // Nếu không, thêm sản phẩm vào giỏ hàng
-                cart.add(hangHoa);
+                gioHang.add(hangHoa);
+                // Giảm số lượng tồn kho
+                hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
                 // Cập nhật biểu tượng giỏ hàng
                 updateCartIcon(customMenu);
                 // Thông báo cho người dùng
                 Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 
@@ -315,8 +329,8 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     /**
      * Xử lý menu event
-     * @param item The menu item that was selected.
      *
+     * @param item The menu item that was selected.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -330,6 +344,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     /**
      * Cập nhật cart item counting
+     *
      * @param customMenu menu cart item
      */
     public Menu updateCartIcon(Menu customMenu) {
@@ -338,16 +353,22 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
 
         TextView tvCartCounting = notifCount.findViewById(R.id.textview_cart_badge);
-        tvCartCounting.setText(String.valueOf(cart.getTongSoLuong()));
+        tvCartCounting.setText(String.valueOf(gioHang.getQuantity()));
 
-        tvCartCounting.setOnClickListener(v -> Toast.makeText(ViewProtypeProductSearch.this, "action_cart : selected", Toast.LENGTH_LONG).show());
+        tvCartCounting.setOnClickListener(v ->
+        {
+            Intent intent = new Intent(ViewProtypeProductSearch.this, ViewGioHangList.class);
+            startActivity(intent);
+        });
+
         return customMenu;
     }
 
+
     /**
      * Xử lý menu cart item = 0
-     * @param menu The options menu in which you place your items.
      *
+     * @param menu The options menu in which you place your items.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,7 +1,5 @@
 package tdc.edu.danhsachsp;
 
-import tdc.edu.danhsachsp.SanPham;
-
 public class HangHoa extends SanPham{
 
 
@@ -14,19 +12,19 @@ public class HangHoa extends SanPham{
         this.soluongNhapkho = soluongNhapkho;
     }
 
-    public HangHoa(String tenSp, String loaiSp, String giaSp, String maSp, int soluongNhapkho) {
+    public HangHoa(String tenSp, String loaiSp, double giaSp, String maSp, int soluongNhapkho) {
         super(tenSp, loaiSp, giaSp, maSp);
         this.soluongNhapkho = soluongNhapkho;
     }
-    public HangHoa(String tenSp, String loaiSp, String giaSp, String maSp ) {
+    public HangHoa(String tenSp, String loaiSp, double giaSp, String maSp ) {
         super(tenSp, loaiSp, giaSp, maSp);
     }
 
-    public int getSoluongNhapkho() {
+    public int getSoLuongTonKho() {
         return soluongNhapkho;
     }
 
-    public void setSoluongNhapkho(int soluongNhapkho) {
+    public void setSoLuongTonKho(int soluongNhapkho) {
         this.soluongNhapkho = soluongNhapkho;
     }
 

@@ -28,7 +28,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Câu lệnh SQL để tạo bảng HangHoa với các cột ma, ten, gioitinh
-        String sql = "Create Table If not exists HangHoa (ma Text primary key, ten Text, gia Text, soluong int, loaisp text)";
+        String sql = "Create Table If not exists HangHoa (ma Text primary key, ten Text, gia double, soluong int, loaisp text)";
 
         // Thực hiện câu lệnh SQL để tạo bảng
         db.execSQL(sql);
@@ -47,7 +47,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
-        db.execSQL(sql, new String[]{o.getMaSp(), o.getTenSp(), o.getGiaSp(), String.valueOf(o.getSoluongNhapkho()), o.getLoaiSp()});
+        db.execSQL(sql, new String[]{o.getMaSp(), o.getTenSp(), String.valueOf(o.getGiaSp()), String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp()});
     }
 
     /**
@@ -81,7 +81,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
         // o.getTen() và o.getGioitinh() sẽ thay thế cho ?, o.getMa() sẽ thay thế cho ?
-        db.execSQL(sql, new String[]{o.getTenSp(), o.getGiaSp(), String.valueOf(o.getSoluongNhapkho()), o.getLoaiSp(), o.getMaSp()});
+        db.execSQL(sql, new String[]{o.getTenSp(), String.valueOf(o.getGiaSp()), String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp(), o.getMaSp()});
     }
 
 
@@ -116,10 +116,10 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setTenSp(cursor.getString(1).toString());
 
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
-                hanghoa.setGiaSp(cursor.getString(2).toString());
+                hanghoa.setGiaSp(cursor.getDouble(2));
 
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
-                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+                hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
                 hanghoa.setLoaiSp(cursor.getString(4).toString());
@@ -169,10 +169,10 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setTenSp(cursor.getString(1).toString());
 
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
-                hanghoa.setGiaSp(cursor.getString(2).toString());
+                hanghoa.setGiaSp(cursor.getDouble(2));
 
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
-                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+                hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
                 hanghoa.setLoaiSp(cursor.getString(4).toString());
@@ -217,10 +217,10 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setTenSp(cursor.getString(1).toString());
 
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
-                hanghoa.setGiaSp(cursor.getString(2).toString());
+                hanghoa.setGiaSp(cursor.getDouble(2));
 
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
-                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+                hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
                 hanghoa.setLoaiSp(cursor.getString(4).toString());
@@ -297,10 +297,10 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setTenSp(cursor.getString(1).toString());
 
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
-                hanghoa.setGiaSp(cursor.getString(2).toString());
+                hanghoa.setGiaSp(cursor.getDouble(2));
 
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
-                hanghoa.setSoluongNhapkho(cursor.getInt(3));
+                hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
                 hanghoa.setLoaiSp(cursor.getString(4).toString());

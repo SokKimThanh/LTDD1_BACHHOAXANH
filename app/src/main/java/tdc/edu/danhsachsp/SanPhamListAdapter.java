@@ -51,9 +51,9 @@ public class SanPhamListAdapter extends ArrayAdapter {
         // hien thi ten san pham
         tvTenSp.setText(sp.getTenSp());
         // hien thi gia san pham
-        tvGiaSp.setText(sp.getGiaSp());
+        tvGiaSp.setText(String.valueOf(sp.getGiaSp()));
         // hien thi số lượng sản phẩm
-        tvSoLuong.setText(String.valueOf(sp.getSoluongNhapkho()));
+        tvSoLuong.setText(String.valueOf(sp.getSoLuongTonKho()));
 
         // hien thi hinh`
         if(sp.getLoaiSp().equals("dm001")){

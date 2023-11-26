@@ -107,8 +107,8 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         //hiển thị dữ liệu lên màn hình sửa
         tvMaSp.setText(sanPham.getMaSp());// mã sp
         edtTenSP.setText(sanPham.getTenSp());// tên sp
-        edtGiaSP.setText(sanPham.getGiaSp());// giá sp
-        String soluong = String.valueOf(sanPham.getSoluongNhapkho());
+        edtGiaSP.setText(String.valueOf(sanPham.getGiaSp()));// giá sp
+        String soluong = String.valueOf(sanPham.getSoLuongTonKho());
 
         edtSoLuongSPNhapKho.setText(soluong);// soluong sp nhập kho
 
@@ -132,8 +132,8 @@ public class ViewSanPhamEdit extends AppCompatActivity {
                     if(sp.getMaSp().equals(sanPham.getMaSp())){
                         // sua
                         sp.setTenSp(edtTenSP.getText().toString());
-                        sp.setGiaSp(edtGiaSP.getText().toString());
-                        sp.setSoluongNhapkho(Integer.parseInt(edtSoLuongSPNhapKho.getText().toString()));
+                        sp.setGiaSp(Double.valueOf(edtGiaSP.getText().toString()));
+                        sp.setSoLuongTonKho(Integer.parseInt(edtSoLuongSPNhapKho.getText().toString()));
                         sp.setLoaiSp(selectedMaDM);
                         // thong bao
                         dbHangHoa.SuaDL(sp);

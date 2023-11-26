@@ -6,12 +6,15 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/rectangle_8"
+        android:icon="@mipmap/bhx"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/rectangle_8"
+        android:roundIcon="@mipmap/bhx"
         android:supportsRtl="true"
         android:theme="@style/Theme.DANHSACHSP"
         tools:targetApi="31">
+        <activity
+            android:name="tdc.edu.giohang.ViewGioHangList"
+            android:exported="false" />
         <activity
             android:name="tdc.edu.navigation.ViewNavigation"
             android:exported="true">
@@ -21,17 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="tdc.edu.ShoppingSearch.ViewProtypeProductSearch"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucAdd"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucEdit"
             android:exported="false" />
@@ -55,9 +53,7 @@
             android:exported="false" />
         <activity
             android:name=".ViewSanPhamList"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

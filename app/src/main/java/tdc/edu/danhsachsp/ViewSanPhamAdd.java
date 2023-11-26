@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
@@ -119,9 +118,9 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 // thêm tên sp
                 sanPham.setTenSp(edtTenSP.getText().toString());
                 // thêm giá sp
-                sanPham.setGiaSp(edtGiaSP.getText().toString());
+                sanPham.setGiaSp(Double.valueOf(edtGiaSP.getText().toString()));
                 // Thêm số lượng nhập kho
-                sanPham.setSoluongNhapkho(Integer.parseInt(edtSoLuongSP.getText().toString()));
+                sanPham.setSoLuongTonKho(Integer.parseInt(edtSoLuongSP.getText().toString()));
                 // thêm loại sp(lưu mã loại sản phẩm)
                 sanPham.setLoaiSp(selectedMaDM);
 
