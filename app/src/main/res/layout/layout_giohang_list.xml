@@ -11,61 +11,66 @@
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
         android:gravity="center"
-        android:text="Giỏ hàng"
         android:paddingVertical="10dp"
+        android:text="Giỏ hàng"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
     <EditText
         android:id="@+id/edtTenDonHang"
-        android:hint="Nhập tên đơn hàng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
         android:layout_marginVertical="5dp"
+        android:hint="Nhập tên đơn hàng"
+        android:paddingVertical="10dp"
         android:textColor="@color/white" />
+
     <ListView
         android:id="@+id/cartListView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:dividerHeight="2dp"
-        android:divider="#FAFCF8"
-        android:background="#FAFFF4"
-        android:layout_height="wrap_content" />
+        android:dividerHeight="1dp" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#E91E63"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:text="Thành tiền: " />
+        android:layout_gravity="center"
+        android:background="@color/pinkPrimary"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvTongThanhTien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:text="VND"/>
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16sp"
+            android:text="Tổng thành tiền: "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTongThanhTien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="0"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VND"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16dp" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnThanhToan"
             android:layout_width="match_parent"
