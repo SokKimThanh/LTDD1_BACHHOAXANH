@@ -9,13 +9,15 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_margin="8dp"
         android:src="@drawable/header"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BÁCH HÓA XANH"
-        android:textSize="34sp"
-        android:textColor="@color/pinkPrimary"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        android:textColor="@color/white"
         android:textAlignment="center"
         tools:ignore="HardcodedText" />
 
