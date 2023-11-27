@@ -83,13 +83,9 @@ public class ViewSanPhamList extends AppCompatActivity {
 
     // khoi tao danh sach san pham
     private void KhoiTao() {
-
-
         // dbsinhvien truy cập dữ liệu DB
         dbSanPham = new DBHangHoa(this);
-
         dataSp.clear();
-
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbSanPham.DocDL().size() <= 0) {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
@@ -104,7 +100,6 @@ public class ViewSanPhamList extends AppCompatActivity {
         spAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, dataSp);
         // hien thi len listview
         lvDanhSachSp.setAdapter(spAdapter);
-
         spAdapter.notifyDataSetChanged();
     }
 

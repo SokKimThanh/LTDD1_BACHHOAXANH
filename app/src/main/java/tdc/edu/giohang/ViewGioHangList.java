@@ -73,7 +73,7 @@ public class ViewGioHangList extends AppCompatActivity {
                     for (int i = 0;i<hangHoaList.size();i++){
                         dbHangHoa.SuaDL(hangHoaList.get(i));
                         msg+="Tên sản phẩm: "+hangHoaList.get(i).getTenSp()+"\n"
-                                +"Giá: "+hangHoaList.get(i).getGiaSp()+"VND                        sl: "+hangHoaList.get(i).getSlban()+"\n";
+                                +"Giá: "+hangHoaList.get(i).getGiaSp()+"VND                                 sl: "+hangHoaList.get(i).getSlban()+"\n";
                     }
                     msg+="\nTổng tiền: "+tvTongThanhTien.getText().toString()+" VND";
                     dbGioHang.ThemDL(edttenDonHang.getText().toString(),msg,tvTongThanhTien.toString());

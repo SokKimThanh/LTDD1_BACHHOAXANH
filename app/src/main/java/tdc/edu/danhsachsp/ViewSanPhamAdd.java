@@ -112,7 +112,6 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                     edtTenSP.setError("Vui long nhập số lượng");
                     return;
                 }
-
                 // Tạo sản phẩm mới
                 HangHoa sanPham = new HangHoa();
                 // thêm mã sp
@@ -132,7 +131,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                     // Thêm đối tượng HangHoa vào cơ sở dữ liệu
                     dbHangHoa.ThemDL(sanPham);
                     Toast.makeText(ViewSanPhamAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-                    ViewSanPhamList.spAdapter.notifyDataSetChanged();// Cập nhật ListView
+//                    ViewSanPhamList.spAdapter.notifyDataSetChanged();// Cập nhật ListView
                 }
             }
         });
