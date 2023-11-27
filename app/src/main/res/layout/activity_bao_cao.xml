@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tdc.edu.ThongKe.BaoCao">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#16811B"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnQuayLai"
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="#16811B"
+            android:drawableLeft="@drawable/baseline_chevron_left_24"
+            android:paddingHorizontal="0dp"
+            android:text="Báo cáo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#211B1B"
+        android:textStyle="bold|normal"
+        android:textSize="20dp"
+        android:text="Số lượng sản phẩm trong kho" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#211B1B" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#008EFF"
+            android:text="Thịt:  " />
+
+        <TextView
+            android:id="@+id/tvTongThit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#008EFF"
+            android:text="Sữa:  " />
+
+        <TextView
+            android:id="@+id/tvTongSua"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#008EFF"
+            android:text="Cá:  " />
+        <TextView
+            android:id="@+id/tvTongCa"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#008EFF"
+            android:text="Trứng:  " />
+        <TextView
+            android:id="@+id/tvTongTrung"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#211B1B"
+        android:textStyle="bold|normal"
+        android:textSize="20dp"
+        android:text="Số lượng sản phẩm đã bán" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#211B1B" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:background="#16811B">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#16811B"
+            android:text="quản lý"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#16811B" />
+        <Button
+            android:id="@+id/btnBaoCao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#16811B"
+            android:text="Báo cáo"
+            android:drawableTop="@drawable/baseline_bar_chart_24"/>
+    </LinearLayout>
+</LinearLayout>

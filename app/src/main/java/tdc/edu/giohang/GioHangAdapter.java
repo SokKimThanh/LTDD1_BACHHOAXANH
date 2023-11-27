@@ -35,6 +35,8 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         TextView tvProductStock = convertView.findViewById(R.id.tvProductCartStock);
         TextView tvQuantity = convertView.findViewById(R.id.tvQuantity);
         ImageView ivProduct =  convertView.findViewById(R.id.ivProductCartItem);
+        ImageView ivDecrease = convertView.findViewById(R.id.ivDecreaseQuantity);
+        ImageView ivIncrease = convertView.findViewById(R.id.ivIncreaseQuantity);
 
         // Điền dữ liệu vào các view
         tvName.setText(hangHoa.getTenSp());
@@ -52,6 +54,33 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         } else if (hangHoa.getLoaiSp().equals("dm004")) {
             ivProduct.setImageResource(R.drawable.sua);
         }
+
+        ivDecrease.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
+                if(Integer.parseInt(tvQuantity.getText().toString())>0){
+                    int tg = Integer.parseInt(tvQuantity.getText().toString())-1;
+                    tvQuantity.setText(tg+"");
+                    hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
+                    hangHoa.setSlban(hangHoa.getSoLuongTonKho() + 1);
+                    ViewGioHangList.tvTongThanhTien.setText((ttt-hangHoa.getGiaSp())+"");
+                }
+
+            }
+        });
+        ivIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
+                int tt = Integer.parseInt(tvQuantity.getText().toString())+1;
+                tvQuantity.setText(tt+"");
+                hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() + 1);
+                hangHoa.setSlban(hangHoa.getSoLuongTonKho() - 1);
+                ViewGioHangList.tvTongThanhTien.setText((ttt+hangHoa.getGiaSp())+"");
+            }
+        });
         // Trả về view hoàn thiện để hiển thị trên màn hình
         return convertView;
     }

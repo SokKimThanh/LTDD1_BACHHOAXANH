@@ -5,6 +5,16 @@ public class HangHoa extends SanPham{
 
     int soluongNhapkho;
 
+    public int getSlban() {
+        return slban;
+    }
+
+    public void setSlban(int slban) {
+        this.slban = slban;
+    }
+
+    int slban;
+
     public HangHoa(){
 
     }

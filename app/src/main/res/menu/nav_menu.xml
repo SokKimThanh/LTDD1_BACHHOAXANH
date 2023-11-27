@@ -8,12 +8,18 @@
         android:title="Danh sách danh mục" />
     <item
         android:id="@+id/mnDanhSachSanPham"
-        android:icon="@drawable/list_navigation"
+        android:icon="@drawable/baseline_shopping_cart_checkout_24"
         android:title="Danh sách sản phẩm" />
+    <item
+        android:id="@+id/mnHoaDon"
+        android:icon="@drawable/baseline_assignment_24"
+        android:title="Danh sách hóa đơn"
+        tools:ignore="HardcodedText" />
     <item
         android:id="@+id/mnSearchSanPham"
         android:icon="@drawable/search"
         android:title="Tìm kiếm sản phẩm" />
+
     <item
         android:id="@+id/mnExit"
         android:icon="@drawable/btn_exit_green"

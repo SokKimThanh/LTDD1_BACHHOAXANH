@@ -37,19 +37,19 @@
             android:name="tdc.edu.danhsachdm.ViewDanhMucList"
             android:exported="true" />
         <activity
-            android:name="tdc.edu.danhsachdh.ThemDonHang"
-            android:exported="true" />
-        <activity
-            android:name="tdc.edu.danhsachdh.ChiTietDonHang"
+            android:name="tdc.edu.danhsachdh.DS_DonHang"
             android:exported="false" />
-        <activity
-            android:name="tdc.edu.danhsachdh.DanhSachDonHang"
-            android:exported="true" />
         <activity
             android:name=".ViewSanPhamAdd"
             android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".ViewSanPhamAdd"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".ViewSanPhamEdit"
+            android:exported="false" />
+        <activity
+            android:name="tdc.edu.ThongKe.BaoCao"
             android:exported="false" />
         <activity
             android:name=".ViewSanPhamList"

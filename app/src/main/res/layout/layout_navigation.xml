@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pinkPrimary"
+            android:background="#DA1212"
             android:gravity="center"
             android:text="MENU"
             android:textColor="@color/black"
@@ -38,7 +38,33 @@
                 android:id="@+id/btnTimKiemSanPham"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TÌM KIẾM SẢN PHẨM"
+                android:text="Tìm kiếm sản phẩm"
+                android:layout_margin="4dp"
+                android:backgroundTint="@color/greenPrimary"
+                android:textSize="24sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/baseline_assignment_24" />
+
+            <Button
+                android:id="@+id/btnHoaDon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Danh sách hóa đơn"
+                android:layout_margin="4dp"
+                android:backgroundTint="@color/greenPrimary"
+                android:textSize="24sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/baseline_bar_chart_24" />
+
+            <Button
+                android:id="@+id/btnBaoCao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Báo cáo"
                 android:layout_margin="4dp"
                 android:backgroundTint="@color/greenPrimary"
                 android:textSize="24sp" />

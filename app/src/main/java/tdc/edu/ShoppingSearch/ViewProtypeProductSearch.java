@@ -165,12 +165,10 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
         listDanhMuc.addAll(dbDanhMuc.DocDL());
-
         // gan san pham bang menu item layout(gan template item)
         protypeItemAdapter = new ProtypeItemAdapter(this, R.layout.layout_protype_item, listDanhMuc);
         // hien thi len listview
         listViewDanhMucSearch.setAdapter(protypeItemAdapter);
-
         protypeItemAdapter.notifyDataSetChanged();
     }
 
@@ -353,7 +351,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         MenuItem item = customMenu.findItem(R.id.cart_menu_icon);
         MenuItemCompat.setActionView(item, R.layout.layout_quantity_shopping_cart);
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
-
         TextView tvCartCounting = notifCount.findViewById(R.id.textview_cart_badge);
         tvCartCounting.setText(String.valueOf(gioHang.getQuantity()));
 
