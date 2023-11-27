@@ -36,3 +36,5 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
 - 26/11/2023 10:03 SA Thực hiện việc tăng giảm số lượng trong giỏ hàng khi nhấn vào nút thêm vào giỏ hàng
 - 26/11/2023 1:57 CH Cài đặt hiển thị hình ảnh sản phẩm trong giỏ hàng
 - 4:50 CH Đổi tên layout file name, thêm thông bao gio hàng null
+
+27/11/2023 8:04 CH mergecode làm báo cáo
