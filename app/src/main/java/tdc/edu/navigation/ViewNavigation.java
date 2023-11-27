@@ -67,7 +67,7 @@ public class ViewNavigation extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
+// thanh sok
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
