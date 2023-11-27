@@ -55,6 +55,7 @@ public class ViewNavigation extends AppCompatActivity {
                     startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
                 }
+                //menu don hang
                 if (item.getItemId() == R.id.mnExit) {
                     finish();
                 }

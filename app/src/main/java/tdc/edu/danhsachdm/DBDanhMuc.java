@@ -49,7 +49,7 @@ public class DBDanhMuc extends SQLiteOpenHelper {
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng DanhMuc
         db.execSQL(sql, new String[]{sv.getMa(), sv.getTen(), sv.getGhichu()});
     }
-
+//xxxxxx
     /**
      * Xóa danh mục
      *
