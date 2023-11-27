@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tdc.edu.danhsachdh.DS_DonHang">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#16811B"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnQuayLai"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="0dp"
+            android:backgroundTint="#16811B"
+            android:drawableLeft="@drawable/baseline_chevron_left_24"
+            android:text="Danh sách hóa đơn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh sách hóa đơn"
+        android:textSize="15dp"
+        android:textStyle="bold|normal"
+        android:layout_margin="5dp"/>
+
+
+    <ListView
+        android:id="@+id/grDSHoaDon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:dividerHeight="2dp"
+        android:divider="#2196F3"
+        android:background="#FFFFFF"
+        android:layout_marginHorizontal="15dp"
+        android:numColumns="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#16811B" />
+
+</LinearLayout>

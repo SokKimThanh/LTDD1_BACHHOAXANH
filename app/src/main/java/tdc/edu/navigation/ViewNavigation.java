@@ -3,6 +3,7 @@ package tdc.edu.navigation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
+import tdc.edu.ThongKe.BaoCao;
+import tdc.edu.danhsachdh.DS_DonHang;
 import tdc.edu.danhsachdm.ViewDanhMucList;
 import tdc.edu.danhsachsp.ViewSanPhamList;
 import tdc.edu.danhsachsp.R;
@@ -22,7 +25,7 @@ public class ViewNavigation extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
 
-    Button btnTimKiemSanPham;
+    Button btnTimKiemSanPham, btnHoaDon, btnBaoCao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,11 @@ public class ViewNavigation extends AppCompatActivity {
                     startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
                 }
+                if (item.getItemId() == R.id.mnHoaDon) {
+                    Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
+                    startActivity(intent);
+//                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
+                }
                 //menu don hang
                 if (item.getItemId() == R.id.mnExit) {
                     finish();
@@ -66,6 +74,22 @@ public class ViewNavigation extends AppCompatActivity {
         btnTimKiemSanPham.setOnClickListener(v->{
             Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
             startActivity(intent);
+        });
+        btnHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+        btnBaoCao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewNavigation.this, BaoCao.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
         });
     }
 // thanh sok
@@ -81,6 +105,8 @@ public class ViewNavigation extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
         btnTimKiemSanPham = findViewById(R.id.btnTimKiemSanPham);
+        btnHoaDon = findViewById(R.id.btnHoaDon);
+        btnBaoCao = findViewById(R.id.btnBaoCao);
     }
 
 }

@@ -1,13 +1,16 @@
 package tdc.edu.giohang;
 
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import java.util.Calendar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
+import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
@@ -28,9 +32,11 @@ public class ViewGioHangList extends AppCompatActivity {
 
     // Cài đặt adapter cho ListView của bạn
     ListView listView;
-    TextView tvTongThanhTien;
+    static TextView tvTongThanhTien;
     Button btnThanhToan;
+    EditText edttenDonHang;
     ImageView ivGioHangNull;
+    DBGioHang dbGioHang = new DBGioHang(ViewGioHangList.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,22 +48,42 @@ public class ViewGioHangList extends AppCompatActivity {
 
     private void setEvent() {
         KhoiTao();
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
         // xử lý cộng trừ gio hàng
         if(hangHoaList.size() == 0){
-            //hiển thị thông báo không có dữ liệu
-            ivGioHangNull.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
             // khóa thao tác thanh toán
             btnThanhToan.setEnabled(false);
         }else {
             // tắt thông báo
-            ivGioHangNull.setVisibility(View.GONE);
             // mở khóa thao tác thanh toán
             btnThanhToan.setEnabled(true);
         }
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHangHoa dbHangHoa = new DBHangHoa(ViewGioHangList.this);
+
+                if(edttenDonHang.getText()!=null){
+                    String msg = "                               "+day+"/"+month+"/"+year+"\n";
+                     msg +="\n                                  "+ edttenDonHang.getText().toString()+"\n\n";
+                    for (int i = 0;i<hangHoaList.size();i++){
+                        dbHangHoa.SuaDL(hangHoaList.get(i));
+                        msg+="Tên sản phẩm: "+hangHoaList.get(i).getTenSp()+"\n"
+                                +"Giá: "+hangHoaList.get(i).getGiaSp()+"VND                        sl: "+hangHoaList.get(i).getSlban()+"\n";
+                    }
+                    msg+="\nTổng tiền: "+tvTongThanhTien.getText().toString()+" VND";
+                    dbGioHang.ThemDL(edttenDonHang.getText().toString(),msg,tvTongThanhTien.toString());
+                    Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void KhoiTao() {
-        ivGioHangNull = findViewById(R.id.ivGioHangNull);
         // Lấy danh sách hàng hóa từ giỏ hàng
         hangHoaList = ViewProtypeProductSearch.gioHang.getHangHoaList();
 
@@ -77,6 +103,8 @@ public class ViewGioHangList extends AppCompatActivity {
         tvTongThanhTien = findViewById(R.id.tvTongThanhTien);
         // Cài đặt button thanh toán
         btnThanhToan = findViewById(R.id.btnThanhToan);
+        edttenDonHang = findViewById(R.id.edtTenDonHang);
+
     }
     /**
      * Xử lý menu event

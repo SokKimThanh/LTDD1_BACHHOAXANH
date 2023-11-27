@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#84F500" />
+            <stroke android:color="@color/white"/> <!-- Màu nền của Button -->
+            <corners android:radius="40dp" /> <!-- Độ cong của góc (ở đây là 10dp, bạn có thể điều chỉnh theo nhu cầu) -->
+        </shape>
+    </item>
+</layer-list>

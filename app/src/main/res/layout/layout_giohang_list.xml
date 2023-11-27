@@ -12,47 +12,65 @@
         android:background="@color/greenPrimary"
         android:gravity="center"
         android:text="Giỏ hàng"
+        android:paddingVertical="10dp"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <ImageView
-        android:id="@+id/ivGioHangNull"
+    <EditText
+        android:id="@+id/edtTenDonHang"
+        android:hint="Nhập tên đơn hàng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:src="@drawable/giohangnull"/>
+        android:paddingVertical="10dp"
+        android:layout_marginVertical="5dp"
+        android:textColor="@color/white" />
     <ListView
         android:id="@+id/cartListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:dividerHeight="2dp"
+        android:divider="#FAFCF8"
+        android:background="#FAFFF4"
+        android:layout_height="wrap_content" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E91E63"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="Thành tiền: " />
+
+    <TextView
+        android:id="@+id/tvTongThanhTien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:text="VND"/>
+</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvTongThanhTien"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/pinkPrimary"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="So tien"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
         <Button
             android:id="@+id/btnThanhToan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:layout_weight="1"
             android:backgroundTint="@color/greenPrimary"
             android:padding="8dp"
             android:text="Thanh toán"
