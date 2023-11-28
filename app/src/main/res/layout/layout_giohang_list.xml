@@ -23,7 +23,7 @@
         android:layout_marginVertical="5dp"
         android:hint="Nhập tên đơn hàng"
         android:paddingVertical="10dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <ListView
         android:id="@+id/cartListView"

@@ -16,7 +16,7 @@ import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
 public class GioHangAdapter extends ArrayAdapter<HangHoa> {
-    int quantity = 1;
+
     public GioHangAdapter(Context context, List<HangHoa> cartItems) {
         super(context, 0, cartItems);
     }
@@ -25,7 +25,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Lấy dữ liệu item cho vị trí này
         HangHoa hangHoa = getItem(position);
-         // Kiểm tra xem một view đã tồn tại chưa, nếu không thì inflate
+        // Kiểm tra xem một view đã tồn tại chưa, nếu không thì inflate
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_giohang_item, parent, false);
         }
@@ -35,7 +35,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         TextView tvPrice = convertView.findViewById(R.id.tvProductCartPrice);
         TextView tvProductStock = convertView.findViewById(R.id.tvProductCartStock);
         TextView tvQuantity = convertView.findViewById(R.id.tvQuantity);
-        ImageView ivProduct =  convertView.findViewById(R.id.ivProductCartItem);
+        ImageView ivProduct = convertView.findViewById(R.id.ivProductCartItem);
         ImageView ivDecrease = convertView.findViewById(R.id.ivDecreaseQuantity);
         ImageView ivIncrease = convertView.findViewById(R.id.ivIncreaseQuantity);
 
@@ -61,13 +61,13 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
             @Override
             public void onClick(View v) {
                 double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                if(Integer.parseInt(tvQuantity.getText().toString())>1){
-                    int tg = Integer.parseInt(tvQuantity.getText().toString())-1;
-                    tvQuantity.setText(tg+"");
+                if (Integer.parseInt(tvQuantity.getText().toString()) > 1) {
+                    int tg = Integer.parseInt(tvQuantity.getText().toString()) - 1;
+                    tvQuantity.setText(tg + "");
                     hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
                     hangHoa.setSlban(hangHoa.getSoLuongTonKho() + 1);
-                    ViewGioHangList.tvTongThanhTien.setText((ttt-hangHoa.getGiaSp())+"");
-                }else{
+                    ViewGioHangList.tvTongThanhTien.setText((ttt - hangHoa.getGiaSp()) + "");
+                } else {
                     Toast.makeText(getContext(), "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
                 }
 
@@ -76,17 +76,16 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         ivIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantity = Integer.parseInt(tvQuantity.getText().toString());
-                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                int tt = quantity+1;
-                if(quantity >= hangHoa.getSoLuongTonKho()){
-                    Toast.makeText(getContext(), "không đủ số lượng cung cấp", Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(tvQuantity.getText().toString()) >= hangHoa.getSoLuongTonKho()) {
+                    Toast.makeText(getContext(), "Số lượng không thể lớn hơn sl tồn kho", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                tvQuantity.setText(tt+"");
-                hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() + 1);
+                int quantity = Integer.parseInt(tvQuantity.getText().toString());
+                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
+                int tt = quantity + 1;
+                tvQuantity.setText(tt + "");
                 hangHoa.setSlban(hangHoa.getSoLuongTonKho() - 1);
-                ViewGioHangList.tvTongThanhTien.setText((ttt+hangHoa.getGiaSp())+"");
+                ViewGioHangList.tvTongThanhTien.setText((ttt + hangHoa.getGiaSp()) + "");
             }
         });
         // Trả về view hoàn thiện để hiển thị trên màn hình
