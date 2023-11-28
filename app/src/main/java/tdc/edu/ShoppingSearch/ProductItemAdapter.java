@@ -30,7 +30,7 @@ public class ProductItemAdapter extends ArrayAdapter {
     List<HangHoa> hangHoaList;//danh sách hàng hóa
     // Tạo giỏ hàng mới để thêm sản phẩm
 
-    public ProductItemAdapter(Context context, int resource, List<HangHoa> hangHoaList,OnAddToCartClickListener listener) {
+    public ProductItemAdapter(Context context, int resource, List<HangHoa> hangHoaList, OnAddToCartClickListener listener) {
         super(context, resource, hangHoaList);
         this.context = context;
         this.resource = resource;
@@ -38,6 +38,7 @@ public class ProductItemAdapter extends ArrayAdapter {
         // constructor của adapter nên chấp nhận một OnAddToCartClickListener
         this.listener = listener;// thêm 1 sự kiện để bắt sự kiện từ add to cart của lớp con
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -83,7 +84,6 @@ public class ProductItemAdapter extends ArrayAdapter {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                HangHoa product = (HangHoa) getItem(position);
                 listener.onAddToCartClicked(hangHoa);
             }
         });

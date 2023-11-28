@@ -1,19 +1,20 @@
 package tdc.edu.giohang;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Calendar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,11 +33,14 @@ public class ViewGioHangList extends AppCompatActivity {
 
     // Cài đặt adapter cho ListView của bạn
     ListView listView;
+    @SuppressLint("StaticFieldLeak")
     static TextView tvTongThanhTien;
     Button btnThanhToan;
     EditText edttenDonHang;
     ImageView ivGioHangNull;
     DBGioHang dbGioHang = new DBGioHang(ViewGioHangList.this);
+    DBHangHoa dbHangHoa = new DBHangHoa(ViewGioHangList.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,32 +57,33 @@ public class ViewGioHangList extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         // xử lý cộng trừ gio hàng
-        if(hangHoaList.size() == 0){
+        if (hangHoaList.size() == 0) {
             Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
             // khóa thao tác thanh toán
             btnThanhToan.setEnabled(false);
-        }else {
+        } else {
             // tắt thông báo
             // mở khóa thao tác thanh toán
             btnThanhToan.setEnabled(true);
         }
-        btnThanhToan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBHangHoa dbHangHoa = new DBHangHoa(ViewGioHangList.this);
+        btnThanhToan.setOnClickListener(v -> {
 
-                if(edttenDonHang.getText()!=null){
-                    String msg = "                               "+day+"/"+month+"/"+year+"\n";
-                     msg +="\n                                  "+ edttenDonHang.getText().toString()+"\n\n";
-                    for (int i = 0;i<hangHoaList.size();i++){
-                        dbHangHoa.SuaDL(hangHoaList.get(i));
-                        msg+="Tên sản phẩm: "+hangHoaList.get(i).getTenSp()+"\n"
-                                +"Giá: "+hangHoaList.get(i).getGiaSp()+"VND                                 sl: "+hangHoaList.get(i).getSlban()+"\n";
-                    }
-                    msg+="\nTổng tiền: "+tvTongThanhTien.getText().toString()+" VND";
-                    dbGioHang.ThemDL(edttenDonHang.getText().toString(),msg,tvTongThanhTien.toString());
-                    Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+
+            if (edttenDonHang.getText() != null) {
+                StringBuilder msg = new StringBuilder("                               " + day + "/" + month + "/" + year + "\n");
+                msg.append("\n                                  ").append(edttenDonHang.getText().toString()).append("\n\n");
+                for (int i = 0; i < hangHoaList.size(); i++) {
+
+                    HangHoa hh = hangHoaList.get(i);
+                    // cập nhật số lượng tồn kho
+                    hh.setSoLuongTonKho(hh.getSoLuongTonKho() - hh.getSlban());
+                    dbHangHoa.SuaDL(hh);
+                    // in thông tin mặt hàng
+                    msg.append("Tên sản phẩm: ").append(hh.getTenSp()).append("\n").append("Giá: ").append(hh.getGiaSp()).append("VND                        sl: ").append(hh.getSlban()).append("\n");
                 }
+                msg.append("\nTổng tiền: ").append(tvTongThanhTien.getText().toString()).append(" VND");
+                dbGioHang.ThemDL(edttenDonHang.getText().toString(), msg.toString(), tvTongThanhTien.toString());
+                Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -106,6 +111,7 @@ public class ViewGioHangList extends AppCompatActivity {
         edttenDonHang = findViewById(R.id.edtTenDonHang);
 
     }
+
     /**
      * Xử lý menu event
      *

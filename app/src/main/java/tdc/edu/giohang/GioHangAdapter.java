@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
 public class GioHangAdapter extends ArrayAdapter<HangHoa> {
-
+    int quantity = 1;
     public GioHangAdapter(Context context, List<HangHoa> cartItems) {
         super(context, 0, cartItems);
     }
@@ -60,12 +61,14 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
             @Override
             public void onClick(View v) {
                 double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                if(Integer.parseInt(tvQuantity.getText().toString())>0){
+                if(Integer.parseInt(tvQuantity.getText().toString())>1){
                     int tg = Integer.parseInt(tvQuantity.getText().toString())-1;
                     tvQuantity.setText(tg+"");
                     hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
                     hangHoa.setSlban(hangHoa.getSoLuongTonKho() + 1);
                     ViewGioHangList.tvTongThanhTien.setText((ttt-hangHoa.getGiaSp())+"");
+                }else{
+                    Toast.makeText(getContext(), "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -73,8 +76,13 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         ivIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                quantity = Integer.parseInt(tvQuantity.getText().toString());
                 double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                int tt = Integer.parseInt(tvQuantity.getText().toString())+1;
+                int tt = quantity+1;
+                if(quantity >= hangHoa.getSoLuongTonKho()){
+                    Toast.makeText(getContext(), "không đủ số lượng cung cấp", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 tvQuantity.setText(tt+"");
                 hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() + 1);
                 hangHoa.setSlban(hangHoa.getSoLuongTonKho() - 1);
