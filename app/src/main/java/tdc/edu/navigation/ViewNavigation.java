@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -183,29 +184,28 @@ public class ViewNavigation extends AppCompatActivity {
             }
         });
         btnTimKiemSanPham.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
             Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
             startActivity(intent);
         });
-
-
         // quan ly danh sach hoa don
-        btnHoaDon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
+        btnHoaDon.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         });
-        btnBaoCao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewNavigation.this, BaoCao.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
+        btnBaoCao.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            Intent intent = new Intent(ViewNavigation.this, BaoCao.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         });
+        btnBaiVietTinTucSanPham.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            Toast.makeText(ViewNavigation.this, "bài viết tin tức sản phẩm", Toast.LENGTH_SHORT).show();
 
+        });
     }
 
     private void KhoiTao() {

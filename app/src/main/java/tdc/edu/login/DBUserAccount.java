@@ -16,14 +16,19 @@ import java.util.List;
 public class DBUserAccount extends SQLiteOpenHelper {
     public DBUserAccount(@Nullable Context context) {
 
-        super(context, "DBUser", null, 1);
+        super(context, "DBUserAccount", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Xóa bảng
+        db.execSQL("DROP TABLE IF EXISTS UserAccount");
         String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap text, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
         db.execSQL(sql);
-
+        // Thêm 3 tài khoản admin, user, và guest
+        ThemDL(new UserAccount("admin", "admin123", "2023-12-31", 0, "admin@example.com", true));
+        ThemDL(new UserAccount("user", "user123", "2023-12-31", 1, "user@example.com", true));
+        ThemDL(new UserAccount("guest", "guest123", "2023-12-31", 2, "guest@example.com", true));
     }
 
     public boolean ThemDL(UserAccount userAccount) {
