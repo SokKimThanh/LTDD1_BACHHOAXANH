@@ -21,54 +21,59 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/borderprimarygreen"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/search" />
-
-            <Button
-                android:id="@+id/btnTimKiemSanPham"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tìm kiếm sản phẩm"
-                android:layout_margin="4dp"
-                android:backgroundTint="@color/greenPrimary"
-                android:textSize="24sp" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/baseline_assignment_24" />
 
-            <Button
-                android:id="@+id/btnHoaDon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Danh sách hóa đơn"
-                android:layout_margin="4dp"
-                android:backgroundTint="@color/greenPrimary"
-                android:textSize="24sp" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/baseline_bar_chart_24" />
+                android:background="@drawable/borderprimarygreen"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnBaoCao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Báo cáo"
-                android:layout_margin="4dp"
-                android:backgroundTint="@color/greenPrimary"
-                android:textSize="24sp" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/btnTimKiemSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tìm kiếm sản phẩm"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/timkiemsanpham"
+                    android:backgroundTint="@color/greenPrimary"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/btnHoaDon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách hóa đơn"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/quanlyhoadon"
+
+                    android:backgroundTint="@color/greenPrimary"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/btnBaoCao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Báo cáo"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/baocaothongke"
+                    android:backgroundTint="@color/greenPrimary"
+                    android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/btnBaiVietTinTucSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Báo cáo"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/baiviettintucsanpham"
+                    android:backgroundTint="@color/greenPrimary"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 

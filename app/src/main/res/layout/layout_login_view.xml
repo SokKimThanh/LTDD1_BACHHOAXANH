@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tdc.edu.login.ViewLogin">
+
+
+    <ImageView
+        android:id="@+id/logoapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greenPrimary"
+        android:src="@drawable/bhxlogo"
+        tools:ignore="ContentDescription" />
+    <!--login password-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="username"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/key"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/edtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Tên đăng nhập"
+                android:inputType="text"
+                android:paddingLeft="64dp"
+                android:textSize="16sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="password"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/password"
+                tools:ignore="ContentDescription,HardcodedText" />
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Nhập mật khẩu"
+                android:inputType="textPassword"
+                android:paddingLeft="64dp"
+                android:textSize="16sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
+
+            <ImageView
+                android:id="@+id/btnShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/showpassword"
+                tools:ignore="ContentDescription,RtlHardcoded" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvMessageStatus"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:hint="Thông báo trạng thái đăng nhập" />
+    </LinearLayout>
+    <!--    link chuyen trang dang nhap dang ky-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvQuenMatKhau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:text="QUÊN MẬT KHẨU"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDangKy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:text="ĐĂNG KÝ"
+            android:textColor="@color/greenPrimary"
+            android:textSize="16sp" />
+    </FrameLayout>
+    <!--button dang nhap-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/btnDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/greenPrimary"
+            android:src="@drawable/btn_dangnhap"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+</LinearLayout>
