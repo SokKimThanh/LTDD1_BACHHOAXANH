@@ -3,9 +3,11 @@ package tdc.edu.login;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +28,7 @@ import tdc.edu.danhsachsp.R;
 public class ViewDangKyTaiKhoan extends AppCompatActivity {
 
     EditText edtTenTaiKhoan, edtCapDoTaiKhoan, edtMatKhau, edtNgayHetHanTaiKhoan, edtEmail;
-    ImageView btnDangKy;
+    ImageView btnDangKy, btnShowPassword;
 
     TextView tvMessageStatus;
     DBUserAccount dbUserAccount;
@@ -141,7 +143,30 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
             }
         });
 
+        btnShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+                ShowPassword();
+            }
 
+
+        });
+    }
+    boolean isChecked = true;//tắt mật khẩu
+    private void ShowPassword() {
+        if (isChecked) {
+            // Hiển thị mật khẩu
+            edtMatKhau.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            isChecked = false;
+        } else {
+            // Ẩn mật khẩu
+            edtMatKhau.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            isChecked = true;
+        }
+
+        // Di chuyển con trỏ về cuối mật khẩu
+        edtMatKhau.setSelection(edtMatKhau.getText().length());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -156,6 +181,7 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
 
     private void setControl() {
         btnDangKy = findViewById(R.id.btnDangKy);
+        btnShowPassword = findViewById(R.id.btnShowPassword);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edtNgayHetHanTaiKhoan = findViewById(R.id.edtNgayHetHanTaiKhoan);
         edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
