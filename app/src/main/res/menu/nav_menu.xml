@@ -8,21 +8,29 @@
         android:title="Danh sách danh mục" />
     <item
         android:id="@+id/mnDanhSachSanPham"
-        android:icon="@drawable/baseline_shopping_cart_checkout_24"
+        android:icon="@drawable/giohangicon"
         android:title="Danh sách sản phẩm" />
     <item
         android:id="@+id/mnHoaDon"
-        android:icon="@drawable/baseline_assignment_24"
+        android:icon="@drawable/hoadonicon"
         android:title="Danh sách hóa đơn"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/mnSearchSanPham"
         android:icon="@drawable/search"
         android:title="Tìm kiếm sản phẩm" />
-
+    <item
+        android:id="@+id/mnBaiVietTinTucSP"
+        android:icon="@drawable/news"
+        android:title="Bài viết, tin tức" />
+    <item
+        android:id="@+id/mnLogout"
+        android:icon="@drawable/btn_exit_green"
+        android:title="Đăng xuất"
+        tools:ignore="HardcodedText" />
     <item
         android:id="@+id/mnExit"
-        android:icon="@drawable/btn_exit_green"
-        android:title="Thoát"
+        android:icon="@drawable/btn_exit"
+        android:title="Thoát ứng dụng"
         tools:ignore="HardcodedText" />
 </menu>

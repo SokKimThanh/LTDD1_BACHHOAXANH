@@ -8,30 +8,38 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DBUserAccount extends SQLiteOpenHelper {
     public DBUserAccount(@Nullable Context context) {
+
         super(context, "DBUser", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap date, capdotaikhoan INTEGER, email text, isEmailVerified text)";
+        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap date, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
         db.execSQL(sql);
+
     }
 
     public void ThemDL(UserAccount userAccount) {
+
         SQLiteDatabase db = getWritableDatabase();
         String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
+
         String tentaikhoan = userAccount.getTentaikhoan();
         String matkhau = userAccount.getMatkhau();
         String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
         String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
         String email = userAccount.getEmail();
-        String isEmailVerified = String.valueOf(userAccount.isEmailVerified());
+
+        // Chuyển boolean thành int, sau đó chuyển int thành String
+        String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
+
         db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
         db.close();
     }
@@ -44,7 +52,7 @@ public class DBUserAccount extends SQLiteOpenHelper {
 
 
     public List<UserAccount> DocDL() {
-        List<UserAccount> listHoaDon = new ArrayList<>();
+        List<UserAccount> userAccounts = new ArrayList<>();
         String sql = "Select * from UserAccount";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
@@ -58,34 +66,47 @@ public class DBUserAccount extends SQLiteOpenHelper {
                 int i3 = cursor.getColumnIndex("ngayhethantruycap");
                 int i4 = cursor.getColumnIndex("capdotaikhoan");
                 int i5 = cursor.getColumnIndex("email");
+                int i6 = cursor.getColumnIndex("isEmailVerified");
 
                 // Lấy dữ liệu từ cột "your_column"
                 int mataikhoan = cursor.getInt(i0);
-                int tentaikhoan = cursor.getInt(i1);
-                int matkhau = cursor.getInt(i2);
-                int ngayhethantruycap = cursor.getInt(i3);
+                String tentaikhoan = cursor.getString(i1);
+                String matkhau = cursor.getString(i2);
+                Date ngayhethantruycap = Date.valueOf(cursor.getString(i3));
                 int capdotaikhoan = cursor.getInt(i4);
-                int email = cursor.getInt(i5);
+                String email = cursor.getString(i5);
+                boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
 
                 // set du lieu cho user account
                 userAccount.setMataikhoan(mataikhoan);
-                userAccount.setMataikhoan(tentaikhoan);
-                userAccount.setMataikhoan(matkhau);
-                userAccount.setMataikhoan(ngayhethantruycap);
-                userAccount.setMataikhoan(capdotaikhoan);
-                userAccount.setMataikhoan(email);
+                userAccount.setTentaikhoan(tentaikhoan);
+                userAccount.setMatkhau(matkhau);
+                userAccount.setNgayhethantruycap(ngayhethantruycap);
+                userAccount.setCapdotaikhoan(capdotaikhoan);
+                userAccount.setEmail(email);
+                userAccount.setEmailVerified(isEmailValidation);
 
-                listHoaDon.add(userAccount);
+                userAccounts.add(userAccount);
             } while (cursor.moveToNext());
             // In dữ liệu ra log
-            Log.d("BHX", "Data from UserAccount: " + listHoaDon);
+            Log.d("BHX", "Data from UserAccount: " + userAccounts);
         }
         cursor.close();
-        return listHoaDon;
+        return userAccounts;
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Xóa bảng
+        db.execSQL("DROP TABLE IF EXISTS UserAccount");
+
+        // Tạo lại bảng
+        onCreate(db);
+
+        // Thêm 3 tài khoản admin, user, và guest
+        ThemDL(new UserAccount("admin", "admin123", Date.valueOf("2023-12-31"), 0, "admin@example.com", true));
+        ThemDL(new UserAccount("user", "user123", Date.valueOf("2023-12-31"), 1, "user@example.com", true));
+        ThemDL(new UserAccount("guest", "guest123", Date.valueOf("2023-12-31"), 2, "guest@example.com", true));
 
     }
 }
