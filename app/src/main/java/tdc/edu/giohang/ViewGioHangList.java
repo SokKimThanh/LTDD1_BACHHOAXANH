@@ -4,19 +4,24 @@ package tdc.edu.giohang;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
 import tdc.edu.danhsachsp.DBHangHoa;
@@ -26,7 +31,13 @@ import tdc.edu.danhsachsp.R;
 public class ViewGioHangList extends AppCompatActivity {
     // Khởi tạo adapter với danh sách GioHang
     GioHangAdapter adapter;
-
+Spinner spDay, spMonth, spYear;
+List<String> dataDay = new ArrayList<>();
+List<String> dataMonth = new ArrayList<>();
+List<String> dataYear = new ArrayList<>();
+Adapter adapterDay;
+Adapter adapterMonth;
+Adapter adapterYear;
 
     // Lấy danh sách hàng hóa từ giỏ hàng
     List<HangHoa> hangHoaList;
@@ -99,6 +110,39 @@ public class ViewGioHangList extends AppCompatActivity {
         // Khởi tạo adapter với danh sách GioHang
         adapter = new GioHangAdapter(this, hangHoaList);
         listView.setAdapter(adapter);
+       dataDay.add("1");
+       dataDay.add("2");
+       dataDay.add("3");
+       dataDay.add("4");
+       dataDay.add("5");
+       dataDay.add("6");
+       dataDay.add("7");
+       dataDay.add("8");
+       dataDay.add("9");
+       dataDay.add("10");
+       dataDay.add("11");
+       dataDay.add("12");
+       dataDay.add("13");
+       dataDay.add("14");
+       dataDay.add("15");
+       dataDay.add("16");
+       dataDay.add("17");
+       dataDay.add("18");
+       dataDay.add("19");
+       dataDay.add("20");
+       dataDay.add("21");
+       dataDay.add("22");
+       dataDay.add("23");
+       dataDay.add("24");
+       dataDay.add("25");
+       dataDay.add("26");
+       dataDay.add("27");
+       dataDay.add("28");
+       dataDay.add("29");
+       dataDay.add("30");
+       dataDay.add("31");
+       adapterDay = new ArrayAdapter<>(ViewGioHangList.this, android.R.layout.simple_spinner_item,dataDay);
+
     }
 
     private void setControl() {
@@ -109,6 +153,9 @@ public class ViewGioHangList extends AppCompatActivity {
         // Cài đặt button thanh toán
         btnThanhToan = findViewById(R.id.btnThanhToan);
         edttenDonHang = findViewById(R.id.edtTenDonHang);
+        spDay = findViewById(R.id.spDay);
+        spMonth = findViewById(R.id.spMonth);
+        spYear = findViewById(R.id.spYear);
 
     }
 
