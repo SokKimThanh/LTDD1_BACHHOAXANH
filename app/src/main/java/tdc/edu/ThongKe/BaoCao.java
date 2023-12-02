@@ -12,10 +12,9 @@ import tdc.edu.danhsachsp.R;
 
 
 public class BaoCao extends AppCompatActivity {
-    Button btnQuayLai;
-    TextView tvTongThit, tvTongCa, tvTongTrung, tvTongSua;
-    DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
-
+Button btnQuayLai;
+TextView tvTongThit, tvTongCa,tvTongTrung, tvTongSua,tvTongThitBan, tvTongCaBan,tvTongTrungBan, tvTongSuaBan;
+DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,14 +78,16 @@ public class BaoCao extends AppCompatActivity {
 //      tvTongThit.setText(thitBan+"");
 //    }
     }
-
     private void setConTrol() {
 
         btnQuayLai = findViewById(R.id.btnQuayLai);
-        tvTongThit = findViewById(R.id.tvTongThit);
-        tvTongTrung = findViewById(R.id.tvTongTrung);
-        tvTongCa = findViewById(R.id.tvTongCa);
-        tvTongSua = findViewById(R.id.tvTongSua);
-
+        tvTongThit =findViewById(R.id.tvTongThit);
+        tvTongTrung =findViewById(R.id.tvTongTrung);
+        tvTongCa =findViewById(R.id.tvTongCa);
+        tvTongSua =findViewById(R.id.tvTongSua);
+        tvTongThitBan =findViewById(R.id.tvTongThitBan);
+        tvTongTrungBan =findViewById(R.id.tvTongTrungBan);
+        tvTongCaBan =findViewById(R.id.tvTongCaBan);
+        tvTongSuaBan =findViewById(R.id.tvTongSuaBan);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserAccount {
 
 
-    private int mataikhoan;
+    private int mataikhoan = 0;
     private String tentaikhoan;
     private String matkhau;
     private Date ngayhethantruycap;
@@ -17,14 +17,16 @@ public class UserAccount {
     }
 
 
-    public UserAccount(int mataikhoan, String tentaikhoan, String matkhau, Date ngayhethantruycap, int capdotaikhoan, String email) {
-        this.mataikhoan = mataikhoan;
+    public UserAccount(String tentaikhoan, String matkhau, Date ngayhethantruycap, int capdotaikhoan, String email, boolean isEmailVerified) {
+        this.mataikhoan++;
         this.tentaikhoan = tentaikhoan;
         this.matkhau = matkhau;
         this.ngayhethantruycap = ngayhethantruycap;
         this.capdotaikhoan = capdotaikhoan;
         this.email = email;
+        this.isEmailVerified = isEmailVerified;
     }
+
     public String getTentaikhoan() {
         return tentaikhoan;
     }
@@ -63,7 +65,8 @@ public class UserAccount {
 
     public void setEmail(String email) {
         this.email = email;
-    } 
+    }
+
     public int getMataikhoan() {
         return mataikhoan;
     }
@@ -71,6 +74,7 @@ public class UserAccount {
     public void setMataikhoan(int mataikhoan) {
         this.mataikhoan = mataikhoan;
     }
+
 
     public boolean isEmailVerified() {
         return isEmailVerified;
