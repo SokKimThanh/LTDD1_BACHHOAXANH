@@ -39,11 +39,12 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
 
 27/11/2023 8:04 CH mergecode làm báo cáo
 
-12/02/2023 Thực hiện phân quyền 
+02/12/2023 Thực hiện phân quyền 
 - tạo view login
 - phân quyền onprepareoptionmenuitem
 - tạo db phân quyền 
 - tạo tài khoản phân quyền
-12/02/2023 7:16 ch Thực hiện đăng ký tài khoản
+02/12/2023 7:16 ch Thực hiện đăng ký tài khoản
 - Tạo view đăng ký
 - test db đăng ký
+03/12/2023 5:49SA thay đổi tên các icon và xem báo cáo
