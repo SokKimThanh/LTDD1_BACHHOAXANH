@@ -38,3 +38,9 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
 - 4:50 CH Đổi tên layout file name, thêm thông bao gio hàng null
 
 27/11/2023 8:04 CH mergecode làm báo cáo
+
+12/02/2023 Thực hiện phân quyền 
+- tạo view login
+- phân quyền onprepareoptionmenuitem
+- tạo db phân quyền 
+- tạo tài khoản phân quyền
