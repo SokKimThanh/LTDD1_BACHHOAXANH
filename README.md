@@ -48,3 +48,4 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
 - Tạo view đăng ký
 - test db đăng ký
 03/12/2023 5:49SA thay đổi tên các icon và xem báo cáo
+03/12/2023 6:43SA add files cap do tai khoan viewlogin
