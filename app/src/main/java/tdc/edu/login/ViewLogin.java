@@ -2,6 +2,7 @@ package tdc.edu.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -72,10 +73,14 @@ public class ViewLogin extends AppCompatActivity {
         String passwordToCheck = edtPassword.getText().toString();
         boolean isExist = false;
 
+        // cập nhật dữ liệu mới
+        userAccounts = dbUserAccount.DocDL();
+
+        // check thông tin
         for (UserAccount user : userAccounts) {
             if (user.getTentaikhoan().equals(usernameToCheck)) {
                 if (user.getMatkhau().equals(passwordToCheck)) {
-                    currentUserAccount = user;
+                    currentUserAccount = user;// tìm thấy thông tin
                     isExist = true;
                     break;
                 }
@@ -83,14 +88,21 @@ public class ViewLogin extends AppCompatActivity {
         }
 
         if (isExist) {
-//            System.out.println("Tài khoản đã tồn tại trong cơ sở dữ liệu.");
+            //  System.out.println("Tài khoản đã tồn tại trong cơ sở dữ liệu.");
             int color = ContextCompat.getColor(getApplicationContext(), R.color.greenPrimary);
             tvMessageStatus.setTextColor(color);
             tvMessageStatus.setText("Đăng nhập thành công");
-            // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewLogin sang ViewNavigation
-            Intent intent = new Intent(ViewLogin.this, ViewNavigation.class);
-            startActivity(intent);
-            finish();  // Đóng Activity hiện tại
+            // Chuyển đến màn hình menu chính sau 3 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewLogin sang ViewNavigation
+                    Intent intent = new Intent(ViewLogin.this, ViewNavigation.class);
+                    startActivity(intent);
+                    finish();  // Đóng Activity hiện tại
+                }
+            }, 3000); // Độ trễ là 3 giây
         } else {
             System.out.println("Tài khoản không tồn tại trong cơ sở dữ liệu.");
             int color = ContextCompat.getColor(getApplicationContext(), R.color.danger);
