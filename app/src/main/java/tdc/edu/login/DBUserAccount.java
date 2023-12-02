@@ -21,27 +21,32 @@ public class DBUserAccount extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap date, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
+        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap text, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
         db.execSQL(sql);
 
     }
 
-    public void ThemDL(UserAccount userAccount) {
+    public boolean ThemDL(UserAccount userAccount) {
+        boolean flag = false;
+        if(userAccount!=null){
 
-        SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
+            SQLiteDatabase db = getWritableDatabase();
+            String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
 
-        String tentaikhoan = userAccount.getTentaikhoan();
-        String matkhau = userAccount.getMatkhau();
-        String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
-        String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
-        String email = userAccount.getEmail();
+            String tentaikhoan = userAccount.getTentaikhoan();
+            String matkhau = userAccount.getMatkhau();
+            String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
+            String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
+            String email = userAccount.getEmail();
 
-        // Chuyển boolean thành int, sau đó chuyển int thành String
-        String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
+            // Chuyển boolean thành int, sau đó chuyển int thành String
+            String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
 
-        db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
-        db.close();
+            db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
+            db.close();
+            flag= true;
+        }
+        return flag;
     }
 
     public void XoaDL(String ma) {
@@ -72,7 +77,7 @@ public class DBUserAccount extends SQLiteOpenHelper {
                 int mataikhoan = cursor.getInt(i0);
                 String tentaikhoan = cursor.getString(i1);
                 String matkhau = cursor.getString(i2);
-                Date ngayhethantruycap = Date.valueOf(cursor.getString(i3));
+                String ngayhethantruycap = cursor.getString(i3);
                 int capdotaikhoan = cursor.getInt(i4);
                 String email = cursor.getString(i5);
                 boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
@@ -104,9 +109,9 @@ public class DBUserAccount extends SQLiteOpenHelper {
         onCreate(db);
 
         // Thêm 3 tài khoản admin, user, và guest
-        ThemDL(new UserAccount("admin", "admin123", Date.valueOf("2023-12-31"), 0, "admin@example.com", true));
-        ThemDL(new UserAccount("user", "user123", Date.valueOf("2023-12-31"), 1, "user@example.com", true));
-        ThemDL(new UserAccount("guest", "guest123", Date.valueOf("2023-12-31"), 2, "guest@example.com", true));
+        ThemDL(new UserAccount("admin", "admin123", "2023-12-31", 0, "admin@example.com", true));
+        ThemDL(new UserAccount("user", "user123", "2023-12-31", 1, "user@example.com", true));
+        ThemDL(new UserAccount("guest", "guest123", "2023-12-31", 2, "guest@example.com", true));
 
     }
 }

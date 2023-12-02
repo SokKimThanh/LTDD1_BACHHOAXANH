@@ -24,7 +24,7 @@ public class ViewLogin extends AppCompatActivity {
 
     ImageView btnDangNhap, btnShowPassword;
     EditText edtUserName, edtPassword;
-    TextView tvMessageStatus;
+    TextView tvMessageStatus, tvDangKy, tvQuenMatKhau;
     DBUserAccount dbUserAccount;
 
     List<UserAccount> userAccounts = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ViewLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_login);
+        setContentView(R.layout.layout_login_view);
         setControl();
         setEvent();
     }
@@ -147,6 +147,36 @@ public class ViewLogin extends AppCompatActivity {
 
 
         });
+        tvDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+                DangKy();
+            }
+
+
+        });
+
+        tvQuenMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+                QuenMatKhau();
+            }
+
+
+        });
+
+    }
+
+    private void DangKy() {
+        Intent intent = new Intent(ViewLogin.this, ViewDangKyTaiKhoan.class);
+        startActivity(intent);
+    }
+
+    private void QuenMatKhau() {
+        Intent intent = new Intent(ViewLogin.this, ViewQuenMatKhau.class);
+        startActivity(intent);
     }
 
     private void setControl() {
@@ -155,5 +185,7 @@ public class ViewLogin extends AppCompatActivity {
         edtUserName = findViewById(R.id.edtUserName);
         edtPassword = findViewById(R.id.edtPassword);
         tvMessageStatus = findViewById(R.id.tvMessageStatus);
+        tvDangKy = findViewById(R.id.tvDangKy);
+        tvQuenMatKhau = findViewById(R.id.tvQuenMatKhau);
     }
 }

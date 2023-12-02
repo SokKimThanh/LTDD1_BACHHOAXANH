@@ -8,7 +8,7 @@ public class UserAccount {
     private int mataikhoan = 0;
     private String tentaikhoan;
     private String matkhau;
-    private Date ngayhethantruycap;
+    private String ngayhethantruycap;
     private int capdotaikhoan;
     private String email;
     private boolean isEmailVerified;
@@ -17,7 +17,7 @@ public class UserAccount {
     }
 
 
-    public UserAccount(String tentaikhoan, String matkhau, Date ngayhethantruycap, int capdotaikhoan, String email, boolean isEmailVerified) {
+    public UserAccount(String tentaikhoan, String matkhau, String ngayhethantruycap, int capdotaikhoan, String email, boolean isEmailVerified) {
         this.mataikhoan++;
         this.tentaikhoan = tentaikhoan;
         this.matkhau = matkhau;
@@ -43,11 +43,11 @@ public class UserAccount {
         this.matkhau = matkhau;
     }
 
-    public Date getNgayhethantruycap() {
+    public String getNgayhethantruycap() {
         return ngayhethantruycap;
     }
 
-    public void setNgayhethantruycap(Date ngayhethantruycap) {
+    public void setNgayhethantruycap(String ngayhethantruycap) {
         this.ngayhethantruycap = ngayhethantruycap;
     }
 

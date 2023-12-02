@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="tdc.edu.login.ViewDangKyTaiKhoan">
+
+    <ImageView
+        android:id="@+id/logoapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greenPrimary"
+        android:src="@drawable/bhxlogo"
+        tools:ignore="ContentDescription" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/edtTenTaiKhoan"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Tên tài khoản"
+            android:textSize="16sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/edtMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/edtCapDoTaiKhoan"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Cấp độ tài khoản"
+            android:inputType="number"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/edtNgayHetHanTaiKhoan"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Ngày hết hạn tài khoản"
+            android:inputType="datetime"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvMessageStatusDangKy"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:hint="Thông báo trạng thái đăng ký"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/btnDangKy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_dangky" />
+    </LinearLayout>
+
+
+</LinearLayout>
