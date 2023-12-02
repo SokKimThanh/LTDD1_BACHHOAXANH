@@ -22,13 +22,8 @@ public class DBUserAccount extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Xóa bảng
-        db.execSQL("DROP TABLE IF EXISTS UserAccount");
         String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap text, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
         db.execSQL(sql);
-        // Thêm 3 tài khoản admin, user, và guest
-        ThemDL(new UserAccount("admin", "admin123", "2023-12-31", 0, "admin@example.com", true));
-        ThemDL(new UserAccount("user", "user123", "2023-12-31", 1, "user@example.com", true));
-        ThemDL(new UserAccount("guest", "guest123", "2023-12-31", 2, "guest@example.com", true));
     }
 
     public boolean ThemDL(UserAccount userAccount) {
@@ -109,14 +104,7 @@ public class DBUserAccount extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Xóa bảng
         db.execSQL("DROP TABLE IF EXISTS UserAccount");
-
         // Tạo lại bảng
         onCreate(db);
-
-        // Thêm 3 tài khoản admin, user, và guest
-        ThemDL(new UserAccount("admin", "admin123", "2023-12-31", 0, "admin@example.com", true));
-        ThemDL(new UserAccount("user", "user123", "2023-12-31", 1, "user@example.com", true));
-        ThemDL(new UserAccount("guest", "guest123", "2023-12-31", 2, "guest@example.com", true));
-
     }
 }
