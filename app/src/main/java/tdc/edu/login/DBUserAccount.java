@@ -8,7 +8,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +21,13 @@ public class DBUserAccount extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Xóa bảng
-        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text, matkhau text, ngayhethantruycap text, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
+        String sql = "create table UserAccount(mataikhoan INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tentaikhoan text not null unique, matkhau text, ngayhethantruycap text, capdotaikhoan INTEGER, email text, isEmailVerified INTEGER)";
         db.execSQL(sql);
     }
 
     public boolean ThemDL(UserAccount userAccount) {
         boolean flag = false;
-        if(userAccount!=null){
+        if (userAccount != null) {
 
             SQLiteDatabase db = getWritableDatabase();
             String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
@@ -44,7 +43,7 @@ public class DBUserAccount extends SQLiteOpenHelper {
 
             db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
             db.close();
-            flag= true;
+            flag = true;
         }
         return flag;
     }
@@ -61,6 +60,51 @@ public class DBUserAccount extends SQLiteOpenHelper {
         String sql = "Select * from UserAccount";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                UserAccount userAccount = new UserAccount();
+                // Lấy chỉ số của cột "your_column"
+                int i0 = cursor.getColumnIndex("mataikhoan");
+                int i1 = cursor.getColumnIndex("tentaikhoan");
+                int i2 = cursor.getColumnIndex("matkhau");
+                int i3 = cursor.getColumnIndex("ngayhethantruycap");
+                int i4 = cursor.getColumnIndex("capdotaikhoan");
+                int i5 = cursor.getColumnIndex("email");
+                int i6 = cursor.getColumnIndex("isEmailVerified");
+
+                // Lấy dữ liệu từ cột "your_column"
+                int mataikhoan = cursor.getInt(i0);
+                String tentaikhoan = cursor.getString(i1);
+                String matkhau = cursor.getString(i2);
+                String ngayhethantruycap = cursor.getString(i3);
+                int capdotaikhoan = cursor.getInt(i4);
+                String email = cursor.getString(i5);
+                boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
+
+                // set du lieu cho user account
+                userAccount.setMataikhoan(mataikhoan);
+                userAccount.setTentaikhoan(tentaikhoan);
+                userAccount.setMatkhau(matkhau);
+                userAccount.setNgayhethantruycap(ngayhethantruycap);
+                userAccount.setCapdotaikhoan(capdotaikhoan);
+                userAccount.setEmail(email);
+                userAccount.setEmailVerified(isEmailValidation);
+
+                userAccounts.add(userAccount);
+            } while (cursor.moveToNext());
+            // In dữ liệu ra log
+            Log.d("BHX", "Data from UserAccount: " + userAccounts);
+        }
+        cursor.close();
+        return userAccounts;
+    }
+
+    public List<UserAccount> DocDLByCapDoTaiKhoan(int levelaccount) {
+        List<UserAccount> userAccounts = new ArrayList<>();
+        // get by cap do tai khoan
+        String sql = "Select * from UserAccount where capdotaikhoan = ?";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(levelaccount)});
         if (cursor.moveToFirst()) {
             do {
                 UserAccount userAccount = new UserAccount();

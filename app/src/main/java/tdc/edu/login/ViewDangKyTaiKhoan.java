@@ -225,7 +225,7 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.nav_menu, menu);
+        inflater.inflate(R.menu.menu_nav_item, menu);
         return true;
     }
 

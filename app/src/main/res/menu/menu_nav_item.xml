@@ -16,6 +16,10 @@
         android:title="Danh sách hóa đơn"
         tools:ignore="HardcodedText" />
     <item
+        android:id="@+id/mnQuanLyHoSo"
+        android:icon="@drawable/icon_users"
+        android:title="Quản lý hồ sơ" />
+    <item
         android:id="@+id/mnSearchSanPham"
         android:icon="@drawable/icon_search"
         android:title="Tìm kiếm sản phẩm" />
@@ -23,6 +27,7 @@
         android:id="@+id/mnBaiVietTinTucSP"
         android:icon="@drawable/icon_news_pink"
         android:title="Bài viết, tin tức" />
+
     <item
         android:id="@+id/mnLogout"
         android:icon="@drawable/btn_exit_green"

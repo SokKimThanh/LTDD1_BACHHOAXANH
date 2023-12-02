@@ -23,6 +23,70 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="0dp">
+        <!--        cap do tai khoan-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_boder_primary_green"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cấp độ tài khoản"
+                android:paddingLeft="6dp"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgCapDoTaiKhoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Khách hàng"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbAdmin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Quản lý"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGuest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Khách thường"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+            <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
+            <EditText
+                android:id="@+id/edtCapDoTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:enabled="false"
+                android:hint="Level Acc"
+                android:inputType="number"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
