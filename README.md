@@ -44,3 +44,6 @@ Thêm thao tác dữ liệu trên màn hình danh sách danh mục
 - phân quyền onprepareoptionmenuitem
 - tạo db phân quyền 
 - tạo tài khoản phân quyền
+12/02/2023 7:16 ch Thực hiện đăng ký tài khoản
+- Tạo view đăng ký
+- test db đăng ký
