@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DANHSACHSP"
         tools:targetApi="31">
         <activity
+            android:name="tdc.edu.login.ViewLogin"
+            android:exported="false" />
+        <activity
             android:name="tdc.edu.giohang.ViewGioHangList"
             android:exported="false" />
         <activity
@@ -26,10 +29,10 @@
         </activity>
         <activity
             android:name="tdc.edu.ShoppingSearch.ViewProtypeProductSearch"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucAdd"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucEdit"
             android:exported="false" />
@@ -41,10 +44,9 @@
             android:exported="false" />
         <activity
             android:name=".ViewSanPhamAdd"
-            android:exported="true" />
-<!--        <activity-->
-<!--            android:name=".ViewSanPhamAdd"-->
-<!--            android:exported="true" />-->
+            android:exported="true" /> <!-- <activity -->
+        <!-- android:name=".ViewSanPhamAdd" -->
+        <!-- android:exported="true" /> -->
         <activity
             android:name=".ViewSanPhamEdit"
             android:exported="false" />
@@ -53,7 +55,7 @@
             android:exported="false" />
         <activity
             android:name=".ViewSanPhamList"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
