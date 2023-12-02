@@ -22,40 +22,70 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/edtTenTaiKhoan"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Tên tài khoản"
-            android:textSize="16sp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtMatKhau"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:textSize="16sp"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="username"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/key"
+                tools:ignore="HardcodedText,RtlSymmetry" />
 
-        <EditText
-            android:id="@+id/edtCapDoTaiKhoan"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Cấp độ tài khoản"
-            android:inputType="number"
-            android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            <EditText
+                android:id="@+id/edtTenTaiKhoan"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Tên đăng nhập"
+                android:inputType="text"
+                android:paddingLeft="64dp"
+                android:textSize="16sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
 
-        <EditText
-            android:id="@+id/edtNgayHetHanTaiKhoan"
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Ngày hết hạn tài khoản"
-            android:inputType="datetime"
-            android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="password"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/password"
+                tools:ignore="ContentDescription,HardcodedText" />
+
+            <EditText
+                android:id="@+id/edtMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Nhập mật khẩu"
+                android:inputType="textPassword"
+                android:paddingLeft="64dp"
+                android:textSize="16sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
+
+            <ImageView
+                android:id="@+id/btnShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/showpassword"
+                tools:ignore="ContentDescription,RtlHardcoded" />
+        </FrameLayout>
 
         <EditText
             android:id="@+id/edtEmail"
@@ -66,13 +96,140 @@
             android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+        <!--        cap do tai khoan-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bogoc"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cấp độ tài khoản"
+                android:paddingLeft="6dp"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgCapDoTaiKhoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbAdmin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Admin"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="User"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGuest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Guest"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+            <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
+            <EditText
+                android:id="@+id/edtCapDoTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:enabled="false"
+                android:hint="Level Acc"
+                android:inputType="number"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+        <!--ngay het han tai khoan-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bogoc"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hết hạn tài khoản"
+                android:paddingLeft="6dp"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgNgayHetHan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb1Thang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="1 tháng"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb6Thang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="6 Tháng"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb1nam"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="1 Năm"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+            <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
+            <EditText
+                android:id="@+id/edtNgayHetHanTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:enabled="false"
+                android:hint="Level Acc"
+                android:inputType="datetime"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tvMessageStatusDangKy"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:gravity="center"
-            android:hint="Thông báo trạng thái đăng ký"
-            android:textSize="16sp" />
+            android:hint="Thông báo trạng thái đăng ký" />
 
         <ImageView
             android:id="@+id/btnDangKy"
