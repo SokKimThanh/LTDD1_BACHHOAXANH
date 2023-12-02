@@ -27,6 +27,7 @@ import tdc.edu.danhsachsp.ViewSanPhamList;
 import tdc.edu.login.AccountLevel;
 import tdc.edu.login.UserAccount;
 import tdc.edu.login.ViewLogin;
+import tdc.edu.login.ViewQuanLyHoSoList;
 
 public class ViewNavigation extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -34,14 +35,14 @@ public class ViewNavigation extends AppCompatActivity {
     Menu menuNav;
     ActionBarDrawerToggle drawerToggle;
 
-    ImageView btnTimKiemSanPham, btnHoaDon, btnBaoCao, btnBaiVietTinTucSanPham;
+    ImageView btnTimKiemSanPham, btnHoaDon, btnBaoCao, btnBaiVietTinTucSanPham, btnQuanLyHoSo;
 
     UserAccount currentUserAccount;
     AccountLevel admin = AccountLevel.ADMIN;
     AccountLevel user = AccountLevel.USER;
     AccountLevel guest = AccountLevel.GUEST;
 
-    MenuItem mnDanhSachDanhMuc, mnDanhSachSanPham, mnHoaDon, mnSearchSanPham, mnExit, mnBaiVietTinTucSP, mnLogout;
+    MenuItem mnDanhSachDanhMuc, mnDanhSachSanPham, mnHoaDon, mnSearchSanPham, mnExit, mnBaiVietTinTucSP, mnLogout, mnQuanLyHoSo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +82,13 @@ public class ViewNavigation extends AppCompatActivity {
         mnExit = menuNav.findItem(R.id.mnExit);
         mnBaiVietTinTucSP = menuNav.findItem(R.id.mnBaiVietTinTucSP);
         mnLogout = menuNav.findItem(R.id.mnLogout);
+        mnQuanLyHoSo = menuNav.findItem(R.id.mnQuanLyHoSo);
 
         btnTimKiemSanPham.setVisibility(View.GONE);
         btnHoaDon.setVisibility(View.GONE);
         btnBaoCao.setVisibility(View.GONE);
         btnBaiVietTinTucSanPham.setVisibility(View.GONE);
+        btnQuanLyHoSo.setVisibility(View.GONE);
 
         // Luôn hiển thị mục menu Exit
         mnExit.setVisible(true);
@@ -242,6 +245,19 @@ public class ViewNavigation extends AppCompatActivity {
                 }
             }, 500); // Độ trễ là 0.5 giây
         });
+        btnQuanLyHoSo.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+
+            // Chuyển đến màn hình kế sau 0.5 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ViewNavigation.this, ViewQuanLyHoSoList.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+            }, 500); // Độ trễ là 0.5 giây
+        });
     }
 
     private void KhoiTao() {
@@ -272,6 +288,7 @@ public class ViewNavigation extends AppCompatActivity {
         btnHoaDon = findViewById(R.id.btnHoaDon);
         btnBaoCao = findViewById(R.id.btnBaoCao);
         btnBaiVietTinTucSanPham = findViewById(R.id.btnBaiVietTinTucSanPham);
+        btnQuanLyHoSo = findViewById(R.id.btnQuanLyHoSo);
     }
 
     @Override
