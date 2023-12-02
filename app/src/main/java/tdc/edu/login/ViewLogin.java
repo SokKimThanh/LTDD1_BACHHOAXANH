@@ -109,7 +109,7 @@ public class ViewLogin extends AppCompatActivity {
             int color = ContextCompat.getColor(getApplicationContext(), R.color.greenPrimary);
             tvMessageStatus.setTextColor(color);
             tvMessageStatus.setText("Đăng nhập thành công");
-            // Chuyển đến màn hình menu chính sau 3 giây
+            // Chuyển đến màn hình menu chính sau 0.5 giây
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -119,7 +119,7 @@ public class ViewLogin extends AppCompatActivity {
                     startActivity(intent);
                     finish();  // Đóng Activity hiện tại
                 }
-            }, 1000); // Độ trễ là 1 giây
+            }, 500); // Độ trễ là 0.5 giây
         } else {
             Toast.makeText(this, "Tài khoản không tồn tại trong cơ sở dữ liệu.", Toast.LENGTH_SHORT).show();
             int color = ContextCompat.getColor(getApplicationContext(), R.color.danger);

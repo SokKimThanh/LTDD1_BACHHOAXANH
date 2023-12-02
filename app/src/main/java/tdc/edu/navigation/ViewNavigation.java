@@ -146,65 +146,101 @@ public class ViewNavigation extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Chuyển đến màn hình menu chính sau 0.5 giây
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                if (item.getItemId() == R.id.mnDanhSachDanhMuc) {
-                    Intent intent = new Intent(ViewNavigation.this, ViewDanhMucList.class);
-                    startActivity(intent);
+                        if (item.getItemId() == R.id.mnDanhSachDanhMuc) {
+                            Intent intent = new Intent(ViewNavigation.this, ViewDanhMucList.class);
+                            startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Danh sách danh mục", Toast.LENGTH_SHORT).show();
-                }
-                if (item.getItemId() == R.id.mnDanhSachSanPham) {
-                    Intent intent = new Intent(ViewNavigation.this, ViewSanPhamList.class);
-                    startActivity(intent);
+                        }
+                        if (item.getItemId() == R.id.mnDanhSachSanPham) {
+                            Intent intent = new Intent(ViewNavigation.this, ViewSanPhamList.class);
+                            startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Danh sách sản phẩm", Toast.LENGTH_SHORT).show();
-                }
-                if (item.getItemId() == R.id.mnHoaDon) {
-                    Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
-                    startActivity(intent);
+                        }
+                        if (item.getItemId() == R.id.mnHoaDon) {
+                            Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
+                            startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
-                }
+                        }
 
-                if (item.getItemId() == R.id.mnSearchSanPham) {
-                    Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
-                    startActivity(intent);
+                        if (item.getItemId() == R.id.mnSearchSanPham) {
+                            Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
+                            startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Tìm kiếm sản phẩm", Toast.LENGTH_SHORT).show();
-                }
-                if (item.getItemId() == R.id.mnLogout) {
-                    Intent intent = new Intent(ViewNavigation.this, ViewLogin.class);
-                    startActivity(intent);
+                        }
+                        if (item.getItemId() == R.id.mnLogout) {
+                            Intent intent = new Intent(ViewNavigation.this, ViewLogin.class);
+                            startActivity(intent);
 //                    Toast.makeText(ViewNavigation.this, "Đăng nhập", Toast.LENGTH_SHORT).show();
-                }
+                        }
 
 
-                // menu don hang
-                if (item.getItemId() == R.id.mnExit) {
-                    finish();
-                }
+                        // menu don hang
+                        if (item.getItemId() == R.id.mnExit) {
+                            finish();
+                        }
+                    }
+                }, 500); // Độ trễ là 0.5 giây
+
                 drawerLayout.closeDrawers();
                 return false;
             }
         });
         btnTimKiemSanPham.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
-            Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
-            startActivity(intent);
+            // Chuyển đến màn hình kế sau 0.5 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
+                    startActivity(intent);
+                }
+            }, 500); // Độ trễ là 0.5 giây
+
         });
         // quan ly danh sach hoa don
         btnHoaDon.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
-            Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
+
+            // Chuyển đến màn hình kế sau 0.5 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    Intent intent = new Intent(ViewNavigation.this, DS_DonHang.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+            }, 500); // Độ trễ là 0.5 giây
         });
         btnBaoCao.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
-            Intent intent = new Intent(ViewNavigation.this, BaoCao.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
+            // Chuyển đến màn hình kế sau 0.5 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ViewNavigation.this, BaoCao.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+            }, 500); // Độ trễ là 0.5 giây
+
         });
         btnBaiVietTinTucSanPham.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
-            Toast.makeText(ViewNavigation.this, "bài viết tin tức sản phẩm", Toast.LENGTH_SHORT).show();
 
+            // Chuyển đến màn hình kế sau 0.5 giây
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ViewNavigation.this, "bài viết tin tức sản phẩm", Toast.LENGTH_SHORT).show();
+                }
+            }, 500); // Độ trễ là 0.5 giây
         });
     }
 
