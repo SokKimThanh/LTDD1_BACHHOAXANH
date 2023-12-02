@@ -29,7 +29,7 @@ public class ViewLogin extends AppCompatActivity {
 
     List<UserAccount> userAccounts = new ArrayList<>();
 
-    public static UserAccount currentUserAccount;
+    public static UserAccount currentUserAccount = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

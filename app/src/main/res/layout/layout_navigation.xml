@@ -21,56 +21,68 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_margin="4dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:background="@drawable/borderprimarygreen"
+                android:background="@drawable/bg_boder_primary_green"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/btnTimKiemSanPham"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tìm kiếm sản phẩm"
                     android:layout_margin="4dp"
-                    android:src="@drawable/timkiemsanpham"
                     android:backgroundTint="@color/greenPrimary"
+                    android:src="@drawable/btn_timkiem"
+                    android:text="Tìm kiếm sản phẩm"
                     android:textSize="24sp" />
 
                 <ImageView
                     android:id="@+id/btnHoaDon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Danh sách hóa đơn"
                     android:layout_margin="4dp"
-                    android:src="@drawable/quanlyhoadon"
-
                     android:backgroundTint="@color/greenPrimary"
+                    android:src="@drawable/btn_hoadon_list"
+
+                    android:text="Danh sách hóa đơn"
                     android:textSize="24sp" />
 
                 <ImageView
                     android:id="@+id/btnBaoCao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Báo cáo"
                     android:layout_margin="4dp"
-                    android:src="@drawable/baocaothongke"
                     android:backgroundTint="@color/greenPrimary"
+                    android:src="@drawable/btn_baocao"
+                    android:text="Báo cáo"
                     android:textSize="24sp" />
+
                 <ImageView
                     android:id="@+id/btnBaiVietTinTucSanPham"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Báo cáo"
                     android:layout_margin="4dp"
-                    android:src="@drawable/baiviettintucsanpham"
                     android:backgroundTint="@color/greenPrimary"
+                    android:src="@drawable/btn_baiviet"
+                    android:text="Báo cáo"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/btnQuanLyHoSo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/greenPrimary"
+                    android:src="@drawable/btn_user_list"
+                    android:text="Quản lý hồ sơ"
                     android:textSize="24sp" />
             </LinearLayout>
         </ScrollView>

@@ -90,8 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:choiceMode="singleChoice"
-            android:listSelector="@drawable/layout_protype_selector_background"
-            android:textColor="@drawable/layout_protype_selector_color" />
+            android:listSelector="@drawable/bg_protype_selector"
+            android:textColor="@drawable/bg_border_protype_black" />
         <!--danh sách sản phẩm-->
         <ListView
             android:id="@+id/dsSanPhamNavigation"

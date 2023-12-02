@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
-        android:src="@drawable/bhxlogo"
+        android:src="@drawable/logo_bhx"
         tools:ignore="ContentDescription" />
     <!--login password-->
     <LinearLayout
@@ -37,7 +37,7 @@
                 android:contentDescription="username"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:src="@drawable/key"
+                android:src="@drawable/icon_key"
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
             <EditText
@@ -66,7 +66,7 @@
                 android:contentDescription="password"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:src="@drawable/password"
+                android:src="@drawable/icon_password_green"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <EditText
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/showpassword"
+                android:src="@drawable/icon_showpassword"
                 tools:ignore="ContentDescription,RtlHardcoded" />
         </FrameLayout>
 
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/greenPrimary"
-            android:src="@drawable/btn_dangnhap"
+            android:src="@drawable/btn_user_dangnhap"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 </LinearLayout>

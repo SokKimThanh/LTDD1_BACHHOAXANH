@@ -48,7 +48,14 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
         setContentView(R.layout.layout_login_dangky);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
+        PhanQuyenKhiNhapDangKy();
         setEvent();
+    }
+
+    private void PhanQuyenKhiNhapDangKy() {
+        if(ViewLogin.currentUserAccount!= null){
+
+        }
     }
 
 

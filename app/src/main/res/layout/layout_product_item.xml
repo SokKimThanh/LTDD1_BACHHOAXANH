@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="4dp"
-        android:background="@drawable/borderprimarygreen"
+        android:background="@drawable/bg_boder_primary_green"
         >
         <ImageView
             android:id="@+id/ivProduct"

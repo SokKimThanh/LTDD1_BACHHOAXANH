@@ -79,19 +79,19 @@ public class ViewSanPhamEdit extends AppCompatActivity {
 // Xử lý mã đã chọn...
                 if (selectedMaDM.equals("dm001")) {
                     spinnerDanhMuc.setSelection(0);
-                    ivHinhEdit.setImageResource(R.drawable.thit);
+                    ivHinhEdit.setImageResource(R.drawable.img_thit);
                 }
                 if (selectedMaDM.equals("dm002")) {
                     spinnerDanhMuc.setSelection(1);
-                    ivHinhEdit.setImageResource(R.drawable.ca);
+                    ivHinhEdit.setImageResource(R.drawable.img_ca);
                 }
                 if (selectedMaDM.equals("dm003")) {
                     spinnerDanhMuc.setSelection(2);
-                    ivHinhEdit.setImageResource(R.drawable.trung);
+                    ivHinhEdit.setImageResource(R.drawable.img_trung);
                 }
                 if (selectedMaDM.equals("dm004")) {
                     spinnerDanhMuc.setSelection(3);
-                    ivHinhEdit.setImageResource(R.drawable.sua);
+                    ivHinhEdit.setImageResource(R.drawable.img_sua);
                 }
             }
 
