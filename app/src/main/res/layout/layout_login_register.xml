@@ -7,15 +7,16 @@
 
     tools:context="tdc.edu.login.ViewAccountRegister">
 
-    <ImageView
-        android:id="@+id/logoapp"
+    <!--tieu de-->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
-        android:src="@drawable/logo_bhx"
-        tools:ignore="ContentDescription" />
-
-
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Đăng ký tài khoản"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -96,12 +97,14 @@
             android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+
+
         <!--        cap do tai khoan-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_border_xam"
+            android:background="@drawable/bg_boder_primary_green"
             android:orientation="vertical">
 
 
@@ -165,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_border_xam"
+            android:background="@drawable/bg_boder_primary_green"
             android:orientation="vertical">
 
             <TextView
@@ -211,17 +214,15 @@
                     android:textSize="16sp" />
 
             </RadioGroup>
-            <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
             <EditText
                 android:id="@+id/edtNgayHetHanTaiKhoan"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:enabled="false"
-                android:hint="Level Acc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:hint="Ngày hết hạn tài khoản"
                 android:inputType="datetime"
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
         </LinearLayout>
 
         <TextView
@@ -237,13 +238,4 @@
             android:layout_height="wrap_content"
             android:src="@drawable/btn_user_dangky" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_border_xam"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
 </LinearLayout>

@@ -127,7 +127,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
 
 
                 // Dữ liệu tĩnh tham gia
-                if (ViewSanPhamList.dataSp.add(sanPham)) {
+                if (ViewSanPhamList.hangHoas.add(sanPham)) {
                     // Thêm đối tượng HangHoa vào cơ sở dữ liệu
                     dbHangHoa.ThemDL(sanPham);
                     Toast.makeText(ViewSanPhamAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();

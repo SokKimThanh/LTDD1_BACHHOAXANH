@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 import tdc.edu.danhsachsp.R;
 
-public class AccountItemAdapter {
+public class AccountListAdapter extends ArrayAdapter<UserAccount> {
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
@@ -22,8 +23,8 @@ public class AccountItemAdapter {
 
     List<UserAccount> userAccounts;//danh sách tài khoản
 
-    public AccountItemAdapter(Context context, int resource, List<UserAccount> userAccounts) {
-        super();
+    public AccountListAdapter(Context context, int resource, List<UserAccount> userAccounts) {
+        super(context, resource, userAccounts);
         this.context = context;
         this.resource = resource;
         this.userAccounts = userAccounts;
@@ -56,7 +57,7 @@ public class AccountItemAdapter {
 
 
         // Hiển thị thông tin
-        tvMaTK.setText(userAccount.getMataikhoan());
+        tvMaTK.setText(userAccount.getMataikhoan() + "");
         tvTenTK.setText(userAccount.getTentaikhoan());
         tvEmailTK.setText(userAccount.getEmail());
         tvNgayHetHan.setText(userAccount.getNgayhethantruycap());

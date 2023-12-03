@@ -29,21 +29,30 @@ public class DBUserAccount extends SQLiteOpenHelper {
         boolean flag = false;
         if (userAccount != null) {
 
-            SQLiteDatabase db = getWritableDatabase();
-            String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
+            try {
+                SQLiteDatabase db = getWritableDatabase();
+                String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
 
-            String tentaikhoan = userAccount.getTentaikhoan();
-            String matkhau = userAccount.getMatkhau();
-            String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
-            String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
-            String email = userAccount.getEmail();
+                String tentaikhoan = userAccount.getTentaikhoan();
+                String matkhau = userAccount.getMatkhau();
+                String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
+                String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
+                String email = userAccount.getEmail();
 
-            // Chuyển boolean thành int, sau đó chuyển int thành String
-            String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
+                // Chuyển boolean thành int, sau đó chuyển int thành String
+                String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
 
-            db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
-            db.close();
-            flag = true;
+                db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
+                db.close();
+                flag = true;
+            } catch (Exception ex) {
+                flag = false;
+                try {
+                    throw new Exception(ex.getMessage());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         return flag;
     }

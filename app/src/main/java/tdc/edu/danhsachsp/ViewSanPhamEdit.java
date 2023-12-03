@@ -127,7 +127,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : ViewSanPhamList.dataSp) {
+                for (HangHoa sp : ViewSanPhamList.hangHoas) {
                     //tim ma san pham de cap nhat
                     if (sp.getMaSp().equals(sanPham.getMaSp())) {
                         // sua
@@ -137,7 +137,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
                         sp.setLoaiSp(selectedMaDM);
                         // thong bao
                         dbHangHoa.SuaDL(sp);
-                        ViewSanPhamList.spAdapter.notifyDataSetChanged();
+                        ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();
                         Toast.makeText(ViewSanPhamEdit.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -148,15 +148,15 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (HangHoa sp : ViewSanPhamList.dataSp) {
+                for (HangHoa sp : ViewSanPhamList.hangHoas) {
                     //tim ma san pham de cap nhat
                     if (sp.getMaSp().equals(sanPham.getMaSp())) {
                         // xoa
 
-                        ViewSanPhamList.dataSp.remove(sp);
+                        ViewSanPhamList.hangHoas.remove(sp);
                         // thong bao
                         dbHangHoa.XoaDL(sp);
-                        ViewSanPhamList.spAdapter.notifyDataSetChanged();
+                        ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();
                         Toast.makeText(ViewSanPhamEdit.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     }
                 }

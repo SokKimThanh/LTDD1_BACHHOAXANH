@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import tdc.edu.danhsachsp.R;
 
@@ -36,10 +37,9 @@ public class ViewAccountRegister extends AppCompatActivity {
     RadioButton rbAdmin, rbUser, rbGuest;
     RadioButton rb1Thang, rb6Thang, rb1Nam;
 
-    LocalDate today;
-    LocalDate oneMonthLater;
-    LocalDate sixMonthsLater;
-    LocalDate oneYearLater;
+    String ngayGiaHan_1Thang;
+    String ngayGiaHan_6Thang;
+    String ngayGiaHan_1Nam;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,7 +53,7 @@ public class ViewAccountRegister extends AppCompatActivity {
     }
 
     private void PhanQuyenKhiNhapDangKy() {
-        if(ViewAccountLogin.currentUserAccount!= null){
+        if (ViewAccountLogin.currentUserAccount != null) {
 
         }
     }
@@ -74,10 +74,7 @@ public class ViewAccountRegister extends AppCompatActivity {
                 // Hiện cấp độ   khi RadioButton được nhấn
                 edtCapDoTaiKhoan.setText("2");
             } else {
-                rgCapDoTaiKhoan.clearCheck();
                 rbAdmin.setChecked(true);
-                rbUser.setChecked(false);
-                rbGuest.setChecked(false);
                 edtCapDoTaiKhoan.setText("0");
             }
         });
@@ -87,19 +84,13 @@ public class ViewAccountRegister extends AppCompatActivity {
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (checkedId == rb1Thang.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                edtNgayHetHanTaiKhoan.setText("" + oneMonthLater);
+                edtNgayHetHanTaiKhoan.setText("" + ngayGiaHan_1Thang);
             } else if (checkedId == rb6Thang.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                edtNgayHetHanTaiKhoan.setText("" + sixMonthsLater);
+                edtNgayHetHanTaiKhoan.setText("" + ngayGiaHan_6Thang);
             } else if (checkedId == rb1Nam.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                edtNgayHetHanTaiKhoan.setText("" + oneYearLater);
-            } else {
-                rgNgayHetHan.clearCheck();
-                rb1Thang.setChecked(true);
-                rb6Thang.setChecked(false);
-                rb1Nam.setChecked(false);
-                edtNgayHetHanTaiKhoan.setText("" + today);
+                edtNgayHetHanTaiKhoan.setText("" + ngayGiaHan_1Nam);
             }
         });
         btnDangKy.setOnClickListener(v -> {
@@ -137,16 +128,23 @@ public class ViewAccountRegister extends AppCompatActivity {
             String email = edtEmail.getText().toString();
 
             UserAccount user = new UserAccount(tentaikhoan, matkhau, ngayhethan, capdotaikhoan, email, true);
-            if (dbUserAccount.ThemDL(user)) {
-                Toast.makeText(ViewAccountRegister.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
-                int color = ContextCompat.getColor(getApplicationContext(), R.color.greenPrimary);
-                tvMessageStatus.setTextColor(color);
-                tvMessageStatus.setText("Đăng ký thành công!");
-            } else {
-                Toast.makeText(ViewAccountRegister.this, "Dang ky khong thanh cong", Toast.LENGTH_SHORT).show();
+            try {
+                if (dbUserAccount.ThemDL(user)) {
+                    Toast.makeText(ViewAccountRegister.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                    int color = ContextCompat.getColor(getApplicationContext(), R.color.greenPrimary);
+                    tvMessageStatus.setTextColor(color);
+                    tvMessageStatus.setText("Đăng ký thành công!");
+                } else {
+                    Toast.makeText(ViewAccountRegister.this, "Dang ky khong thanh cong", Toast.LENGTH_SHORT).show();
+                    int color = ContextCompat.getColor(getApplicationContext(), R.color.danger);
+                    tvMessageStatus.setTextColor(color);
+                    tvMessageStatus.setText("Đăng ký không thành công!");
+                }
+            } catch (Exception ex) {
+                Toast.makeText(ViewAccountRegister.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 int color = ContextCompat.getColor(getApplicationContext(), R.color.danger);
                 tvMessageStatus.setTextColor(color);
-                tvMessageStatus.setText("Đăng ký không thành công!");
+                tvMessageStatus.setText("Trùng tên tài khoản");
             }
         });
 
@@ -159,8 +157,24 @@ public class ViewAccountRegister extends AppCompatActivity {
 
 
         });
+
+//        cap do tai khoan
+        rgCapDoTaiKhoan.clearCheck();
+        rbAdmin.setChecked(true);
+        rbUser.setChecked(false);
+        rbGuest.setChecked(false);
+        edtCapDoTaiKhoan.setText("0");
+        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
+
+        // ngay het han
+        rgNgayHetHan.clearCheck();
+        rb1Thang.setChecked(true);
+        rb6Thang.setChecked(false);
+        rb1Nam.setChecked(false);
     }
+
     boolean isChecked = true;//tắt mật khẩu
+
     private void ShowPassword() {
         if (isChecked) {
             // Hiển thị mật khẩu
@@ -179,11 +193,29 @@ public class ViewAccountRegister extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void KhoiTao() {
         dbUserAccount = new DBUserAccount(ViewAccountRegister.this);
+        Date d = new Date();
+        String ngayGiaHan = DateFormat.format("dd/MM/yyyy", d.getTime()).toString();
+        String[] dataGH = ngayGiaHan.split("/");
+        int namGH_1Nam = Integer.parseInt(dataGH[2]) + 1;
+        int namGH_6Thang = Integer.parseInt(dataGH[2]);
+        int namGH_1Thang = Integer.parseInt(dataGH[2]);
 
-        today = LocalDate.now();
-        oneMonthLater = today.plusMonths(1);
-        sixMonthsLater = today.plusMonths(6);
-        oneYearLater = today.plusYears(1);
+        int thangGH_6Thang = Integer.parseInt(dataGH[1]) + 6;
+        int thangGH_1Thang = Integer.parseInt(dataGH[1]) + 1;
+        int thangGH_1Nam = Integer.parseInt(dataGH[1]);
+
+        if (thangGH_6Thang > 12) {
+            thangGH_6Thang = thangGH_6Thang - 12;
+            namGH_6Thang++;
+        }
+        if (thangGH_1Thang > 12) {
+            thangGH_1Thang = 1;
+            namGH_1Thang++;
+        }
+        ngayGiaHan_1Thang = dataGH[0] + "/" + String.format("%02d",thangGH_1Thang)+ "/" + namGH_1Thang;
+        ngayGiaHan_6Thang = dataGH[0] + "/" + String.format("%02d",thangGH_6Thang) + "/" + namGH_6Thang;
+        ngayGiaHan_1Nam = dataGH[0] + "/" + String.format("%02d",thangGH_1Nam)  + "/" + namGH_1Nam;
+
     }
 
     private void setControl() {
@@ -206,20 +238,7 @@ public class ViewAccountRegister extends AppCompatActivity {
         rb6Thang = findViewById(R.id.rb6Thang);
         rb1Nam = findViewById(R.id.rb1nam);
 
-//        cap do tai khoan
-        rgCapDoTaiKhoan.clearCheck();
-        rbAdmin.setChecked(true);
-        rbUser.setChecked(false);
-        rbGuest.setChecked(false);
-        edtCapDoTaiKhoan.setText("0");
-        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
 
-        // ngay het han
-        rgNgayHetHan.clearCheck();
-        rb1Thang.setChecked(true);
-        rb6Thang.setChecked(false);
-        rb1Nam.setChecked(false);
-        edtNgayHetHanTaiKhoan.setText("" + today);
     }
 
     @Override
