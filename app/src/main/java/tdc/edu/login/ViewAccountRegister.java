@@ -25,7 +25,7 @@ import java.time.LocalDate;
 
 import tdc.edu.danhsachsp.R;
 
-public class ViewDangKyTaiKhoan extends AppCompatActivity {
+public class ViewAccountRegister extends AppCompatActivity {
 
     EditText edtTenTaiKhoan, edtCapDoTaiKhoan, edtMatKhau, edtNgayHetHanTaiKhoan, edtEmail;
     ImageView btnDangKy, btnShowPassword;
@@ -53,7 +53,7 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
     }
 
     private void PhanQuyenKhiNhapDangKy() {
-        if(ViewLogin.currentUserAccount!= null){
+        if(ViewAccountLogin.currentUserAccount!= null){
 
         }
     }
@@ -138,12 +138,12 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
 
             UserAccount user = new UserAccount(tentaikhoan, matkhau, ngayhethan, capdotaikhoan, email, true);
             if (dbUserAccount.ThemDL(user)) {
-                Toast.makeText(ViewDangKyTaiKhoan.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewAccountRegister.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
                 int color = ContextCompat.getColor(getApplicationContext(), R.color.greenPrimary);
                 tvMessageStatus.setTextColor(color);
                 tvMessageStatus.setText("Đăng ký thành công!");
             } else {
-                Toast.makeText(ViewDangKyTaiKhoan.this, "Dang ky khong thanh cong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewAccountRegister.this, "Dang ky khong thanh cong", Toast.LENGTH_SHORT).show();
                 int color = ContextCompat.getColor(getApplicationContext(), R.color.danger);
                 tvMessageStatus.setTextColor(color);
                 tvMessageStatus.setText("Đăng ký không thành công!");
@@ -178,7 +178,7 @@ public class ViewDangKyTaiKhoan extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewDangKyTaiKhoan.this);
+        dbUserAccount = new DBUserAccount(ViewAccountRegister.this);
 
         today = LocalDate.now();
         oneMonthLater = today.plusMonths(1);

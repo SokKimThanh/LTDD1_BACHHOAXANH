@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import tdc.edu.danhsachsp.R;
 
-public class ViewQuenMatKhau extends AppCompatActivity {
+public class ViewAccountForgotten extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

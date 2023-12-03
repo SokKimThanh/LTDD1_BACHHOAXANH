@@ -23,7 +23,7 @@ import java.util.List;
 import tdc.edu.danhsachsp.R;
 import tdc.edu.navigation.ViewNavigation;
 
-public class ViewLogin extends AppCompatActivity {
+public class ViewAccountLogin extends AppCompatActivity {
 
     ImageView btnDangNhap, btnShowPassword;
     EditText edtUserName, edtPassword, edtCapDoTaiKhoan;
@@ -74,7 +74,7 @@ public class ViewLogin extends AppCompatActivity {
     }
 
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewLogin.this);
+        dbUserAccount = new DBUserAccount(ViewAccountLogin.this);
         userAccounts.clear();
         userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
     }
@@ -139,8 +139,8 @@ public class ViewLogin extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewLogin sang ViewNavigation
-                    Intent intent = new Intent(ViewLogin.this, ViewNavigation.class);
+                    // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewAccountLogin sang ViewNavigation
+                    Intent intent = new Intent(ViewAccountLogin.this, ViewNavigation.class);
                     startActivity(intent);
                     finish();  // Đóng Activity hiện tại
                 }
@@ -195,12 +195,12 @@ public class ViewLogin extends AppCompatActivity {
     }
 
     private void DangKy() {
-        Intent intent = new Intent(ViewLogin.this, ViewDangKyTaiKhoan.class);
+        Intent intent = new Intent(ViewAccountLogin.this, ViewAccountRegister.class);
         startActivity(intent);
     }
 
     private void QuenMatKhau() {
-        Intent intent = new Intent(ViewLogin.this, ViewQuenMatKhau.class);
+        Intent intent = new Intent(ViewAccountLogin.this, ViewAccountForgotten.class);
         startActivity(intent);
     }
 

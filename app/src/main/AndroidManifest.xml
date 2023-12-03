@@ -13,16 +13,16 @@
         android:theme="@style/Theme.DANHSACHSP"
         tools:targetApi="31">
         <activity
-            android:name="tdc.edu.login.ViewQuanLyHoSoList"
+            android:name="tdc.edu.login.ViewAccountSearch"
             android:exported="false" />
         <activity
-            android:name="tdc.edu.login.ViewQuenMatKhau"
+            android:name="tdc.edu.login.ViewAccountForgotten"
             android:exported="false" />
         <activity
-            android:name="tdc.edu.login.ViewDangKyTaiKhoan"
+            android:name="tdc.edu.login.ViewAccountRegister"
             android:exported="false" />
         <activity
-            android:name="tdc.edu.login.ViewLogin"
+            android:name="tdc.edu.login.ViewAccountLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

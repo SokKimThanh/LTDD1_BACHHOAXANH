@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import tdc.edu.danhsachsp.R;
 
-public class ViewQuanLyHoSoList extends AppCompatActivity {
+public class ViewAccountSearch extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

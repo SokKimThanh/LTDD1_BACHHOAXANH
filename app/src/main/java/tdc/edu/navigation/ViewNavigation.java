@@ -33,8 +33,8 @@ import tdc.edu.danhsachsp.R;
 import tdc.edu.danhsachsp.ViewSanPhamList;
 import tdc.edu.login.AccountLevel;
 import tdc.edu.login.UserAccount;
-import tdc.edu.login.ViewLogin;
-import tdc.edu.login.ViewQuanLyHoSoList;
+import tdc.edu.login.ViewAccountLogin;
+import tdc.edu.login.ViewAccountSearch;
 
 public class ViewNavigation extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -94,7 +94,7 @@ public class ViewNavigation extends AppCompatActivity {
         mnExit.setVisible(true);
         mnLogout.setVisible(true);
 
-        if (currentUserAccount == null || ViewLogin.currentUserAccount == null) {
+        if (currentUserAccount == null || ViewAccountLogin.currentUserAccount == null) {
             redirectToLoginAfterDelay(1000);
             return true;
         }
@@ -158,8 +158,8 @@ public class ViewNavigation extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Nếu lỗi, tạo một Intent để chuyển từ ViewNavigation sang ViewLogin
-                Intent intent = new Intent(ViewNavigation.this, ViewLogin.class);
+                // Nếu lỗi, tạo một Intent để chuyển từ ViewNavigation sang ViewAccountLogin
+                Intent intent = new Intent(ViewNavigation.this, ViewAccountLogin.class);
                 startActivity(intent);
             }
         }, delayMillis); // Độ trễ là 1 giây
@@ -206,12 +206,12 @@ public class ViewNavigation extends AppCompatActivity {
                     }
                     // Đăng nhập
                     if (item.getItemId() == id.mnLogout) {
-                        Intent intent = new Intent(ViewNavigation.this, ViewLogin.class);
+                        Intent intent = new Intent(ViewNavigation.this, ViewAccountLogin.class);
                         startActivity(intent);
                     }
                     // Quản lý hồ sơ
                     if (item.getItemId() == id.mnQuanLyHoSo) {
-                        Intent intent = new Intent(ViewNavigation.this, ViewQuanLyHoSoList.class);
+                        Intent intent = new Intent(ViewNavigation.this, ViewAccountSearch.class);
                         startActivity(intent);
                     }
                     // Thoát ứng dụng
@@ -284,7 +284,7 @@ public class ViewNavigation extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(ViewNavigation.this, ViewQuanLyHoSoList.class);
+                    Intent intent = new Intent(ViewNavigation.this, ViewAccountSearch.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 }
@@ -294,7 +294,7 @@ public class ViewNavigation extends AppCompatActivity {
 
     private void KhoiTao() {
         // khởi tạo tài khoản đăng nhập thành công;
-        currentUserAccount = ViewLogin.currentUserAccount;
+        currentUserAccount = ViewAccountLogin.currentUserAccount;
 
         // khởi tạo menu navigation;
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, string.app_name, string.app_name);

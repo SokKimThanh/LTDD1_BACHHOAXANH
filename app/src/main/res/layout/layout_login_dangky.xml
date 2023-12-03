@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="tdc.edu.login.ViewDangKyTaiKhoan">
+    tools:context="tdc.edu.login.ViewAccountRegister">
 
     <ImageView
         android:id="@+id/logoapp"

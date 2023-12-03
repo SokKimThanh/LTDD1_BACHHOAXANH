@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tdc.edu.login.ViewQuanLyHoSoList">
+    android:orientation="vertical"
+    tools:context="tdc.edu.login.ViewAccountLogin">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greenPrimary"
+        android:gravity="center"
+        android:padding="8sp"
+        android:text="Danh sách tài khoản"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/lvDanhSachDM"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
