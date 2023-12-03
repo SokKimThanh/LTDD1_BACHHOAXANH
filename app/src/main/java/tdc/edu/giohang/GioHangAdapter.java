@@ -75,12 +75,12 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         ivDecrease.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
             this.listener.onDecreaseCartItemClicked(hangHoa);
-            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity()+"");
+            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)+"");
         });
         ivIncrease.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
             this.listener.onIncreaseCartItemClicked(hangHoa);
-            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity()+"");
+            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)+"");
         });
 
 

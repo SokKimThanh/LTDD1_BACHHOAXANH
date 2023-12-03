@@ -166,6 +166,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onIncreaseCartItemClicked(HangHoa hangHoa) {
         ViewProtypeProductSearch.gioHang.increaseQuantity(hangHoa);
@@ -176,6 +177,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
         ViewProtypeProductSearch.tvCartCounting.setText(String.valueOf(ViewProtypeProductSearch.gioHang.getQuantity()));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onDecreaseCartItemClicked(HangHoa hangHoa) {
 
