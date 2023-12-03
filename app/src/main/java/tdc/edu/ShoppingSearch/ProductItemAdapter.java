@@ -80,12 +80,7 @@ public class ProductItemAdapter extends ArrayAdapter {
             ivProduct.setImageResource(R.drawable.img_sua);
         }
 
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onAddToCartClicked(hangHoa);
-            }
-        });
+        btnAddToCart.setOnClickListener(v -> listener.onAddToCartClicked(hangHoa));
 
         // Return the completed view to render on screen
         // hien thi toan bo du lieu len view hop le

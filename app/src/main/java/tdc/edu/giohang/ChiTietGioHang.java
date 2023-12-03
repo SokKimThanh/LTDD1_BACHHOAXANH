@@ -1,16 +1,12 @@
 package tdc.edu.giohang;
 
-import java.util.List;
-
-import tdc.edu.danhsachsp.HangHoa;
-
-public class ChiTietGioHang extends GioHang{
-private String tenDH;
-private String dataHangHoa;
-private  int ngay;
-private  int thang;
-private  int nam;
-private  int tongTien;
+public class ChiTietGioHang extends GioHang {
+    private String tenDH;
+    private String dataHangHoa;
+    private int ngay;
+    private int thang;
+    private int nam;
+    private int tongTien;
 
     @Override
     public String toString() {
@@ -83,7 +79,6 @@ private  int tongTien;
         this.nam = nam;
         this.tongTien = tongTien;
     }
-
 
 
 }

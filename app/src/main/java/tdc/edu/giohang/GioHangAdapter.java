@@ -4,27 +4,42 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
+import tdc.edu.ShoppingSearch.OnDeleteFromCartClickListener;
 import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
 public class GioHangAdapter extends ArrayAdapter<HangHoa> {
+    // Khai báo interface
+    private OnDeleteFromCartClickListener listener;//Triển khai interface để bắt sự kiện của adapter con từ lớp cha
 
-    public GioHangAdapter(Context context, List<HangHoa> cartItems) {
-        super(context, 0, cartItems);
+    Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
+
+    int resource;//id cua control
+
+    List<HangHoa> hangHoaList;
+
+    public GioHangAdapter(Context context, int resource, List<HangHoa> hangHoaList, OnDeleteFromCartClickListener listener) {
+        super(context, 0, hangHoaList);
+        this.context = context;
+        this.resource = resource;
+        this.hangHoaList = hangHoaList;
+        this.listener = listener;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Lấy dữ liệu item cho vị trí này
-        HangHoa hangHoa = getItem(position);
+        // Khởi tạo giá hàng hóa khi getView
+        HangHoa hangHoa = hangHoaList.get(position);
+
         // Kiểm tra xem một view đã tồn tại chưa, nếu không thì inflate
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_giohang_item, parent, false);
@@ -38,6 +53,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         ImageView ivProduct = convertView.findViewById(R.id.ivProductCartItem);
         ImageView ivDecrease = convertView.findViewById(R.id.ivDecreaseQuantity);
         ImageView ivIncrease = convertView.findViewById(R.id.ivIncreaseQuantity);
+        ImageView btnXoaSanPhamGioHang = convertView.findViewById(R.id.btnXoaSanPhamGioHang);
 
         // Điền dữ liệu vào các view
         tvName.setText(hangHoa.getTenSp());
@@ -56,37 +72,21 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
             ivProduct.setImageResource(R.drawable.img_sua);
         }
 
-        ivDecrease.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                if (Integer.parseInt(tvQuantity.getText().toString()) > 1) {
-                    int tg = Integer.parseInt(tvQuantity.getText().toString()) - 1;
-                    tvQuantity.setText(tg + "");
-                    hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
-                    hangHoa.setSlban(hangHoa.getSlban() + 1);
-                    ViewGioHangList.tvTongThanhTien.setText((ttt - hangHoa.getGiaSp()) + "");
-                } else {
-                    Toast.makeText(getContext(), "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
-                }
-
-            }
+        ivDecrease.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            this.listener.onDecreaseCartItemClicked(hangHoa);
+            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity()+"");
         });
-        ivIncrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.parseInt(tvQuantity.getText().toString()) >= hangHoa.getSoLuongTonKho()) {
-                    Toast.makeText(getContext(), "Số lượng không thể lớn hơn sl tồn kho", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                int quantity = Integer.parseInt(tvQuantity.getText().toString());
-                double ttt = Double.parseDouble(ViewGioHangList.tvTongThanhTien.getText().toString());
-                int tt = quantity + 1;
-                tvQuantity.setText(tt + "");
-                hangHoa.setSlban(hangHoa.getSoLuongTonKho() - 1);
-                ViewGioHangList.tvTongThanhTien.setText((ttt + hangHoa.getGiaSp()) + "");
-            }
+        ivIncrease.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            this.listener.onIncreaseCartItemClicked(hangHoa);
+            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity()+"");
+        });
+
+
+        btnXoaSanPhamGioHang.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
+            this.listener.onDeleteCartItemClicked(hangHoa);
         });
         // Trả về view hoàn thiện để hiển thị trên màn hình
         return convertView;

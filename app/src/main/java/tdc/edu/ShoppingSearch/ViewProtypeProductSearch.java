@@ -75,7 +75,17 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     String radioSearchByText;
 
-
+    /**
+     * TextView tvCartCounting
+     */
+    public static TextView tvCartCounting;
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,9 +145,9 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
             // Xử lý sự kiện khi nhấn nút tìm kiếm
             if (radioSearchByText.equals("Loại sản phẩm")) {
                 if (Objects.isNull(danhMucSelector)) {
-                    if(listDanhMuc.size()>0){
+                    if (listDanhMuc.size() > 0) {
                         Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Toast.makeText(this, "Db không có loại sản phẩm nào", Toast.LENGTH_SHORT).show();
                     }
                     return;
@@ -226,8 +236,6 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
                         // đủ số lượng cung cấp
                         // Nếu người dùng chọn có, tăng số lượng sản phẩm trong giỏ hàng
                         gioHang.increaseQuantity(hangHoa);
-                        // Giảm số lượng tồn kho
-                        hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
                         // Cập nhật biểu tượng giỏ hàng
                         updateCartIcon(customMenu);
                         // Thông báo cho người dùng
@@ -262,6 +270,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
             }
         }
     }
+
 
     /**
      * Hiển thị danh sách loại sản phẩm từ database
@@ -369,7 +378,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         MenuItem item = customMenu.findItem(R.id.cart_menu_icon);
         MenuItemCompat.setActionView(item, R.layout.layout_quantity_shopping_cart);
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
-        TextView tvCartCounting = notifCount.findViewById(R.id.textview_cart_badge);
+        tvCartCounting = notifCount.findViewById(R.id.textview_cart_badge);
         tvCartCounting.setText(String.valueOf(gioHang.getQuantity()));
 
         tvCartCounting.setOnClickListener(v ->
