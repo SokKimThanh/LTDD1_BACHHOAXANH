@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
-
+<!--tendangnhap-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
 
         </FrameLayout>
-
+<!--mat khau-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,17 +88,34 @@
                 android:src="@drawable/icon_showpassword"
                 tools:ignore="ContentDescription,RtlHardcoded" />
         </FrameLayout>
-
-        <EditText
-            android:id="@+id/edtEmail"
+<!--email-->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="username"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/mail"
+                tools:ignore="HardcodedText,RtlSymmetry" />
 
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Tên đăng nhập"
+                android:inputType="text"
+                android:paddingLeft="64dp"
+                android:textSize="16sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,VisualLintTextFieldSize" />
+
+        </FrameLayout>
         <!--        cap do tai khoan-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,7 +146,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_weight="1"
-                    android:text="Admin"
+                    android:text="Quản lý"
                     android:textSize="16sp" />
 
                 <RadioButton
@@ -138,7 +155,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_weight="1"
-                    android:text="User"
+                    android:text="Khách hàng"
                     android:textSize="16sp" />
 
                 <RadioButton
@@ -147,7 +164,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_weight="1"
-                    android:text="Guest"
+                    android:text="Nhân viên"
                     android:textSize="16sp" />
 
             </RadioGroup>

@@ -29,11 +29,11 @@ public class ViewAccountSearch extends AppCompatActivity {
     ListView listViewDSTaiKhoan;
 
     // List data account
-    List<UserAccount> userAccounts = new ArrayList<>();
+    List<Account> accounts = new ArrayList<>();
     // Database account
-    DBUserAccount dbUserAccount;
+    DBAccount dbUserAccount;
     // Account item Adapter
-    AccountListAdapter accountListAdapter;
+    AccountAdapter accountListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +50,21 @@ public class ViewAccountSearch extends AppCompatActivity {
      */
     private void ClickEventShowRadioGroupLevelAccount() {
         rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
-            userAccounts.clear();
+            accounts.clear();
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (checkedId == rbAdmin.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
             } else if (checkedId == rbUser.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
             } else if (checkedId == rbGuest.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.GUEST.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
             }
         });
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
-            userAccounts.clear();
+            accounts.clear();
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (rbLoaiTK.isChecked()) {
                 // Hiện khi RadioButton được nhấn
@@ -100,8 +100,8 @@ public class ViewAccountSearch extends AppCompatActivity {
         } else if (rbGuest.isChecked()) {
             i = 2;// guest
         }
-        userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i));
-        accountListAdapter = new AccountListAdapter(this, R.layout.layout_login_item, userAccounts);
+        accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i));
+        accountListAdapter = new AccountAdapter(this, R.layout.layout_login_item, accounts);
         // hien thi len listview
         listViewDSTaiKhoan.setAdapter(accountListAdapter);
         accountListAdapter.notifyDataSetChanged();
@@ -121,30 +121,30 @@ public class ViewAccountSearch extends AppCompatActivity {
             //public class SanPham implements Serializable {
             // các trường và phương thức của bạn ở đây
             // }
-            intent.putExtra("item", userAccounts.get(position));
+            intent.putExtra("item", accounts.get(position));
             startActivity(intent);
         });
         //su kien long click de xoa item
         listViewDSTaiKhoan.setOnItemLongClickListener((parent, view, position, id) -> {
-            UserAccount o = userAccounts.get(position);
+            Account o = accounts.get(position);
             dbUserAccount.XoaDL(String.valueOf(o.getMataikhoan()));
-            userAccounts.remove(position);
+            accounts.remove(position);
             Toast.makeText(ViewAccountSearch.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
             return false;
         });
     }
 
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewAccountSearch.this);
-        userAccounts.clear();
+        dbUserAccount = new DBAccount(ViewAccountSearch.this);
+        accounts.clear();
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbUserAccount.DocDL().size() <= 0) {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
-        userAccounts.addAll(dbUserAccount.DocDL());
+        accounts.addAll(dbUserAccount.DocDL());
         // gan san pham bang menu item layout(gan template item)
-        accountListAdapter = new AccountListAdapter(this, R.layout.layout_login_item, userAccounts);
+        accountListAdapter = new AccountAdapter(this, R.layout.layout_login_item, accounts);
         // hien thi len listview
         listViewDSTaiKhoan.setAdapter(accountListAdapter);
         accountListAdapter.notifyDataSetChanged();

@@ -95,7 +95,14 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rbAdmin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
 
+                        android:layout_weight="1"
+                        android:text="Quản lý"
+                        android:textSize="16sp" />
                     <RadioButton
                         android:id="@+id/rbUser"
                         android:layout_width="0dp"
@@ -105,21 +112,14 @@
                         android:text="Khách hàng"
                         android:textSize="16sp" />
 
-                    <RadioButton
-                        android:id="@+id/rbAdmin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
 
-                        android:layout_weight="1"
-                        android:text="Quản lý"
-                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/rbGuest"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Khách thường"
+                        android:text="Nhân viên"
                         android:textSize="16sp" />
 
                 </RadioGroup>

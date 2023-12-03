@@ -1,9 +1,8 @@
 package tdc.edu.login;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class UserAccount implements Serializable {
+public class Account implements Serializable {
 
 
     private int mataikhoan = 0;
@@ -14,11 +13,11 @@ public class UserAccount implements Serializable {
     private String email;
     private boolean isEmailVerified;
 
-    public UserAccount() {
+    public Account() {
     }
 
 
-    public UserAccount(String tentaikhoan, String matkhau, String ngayhethantruycap, int capdotaikhoan, String email, boolean isEmailVerified) {
+    public Account(String tentaikhoan, String matkhau, String ngayhethantruycap, int capdotaikhoan, String email, boolean isEmailVerified) {
         this.mataikhoan++;
         this.tentaikhoan = tentaikhoan;
         this.matkhau = matkhau;

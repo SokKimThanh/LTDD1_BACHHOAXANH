@@ -17,7 +17,7 @@
             android:layout_height="100dp"
             android:layout_margin="4dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/logo_vend" />
 
 
         <!-- Auto layout, variables, and unit scale are not yet supported -->

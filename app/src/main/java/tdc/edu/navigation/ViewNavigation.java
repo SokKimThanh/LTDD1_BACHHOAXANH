@@ -31,8 +31,8 @@ import tdc.edu.danhsachdh.DS_DonHang;
 import tdc.edu.danhsachdm.ViewDanhMucList;
 import tdc.edu.danhsachsp.R;
 import tdc.edu.danhsachsp.ViewSanPhamList;
+import tdc.edu.login.Account;
 import tdc.edu.login.AccountLevel;
-import tdc.edu.login.UserAccount;
 import tdc.edu.login.ViewAccountLogin;
 import tdc.edu.login.ViewAccountSearch;
 
@@ -44,7 +44,7 @@ public class ViewNavigation extends AppCompatActivity {
 
     ImageView btnTimKiemSanPham, btnHoaDon, btnBaoCao, btnBaiVietTinTucSanPham, btnQuanLyHoSo;
 
-    UserAccount currentUserAccount;
+    Account currentAccount;
 
 
     MenuItem mnDanhSachDanhMuc, mnDanhSachSanPham, mnHoaDon, mnSearchSanPham, mnExit, mnBaiVietTinTucSP, mnLogout, mnQuanLyHoSo;
@@ -94,16 +94,16 @@ public class ViewNavigation extends AppCompatActivity {
         mnExit.setVisible(true);
         mnLogout.setVisible(true);
 
-        if (currentUserAccount == null || ViewAccountLogin.currentUserAccount == null) {
+        if (currentAccount == null || ViewAccountLogin.currentAccount == null) {
             redirectToLoginAfterDelay(1000);
             return true;
         }
         final int admin = AccountLevel.ADMIN.getLevelCode();
-        final int user = AccountLevel.USER.getLevelCode();
-        final int guest = AccountLevel.GUEST.getLevelCode();
+        final int user = AccountLevel.CUSTOMER.getLevelCode();
+        final int customer = AccountLevel.EMPLOYEE.getLevelCode();
 
         // Kiểm tra quyền của người dùng
-        int capDoTaiKhoan = currentUserAccount.getCapdotaikhoan();
+        int capDoTaiKhoan = currentAccount.getCapdotaikhoan();
         if (capDoTaiKhoan == admin) {
             // Hiện tất cả các mục menu và nút cho admin
             showAllMenuItems(menuNav);
@@ -114,8 +114,8 @@ public class ViewNavigation extends AppCompatActivity {
             mnBaiVietTinTucSP.setVisible(true);
             btnTimKiemSanPham.setVisibility(View.VISIBLE);
             btnBaiVietTinTucSanPham.setVisibility(View.VISIBLE);
-        } else if (capDoTaiKhoan == guest) {
-            // Không hiện mục menu hoặc nút nào cho khách, ngoại trừ mục menu Exit, tin tuc bai viet, dang xuat
+        } else if (capDoTaiKhoan == customer) {
+            // Không hiện mục menu hoặc nút nào cho nhân viên, ngoại trừ mục menu Exit, tin tuc bai viet, dang xuat
             mnBaiVietTinTucSP.setVisible(true);
             btnBaiVietTinTucSanPham.setVisibility(View.VISIBLE);
         }
@@ -294,7 +294,7 @@ public class ViewNavigation extends AppCompatActivity {
 
     private void KhoiTao() {
         // khởi tạo tài khoản đăng nhập thành công;
-        currentUserAccount = ViewAccountLogin.currentUserAccount;
+        currentAccount = ViewAccountLogin.currentAccount;
 
         // khởi tạo menu navigation;
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, string.app_name, string.app_name);

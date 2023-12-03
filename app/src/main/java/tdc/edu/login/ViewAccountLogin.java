@@ -28,13 +28,13 @@ public class ViewAccountLogin extends AppCompatActivity {
     ImageView btnDangNhap, btnShowPassword;
     EditText edtUserName, edtPassword, edtCapDoTaiKhoan;
     TextView tvMessageStatus, tvDangKy, tvQuenMatKhau;
-    DBUserAccount dbUserAccount;
+    DBAccount dbUserAccount;
 
-    List<UserAccount> userAccounts = new ArrayList<>();
+    List<Account> accounts = new ArrayList<>();
 
     RadioGroup rgCapDoTaiKhoan;
     RadioButton rbAdmin, rbUser, rbGuest;
-    public static UserAccount currentUserAccount = null;
+    public static Account currentAccount = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +52,31 @@ public class ViewAccountLogin extends AppCompatActivity {
 
     private void ClickEventLevelAccount() {
         rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
-            userAccounts.clear();
+            accounts.clear();
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (checkedId == rbAdmin.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
             } else if (checkedId == rbUser.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
             } else if (checkedId == rbGuest.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.GUEST.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
             } else {
                 rgCapDoTaiKhoan.clearCheck();
                 rbAdmin.setChecked(true);
                 rbUser.setChecked(false);
                 rbGuest.setChecked(false);
-                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
             }
         });
     }
 
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewAccountLogin.this);
-        userAccounts.clear();
-        userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+        dbUserAccount = new DBAccount(ViewAccountLogin.this);
+        accounts.clear();
+        accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
     }
 
     boolean isChecked = true;//tắt mật khẩu
@@ -119,10 +119,10 @@ public class ViewAccountLogin extends AppCompatActivity {
 
 
         // check thông tin
-        for (UserAccount user : userAccounts) {
+        for (Account user : accounts) {
             if (user.getTentaikhoan().equals(usernameToCheck)) {
                 if (user.getMatkhau().equals(passwordToCheck)) {
-                    currentUserAccount = user;// tìm thấy thông tin
+                    currentAccount = user;// tìm thấy thông tin
                     isExist = true;
                     break;
                 }

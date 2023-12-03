@@ -32,7 +32,7 @@ public class ViewAccountRegister extends AppCompatActivity {
     ImageView btnDangKy, btnShowPassword;
 
     TextView tvMessageStatus;
-    DBUserAccount dbUserAccount;
+    DBAccount dbUserAccount;
     RadioGroup rgCapDoTaiKhoan, rgNgayHetHan;
     RadioButton rbAdmin, rbUser, rbGuest;
     RadioButton rb1Thang, rb6Thang, rb1Nam;
@@ -53,7 +53,7 @@ public class ViewAccountRegister extends AppCompatActivity {
     }
 
     private void PhanQuyenKhiNhapDangKy() {
-        if (ViewAccountLogin.currentUserAccount != null) {
+        if (ViewAccountLogin.currentAccount != null) {
 
         }
     }
@@ -127,7 +127,7 @@ public class ViewAccountRegister extends AppCompatActivity {
             String ngayhethan = edtNgayHetHanTaiKhoan.getText().toString();
             String email = edtEmail.getText().toString();
 
-            UserAccount user = new UserAccount(tentaikhoan, matkhau, ngayhethan, capdotaikhoan, email, true);
+            Account user = new Account(tentaikhoan, matkhau, ngayhethan, capdotaikhoan, email, true);
             try {
                 if (dbUserAccount.ThemDL(user)) {
                     Toast.makeText(ViewAccountRegister.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
@@ -192,7 +192,7 @@ public class ViewAccountRegister extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewAccountRegister.this);
+        dbUserAccount = new DBAccount(ViewAccountRegister.this);
         Date d = new Date();
         String ngayGiaHan = DateFormat.format("dd/MM/yyyy", d.getTime()).toString();
         String[] dataGH = ngayGiaHan.split("/");

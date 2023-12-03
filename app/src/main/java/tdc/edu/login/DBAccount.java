@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DBUserAccount extends SQLiteOpenHelper {
-    public DBUserAccount(@Nullable Context context) {
+public class DBAccount extends SQLiteOpenHelper {
+    public DBAccount(@Nullable Context context) {
 
-        super(context, "DBUserAccount", null, 1);
+        super(context, "DBAccount", null, 1);
     }
 
     @Override
@@ -25,22 +25,22 @@ public class DBUserAccount extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
-    public boolean ThemDL(UserAccount userAccount) {
+    public boolean ThemDL(Account account) {
         boolean flag = false;
-        if (userAccount != null) {
+        if (account != null) {
 
             try {
                 SQLiteDatabase db = getWritableDatabase();
                 String sql = "INSERT INTO UserAccount(tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified) VALUES(?,?,?,?,?,?)";
 
-                String tentaikhoan = userAccount.getTentaikhoan();
-                String matkhau = userAccount.getMatkhau();
-                String ngayhethantruycap = String.valueOf(userAccount.getNgayhethantruycap());
-                String capdotaikhoan = String.valueOf(userAccount.getCapdotaikhoan());
-                String email = userAccount.getEmail();
+                String tentaikhoan = account.getTentaikhoan();
+                String matkhau = account.getMatkhau();
+                String ngayhethantruycap = String.valueOf(account.getNgayhethantruycap());
+                String capdotaikhoan = String.valueOf(account.getCapdotaikhoan());
+                String email = account.getEmail();
 
                 // Chuyển boolean thành int, sau đó chuyển int thành String
-                String isEmailVerified = String.valueOf(userAccount.isEmailVerified() ? 1 : 0);
+                String isEmailVerified = String.valueOf(account.isEmailVerified() ? 1 : 0);
 
                 db.execSQL(sql, new String[]{tentaikhoan, matkhau, ngayhethantruycap, capdotaikhoan, email, isEmailVerified});
                 db.close();
@@ -64,14 +64,14 @@ public class DBUserAccount extends SQLiteOpenHelper {
     }
 
 
-    public List<UserAccount> DocDL() {
-        List<UserAccount> userAccounts = new ArrayList<>();
+    public List<Account> DocDL() {
+        List<Account> accounts = new ArrayList<>();
         String sql = "Select * from UserAccount";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                UserAccount userAccount = new UserAccount();
+                Account account = new Account();
                 // Lấy chỉ số của cột "your_column"
                 int i0 = cursor.getColumnIndex("mataikhoan");
                 int i1 = cursor.getColumnIndex("tentaikhoan");
@@ -91,32 +91,32 @@ public class DBUserAccount extends SQLiteOpenHelper {
                 boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
 
                 // set du lieu cho user account
-                userAccount.setMataikhoan(mataikhoan);
-                userAccount.setTentaikhoan(tentaikhoan);
-                userAccount.setMatkhau(matkhau);
-                userAccount.setNgayhethantruycap(ngayhethantruycap);
-                userAccount.setCapdotaikhoan(capdotaikhoan);
-                userAccount.setEmail(email);
-                userAccount.setEmailVerified(isEmailValidation);
+                account.setMataikhoan(mataikhoan);
+                account.setTentaikhoan(tentaikhoan);
+                account.setMatkhau(matkhau);
+                account.setNgayhethantruycap(ngayhethantruycap);
+                account.setCapdotaikhoan(capdotaikhoan);
+                account.setEmail(email);
+                account.setEmailVerified(isEmailValidation);
 
-                userAccounts.add(userAccount);
+                accounts.add(account);
             } while (cursor.moveToNext());
             // In dữ liệu ra log
-            Log.d("BHX", "Data from UserAccount: " + userAccounts);
+            Log.d("BHX", "Data from Account: " + accounts);
         }
         cursor.close();
-        return userAccounts;
+        return accounts;
     }
 
-    public List<UserAccount> DocDLByCapDoTaiKhoan(int levelaccount) {
-        List<UserAccount> userAccounts = new ArrayList<>();
+    public List<Account> DocDLByCapDoTaiKhoan(int levelaccount) {
+        List<Account> accounts = new ArrayList<>();
         // get by cap do tai khoan
         String sql = "Select * from UserAccount where capdotaikhoan = ?";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(levelaccount)});
         if (cursor.moveToFirst()) {
             do {
-                UserAccount userAccount = new UserAccount();
+                Account account = new Account();
                 // Lấy chỉ số của cột "your_column"
                 int i0 = cursor.getColumnIndex("mataikhoan");
                 int i1 = cursor.getColumnIndex("tentaikhoan");
@@ -136,21 +136,21 @@ public class DBUserAccount extends SQLiteOpenHelper {
                 boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
 
                 // set du lieu cho user account
-                userAccount.setMataikhoan(mataikhoan);
-                userAccount.setTentaikhoan(tentaikhoan);
-                userAccount.setMatkhau(matkhau);
-                userAccount.setNgayhethantruycap(ngayhethantruycap);
-                userAccount.setCapdotaikhoan(capdotaikhoan);
-                userAccount.setEmail(email);
-                userAccount.setEmailVerified(isEmailValidation);
+                account.setMataikhoan(mataikhoan);
+                account.setTentaikhoan(tentaikhoan);
+                account.setMatkhau(matkhau);
+                account.setNgayhethantruycap(ngayhethantruycap);
+                account.setCapdotaikhoan(capdotaikhoan);
+                account.setEmail(email);
+                account.setEmailVerified(isEmailValidation);
 
-                userAccounts.add(userAccount);
+                accounts.add(account);
             } while (cursor.moveToNext());
             // In dữ liệu ra log
-            Log.d("BHX", "Data from UserAccount: " + userAccounts);
+            Log.d("BHX", "Data from Account: " + accounts);
         }
         cursor.close();
-        return userAccounts;
+        return accounts;
     }
 
     @Override

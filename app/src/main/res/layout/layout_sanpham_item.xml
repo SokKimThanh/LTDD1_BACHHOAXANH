@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:layout_margin="8sp">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_margin="4dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/logo_vend" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +24,8 @@
             android:id="@+id/tvTenSp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4sp"
             android:text="tensp"
-            android:textSize="30sp" />
+            android:textSize="16sp" />
         <!--số lượng sản phẩm-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SL"
-                android:textSize="30sp"
+                android:textSize="16sp"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10000"
-                android:textSize="30sp" />
+                android:textSize="16sp" />
         </LinearLayout>
         <!--giá sản phẩm-->
         <LinearLayout
@@ -57,14 +57,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giá"
-                android:textSize="30sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvGiaSp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10000"
-                android:textSize="30sp"
+                android:textSize="16sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>

@@ -15,25 +15,25 @@ import java.util.List;
 
 import tdc.edu.danhsachsp.R;
 
-public class AccountListAdapter extends ArrayAdapter<UserAccount> {
+public class AccountAdapter extends ArrayAdapter<Account> {
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
     int resource;//id cua control
 
-    List<UserAccount> userAccounts;//danh sách tài khoản
+    List<Account> accounts;//danh sách tài khoản
 
-    public AccountListAdapter(Context context, int resource, List<UserAccount> userAccounts) {
-        super(context, resource, userAccounts);
+    public AccountAdapter(Context context, int resource, List<Account> accounts) {
+        super(context, resource, accounts);
         this.context = context;
         this.resource = resource;
-        this.userAccounts = userAccounts;
+        this.accounts = accounts;
     }
 
     @NonNull
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // Khởi tạo giá hàng hóa khi getView
-        UserAccount userAccount = userAccounts.get(position);
+        Account account = accounts.get(position);
 
         // Inflate layout, get references to views, etc.
         if (convertView == null) {
@@ -50,19 +50,19 @@ public class AccountListAdapter extends ArrayAdapter<UserAccount> {
 
 
         // kiểm tra xem position có lớn hơn hoặc bằng kích thước của hangHoaList hay không, vì chỉ số của danh sách bắt đầu từ 0
-        if (position >= userAccounts.size()) {
+        if (position >= accounts.size()) {
             Toast.makeText(context, "Hết dữ liệu", Toast.LENGTH_SHORT).show();
             return convertView;
         }
 
 
         // Hiển thị thông tin
-        tvMaTK.setText(userAccount.getMataikhoan() + "");
-        tvTenTK.setText(userAccount.getTentaikhoan());
-        tvEmailTK.setText(userAccount.getEmail());
-        tvNgayHetHan.setText(userAccount.getNgayhethantruycap());
-        tvLoaiTK.setText(userAccount.getCapdotaikhoan() == AccountLevel.ADMIN.getLevelCode() ? "Quản lý" : userAccount.getCapdotaikhoan() == AccountLevel.USER.getLevelCode() ? "Khách hàng" : userAccount.getCapdotaikhoan() == AccountLevel.GUEST.getLevelCode() ? "Khách vãng lai" : "Unknow");
-        tvKichHoatEmail.setText(userAccount.isEmailVerified() == false ? "Chưa kích hoạt" : "Đã kích hoạt");
+        tvMaTK.setText(account.getMataikhoan() + "");
+        tvTenTK.setText(account.getTentaikhoan());
+        tvEmailTK.setText(account.getEmail());
+        tvNgayHetHan.setText(account.getNgayhethantruycap());
+        tvLoaiTK.setText(account.getCapdotaikhoan() == AccountLevel.ADMIN.getLevelCode() ? "Quản lý" : account.getCapdotaikhoan() == AccountLevel.CUSTOMER.getLevelCode() ? "Khách hàng" : account.getCapdotaikhoan() == AccountLevel.EMPLOYEE.getLevelCode() ? "Khách vãng lai" : "Unknow");
+        tvKichHoatEmail.setText(account.isEmailVerified() == false ? "Chưa kích hoạt" : "Đã kích hoạt");
 
 
         // Return the completed view to render on screen
