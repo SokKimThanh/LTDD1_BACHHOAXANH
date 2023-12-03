@@ -4,19 +4,28 @@ package tdc.edu.giohang;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
 import tdc.edu.danhsachsp.DBHangHoa;
@@ -26,7 +35,8 @@ import tdc.edu.danhsachsp.R;
 public class ViewGioHangList extends AppCompatActivity {
     // Khởi tạo adapter với danh sách GioHang
     GioHangAdapter adapter;
-
+Spinner spDay, spMonth, spYear;
+EditText edtNgayLapHoaDon;
 
     // Lấy danh sách hàng hóa từ giỏ hàng
     List<HangHoa> hangHoaList;
@@ -67,23 +77,37 @@ public class ViewGioHangList extends AppCompatActivity {
             btnThanhToan.setEnabled(true);
         }
         btnThanhToan.setOnClickListener(v -> {
-
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                 date = dateFormat.parse(edtNgayLapHoaDon.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             if (edttenDonHang.getText() != null) {
-                StringBuilder msg = new StringBuilder("                               " + day + "/" + month + "/" + year + "\n");
-                msg.append("\n                                  ").append(edttenDonHang.getText().toString()).append("\n\n");
+                ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
+                chiTietGioHang.setTenDH(edttenDonHang.getText().toString());
+                String msg = "";
                 for (int i = 0; i < hangHoaList.size(); i++) {
-
                     HangHoa hh = hangHoaList.get(i);
                     // cập nhật số lượng tồn kho
+
                     hh.setSoLuongTonKho(hh.getSoLuongTonKho() - hh.getSlban());
+
                     dbHangHoa.SuaDL(hh);
-                    // in thông tin mặt hàng
-                    msg.append("Tên sản phẩm: ").append(hh.getTenSp()).append("\n").append("Giá: ").append(hh.getGiaSp()).append("VND                        sl: ").append(hh.getSlban()).append("\n");
+                    msg+="Tên sp: "+ hangHoaList.get(i).getTenSp();
+                    msg+="\nĐơn giá: "+(int)hangHoaList.get(i).getGiaSp()+"........................................."+hangHoaList.get(i).getSlban()+"\n";
                 }
-                msg.append("\nTổng tiền: ").append(tvTongThanhTien.getText().toString()).append(" VND");
-                dbGioHang.ThemDL(edttenDonHang.getText().toString(), msg.toString(), tvTongThanhTien.toString());
+                chiTietGioHang.setDataHangHoa(msg);
+                chiTietGioHang.setNgay(date.getDate());
+                chiTietGioHang.setThang(date.getMonth()+1);
+                chiTietGioHang.setNam(date.getYear()+1900);
+                  chiTietGioHang.setTongTien((int) Double.parseDouble(tvTongThanhTien.getText().toString()));
+               dbGioHang.ThemDL(chiTietGioHang);
                 Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(ViewGioHangList.this, chiTietGioHang.toString(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -99,6 +123,11 @@ public class ViewGioHangList extends AppCompatActivity {
         // Khởi tạo adapter với danh sách GioHang
         adapter = new GioHangAdapter(this, hangHoaList);
         listView.setAdapter(adapter);
+        // Định dạng chuỗi ngày tháng năm
+
+
+
+
     }
 
     private void setControl() {
@@ -109,7 +138,7 @@ public class ViewGioHangList extends AppCompatActivity {
         // Cài đặt button thanh toán
         btnThanhToan = findViewById(R.id.btnThanhToan);
         edttenDonHang = findViewById(R.id.edtTenDonHang);
-
+        edtNgayLapHoaDon =  findViewById(R.id.edtNgayLapHoaDon);
     }
 
     /**

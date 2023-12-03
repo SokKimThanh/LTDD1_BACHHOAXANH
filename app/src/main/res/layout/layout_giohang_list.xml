@@ -23,7 +23,21 @@
         android:layout_marginVertical="5dp"
         android:hint="Nhập tên đơn hàng"
         android:paddingVertical="10dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:text="Ngày lập hóa đơn: "/>
+        <EditText
+            android:id="@+id/edtNgayLapHoaDon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="datetime"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/cartListView"

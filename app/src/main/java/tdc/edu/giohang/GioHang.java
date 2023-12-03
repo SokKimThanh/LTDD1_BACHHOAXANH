@@ -8,6 +8,7 @@ import java.util.Map;
 import tdc.edu.danhsachsp.HangHoa;
 
 public class GioHang {
+
     private HashMap<HangHoa, Integer> hangHoaMap;
 
     public GioHang() {
