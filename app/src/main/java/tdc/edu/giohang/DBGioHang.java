@@ -11,31 +11,33 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import tdc.edu.danhsachdm.DanhMuc;
+
 public class DBGioHang extends SQLiteOpenHelper {
 
     public DBGioHang(@Nullable Context context) {
-        super(context, "QLBach_HoaXanh", null, 1);
+        super(context, "QL_GioHang", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table Hoa_Don(maDH text,thongtin text,ngay text)";
+        String sql = "create table HoaDon(maDH text,thongtin text,gia text, Ngay text,Thang text,Nam text)";
         db.execSQL(sql);
     }
-    public void ThemDL(String maHD, String chuoi,String ngay) {
+    public void ThemDL(ChiTietGioHang chiTietGioHang) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO Hoa_Don VALUES(?,?,?)";
-        db.execSQL(sql, new String[]{maHD,chuoi,ngay});
+        String sql = "INSERT INTO HoaDon VALUES(?,?,?,?,?,?)";
+        db.execSQL(sql, new String[]{chiTietGioHang.getTenDH(),chiTietGioHang.getDataHangHoa(),chiTietGioHang.getNgay()+"", chiTietGioHang.getThang()+"",chiTietGioHang.getNam()+"",chiTietGioHang.getTongTien()+""});
         db.close();
     }
     public void XoaDL(String ma) {
-        String sql = "Delete from Hoa_Don where maDH = ?";
+        String sql = "Delete from HoaDon where maDH = ?";
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(sql, new String[]{ma});
     }
     public  List<String> TraCuu() {
         List<String> listHoaDon = new ArrayList<>();
-        String sql = "Select * from Hoa_Don";
+        String sql = "Select * from HoaDon";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
@@ -45,31 +47,30 @@ public class DBGioHang extends SQLiteOpenHelper {
         }
         return listHoaDon;
     }
-    public  List<String> TraCuu2() {
-        List<String> listHoaDon = new ArrayList<>();
-        String sql = "Select * from Hoa_Don";
+
+    public List<ChiTietGioHang> DocDL() {
+        List<ChiTietGioHang> chiTietGioHangs = new ArrayList<>();
+        String sql = "Select * from HoaDon";
+
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
+
+        // Kiểm tra xem con trỏ có dữ liệu không
         if (cursor.moveToFirst()) {
             do {
-                listHoaDon.add((String) cursor.getString(2).toString());
+                ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
+                chiTietGioHang.setTenDH(cursor.getString(0).toString());
+                chiTietGioHang.setDataHangHoa(cursor.getString(1).toString());
+                chiTietGioHang.setNgay(Integer.parseInt(cursor.getString(2).toString()));
+                chiTietGioHang.setThang(Integer.parseInt(cursor.getString(3).toString()));
+                chiTietGioHang.setNam(Integer.parseInt(cursor.getString(4).toString()));
+               chiTietGioHang.setTongTien(Integer.parseInt(cursor.getString(5).toString()));
+               // chiTietGioHang.setTongTien(2);
+
+                chiTietGioHangs.add(chiTietGioHang);
             } while (cursor.moveToNext());
         }
-        return listHoaDon;
-    }
-    public  List<String> DocDL() {
-        List<String> listHoaDon = new ArrayList<>();
-        String sql = "Select * from Hoa_Don";
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
-            do {
-                // listHoaDon.add((String) cursor.getString(0).toString());
-                listHoaDon.add((String) cursor.getString(1).toString());
-              //  listHoaDon.add((String) cursor.getString(2).toString());
-            } while (cursor.moveToNext());
-        }
-        return listHoaDon;
+        return chiTietGioHangs;
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

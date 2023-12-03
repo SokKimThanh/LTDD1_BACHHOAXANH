@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -17,8 +18,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -32,12 +36,7 @@ public class ViewGioHangList extends AppCompatActivity {
     // Khởi tạo adapter với danh sách GioHang
     GioHangAdapter adapter;
 Spinner spDay, spMonth, spYear;
-List<String> dataDay = new ArrayList<>();
-List<String> dataMonth = new ArrayList<>();
-List<String> dataYear = new ArrayList<>();
-Adapter adapterDay;
-Adapter adapterMonth;
-Adapter adapterYear;
+EditText edtNgayLapHoaDon;
 
     // Lấy danh sách hàng hóa từ giỏ hàng
     List<HangHoa> hangHoaList;
@@ -78,23 +77,37 @@ Adapter adapterYear;
             btnThanhToan.setEnabled(true);
         }
         btnThanhToan.setOnClickListener(v -> {
-
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                 date = dateFormat.parse(edtNgayLapHoaDon.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             if (edttenDonHang.getText() != null) {
-                StringBuilder msg = new StringBuilder("                               " + day + "/" + month + "/" + year + "\n");
-                msg.append("\n                                  ").append(edttenDonHang.getText().toString()).append("\n\n");
+                ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
+                chiTietGioHang.setTenDH(edttenDonHang.getText().toString());
+                String msg = "";
                 for (int i = 0; i < hangHoaList.size(); i++) {
-
                     HangHoa hh = hangHoaList.get(i);
                     // cập nhật số lượng tồn kho
+
                     hh.setSoLuongTonKho(hh.getSoLuongTonKho() - hh.getSlban());
+
                     dbHangHoa.SuaDL(hh);
-                    // in thông tin mặt hàng
-                    msg.append("Tên sản phẩm: ").append(hh.getTenSp()).append("\n").append("Giá: ").append(hh.getGiaSp()).append("VND                        sl: ").append(hh.getSlban()).append("\n");
+                    msg+="Tên sp: "+ hangHoaList.get(i).getTenSp();
+                    msg+="\nĐơn giá: "+(int)hangHoaList.get(i).getGiaSp()+"........................................."+hangHoaList.get(i).getSlban()+"\n";
                 }
-                msg.append("\nTổng tiền: ").append(tvTongThanhTien.getText().toString()).append(" VND");
-                dbGioHang.ThemDL(edttenDonHang.getText().toString(), msg.toString(), tvTongThanhTien.toString());
+                chiTietGioHang.setDataHangHoa(msg);
+                chiTietGioHang.setNgay(date.getDate());
+                chiTietGioHang.setThang(date.getMonth()+1);
+                chiTietGioHang.setNam(date.getYear()+1900);
+                  chiTietGioHang.setTongTien((int) Double.parseDouble(tvTongThanhTien.getText().toString()));
+               dbGioHang.ThemDL(chiTietGioHang);
                 Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(ViewGioHangList.this, chiTietGioHang.toString(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -110,38 +123,10 @@ Adapter adapterYear;
         // Khởi tạo adapter với danh sách GioHang
         adapter = new GioHangAdapter(this, hangHoaList);
         listView.setAdapter(adapter);
-       dataDay.add("1");
-       dataDay.add("2");
-       dataDay.add("3");
-       dataDay.add("4");
-       dataDay.add("5");
-       dataDay.add("6");
-       dataDay.add("7");
-       dataDay.add("8");
-       dataDay.add("9");
-       dataDay.add("10");
-       dataDay.add("11");
-       dataDay.add("12");
-       dataDay.add("13");
-       dataDay.add("14");
-       dataDay.add("15");
-       dataDay.add("16");
-       dataDay.add("17");
-       dataDay.add("18");
-       dataDay.add("19");
-       dataDay.add("20");
-       dataDay.add("21");
-       dataDay.add("22");
-       dataDay.add("23");
-       dataDay.add("24");
-       dataDay.add("25");
-       dataDay.add("26");
-       dataDay.add("27");
-       dataDay.add("28");
-       dataDay.add("29");
-       dataDay.add("30");
-       dataDay.add("31");
-       adapterDay = new ArrayAdapter<>(ViewGioHangList.this, android.R.layout.simple_spinner_item,dataDay);
+        // Định dạng chuỗi ngày tháng năm
+
+
+
 
     }
 
@@ -153,10 +138,7 @@ Adapter adapterYear;
         // Cài đặt button thanh toán
         btnThanhToan = findViewById(R.id.btnThanhToan);
         edttenDonHang = findViewById(R.id.edtTenDonHang);
-        spDay = findViewById(R.id.spDay);
-        spMonth = findViewById(R.id.spMonth);
-        spYear = findViewById(R.id.spYear);
-
+        edtNgayLapHoaDon =  findViewById(R.id.edtNgayLapHoaDon);
     }
 
     /**

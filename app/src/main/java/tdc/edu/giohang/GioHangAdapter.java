@@ -65,7 +65,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
                     int tg = Integer.parseInt(tvQuantity.getText().toString()) - 1;
                     tvQuantity.setText(tg + "");
                     hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
-                    hangHoa.setSlban(hangHoa.getSoLuongTonKho() + 1);
+                    hangHoa.setSlban(hangHoa.getSlban() + 1);
                     ViewGioHangList.tvTongThanhTien.setText((ttt - hangHoa.getGiaSp()) + "");
                 } else {
                     Toast.makeText(getContext(), "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
