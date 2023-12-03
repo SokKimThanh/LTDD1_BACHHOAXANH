@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tdc.edu.login.ViewAccountLogin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greenPrimary"
+        android:gravity="center"
+        android:padding="8sp"
+        android:text="Tìm kiếm tài khoản theo loại"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        tools:ignore="HardcodedText" />
+    <!--tim kiem-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_boder_primary_green"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <!--dieu kien tim kiem-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tìm theo"
+                android:paddingLeft="8sp"
+                android:textColorHint="@color/greenPrimary"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+            <!--Tìm kiếm theo tên, xem tất cả, lọc theo cấp độ tài khoản-->
+            <RadioGroup
+                android:id="@+id/rgSearchBy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbLoaiTK"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Loại tài khoản"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+                <RadioButton
+                    android:id="@+id/rbTenTK"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Tên tài khoản"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+                <RadioButton
+                    android:id="@+id/rbXemTatCa"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Xem tất cả"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
+            </RadioGroup>
+            <!--cấp độ tài khoản-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phân quyền theo"
+                    android:paddingLeft="8dp"
+                    android:textColorHint="@color/greenPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgCapDoTaiKhoan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbUser"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:text="Khách hàng"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbAdmin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:text="Quản lý"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbGuest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Khách thường"
+                        android:textSize="16sp" />
+
+                </RadioGroup>
+                <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
+                <EditText
+                    android:id="@+id/edtCapDoTaiKhoan"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:enabled="false"
+                    android:hint="Level Acc"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--keyword tim kiem-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtSearchKeyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:inputType="text"
+                android:textSize="20sp"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
+
+            <Button
+                android:id="@+id/btnTimKiem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:backgroundTint="@color/greenPrimary"
+                android:text="Tìm kiếm"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvDanhSachTaiKhoan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

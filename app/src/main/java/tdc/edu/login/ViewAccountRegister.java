@@ -45,7 +45,7 @@ public class ViewAccountRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_login_dangky);
+        setContentView(R.layout.layout_login_register);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
         PhanQuyenKhiNhapDangKy();
