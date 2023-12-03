@@ -9,10 +9,21 @@ import tdc.edu.danhsachsp.HangHoa;
 
 public class GioHang {
 
+    // class of member
     private HashMap<HangHoa, Integer> giohang;
 
+    //constructor
     public GioHang() {
         giohang = new HashMap<>();
+    }
+
+    //properties
+    public HashMap<HangHoa, Integer> getGiohang() {
+        return giohang;
+    }
+
+    public void setGiohang(HashMap<HangHoa, Integer> giohang) {
+        this.giohang = giohang;
     }
 
     /**
@@ -139,6 +150,14 @@ public class GioHang {
     public void clear() {
         // Xóa tất cả các sản phẩm khỏi giỏ hàng
         giohang.clear();
+    }
+
+    public void updateSoLuongTonKho(HangHoa hangHoa, int soLuongMoi) {
+        // Kiểm tra xem sản phẩm có trong giỏ hàng hay không
+        if (contains(hangHoa)) {
+            // Cập nhật số lượng tồn kho của sản phẩm
+            hangHoa.setSoLuongTonKho(soLuongMoi);
+        }
     }
 
 }
