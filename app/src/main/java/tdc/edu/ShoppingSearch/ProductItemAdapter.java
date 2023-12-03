@@ -69,7 +69,6 @@ public class ProductItemAdapter extends ArrayAdapter {
         tvGiaSPSearch.setText(String.valueOf(hangHoa.getGiaSp()));
         tvSoLuongSPSearch.setText(String.valueOf(hangHoa.getSoLuongTonKho()));
 
-
         // hien thi hinh`
         if (hangHoa.getLoaiSp().equals("dm001")) {
             ivProduct.setImageResource(R.drawable.img_thit);

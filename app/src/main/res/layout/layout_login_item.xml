@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8sp">
+
+
+<!-- Layout tài khoản item-->
+<!-- Sok Kim Thanh 03/12/2023 1:35PM -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<!--        mã tài khoản-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Mã tài khoản"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvMaTK"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Mã tai khoan"
+                android:textSize="16sp" />
+        </LinearLayout>
+<!--        tên tài khoản-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Tên tài khoản"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvTenSp"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Ten tai khoan"
+                android:textSize="16sp" />
+        </LinearLayout>
+<!--        email-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Email"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Email"
+                android:textSize="16sp" />
+        </LinearLayout>
+<!--        Thời gian hết hạn-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Ngày gia hạn"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvNgayHetHan"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Ngày hết hạn tai khoan"
+                android:textSize="16sp" />
+        </LinearLayout>
+<!--Loại tài khoản-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Loại tài khoản"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvLoaiTK"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Loai tai khoan"
+                android:textSize="16sp" />
+        </LinearLayout>
+<!--Kích hoạt email-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:hint="Email kích hoạt"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvKichHoatEmail"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:text="Đã kích hoạt"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
