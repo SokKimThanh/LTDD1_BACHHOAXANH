@@ -39,7 +39,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
-    RadioButton radMaLoaiSP, radTenSP, radSearchBy;
+    RadioButton radMaLoaiSP, radTenSP, radAllSanPham, radSearchBy;
     RadioGroup rgSearchBy;
     Button btnTimKiem, btnAddToCartViewHolder;
 
@@ -92,25 +92,27 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
     private void setEvent() {
         KhoiTao();
         // kiểm tra chọn tiêu chí
-        rgSearchBy.clearCheck();
-        radMaLoaiSP.setChecked(true);
-        radTenSP.setChecked(false);
-        radioSearchByText = radMaLoaiSP.getText().toString();
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
             // Xử lý sự kiện khi chọn radio button khác nhau
             radSearchBy = findViewById(checkedId);
             radioSearchByText = radSearchBy.getText().toString();
-            if (radioSearchByText.equals("Loại sản phẩm")) {
+            if (checkedId == radMaLoaiSP.getId()) {
                 // Hiện ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.VISIBLE);
             }
-            if (radioSearchByText.equals("Tên sản phẩm")) {
+            // tên sản phẩm
+            else if (checkedId == radTenSP.getId()) {
                 // Ẩn ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.GONE);
+            } else if (checkedId == radAllSanPham.getId()) {
+                // Ẩn ListView khi RadioButton được nhấn
+                listViewDanhMucSearch.setVisibility(View.VISIBLE);
+            } else {
+                rgSearchBy.clearCheck();
+                radMaLoaiSP.setChecked(true);
+                radTenSP.setChecked(false);
+                listViewDanhMucSearch.setVisibility(View.VISIBLE);
             }
-            // clear danh sach chon lai
-            listViewDanhMucSearch.clearChoices();
-            protypeItemAdapter.notifyDataSetChanged();
 
         });
 
@@ -133,13 +135,21 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
             // Xử lý sự kiện khi nhấn nút tìm kiếm
             if (radioSearchByText.equals("Loại sản phẩm")) {
                 if (Objects.isNull(danhMucSelector)) {
-                    Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+                    if(listDanhMuc.size()>0){
+                        Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(this, "Db không có loại sản phẩm nào", Toast.LENGTH_SHORT).show();
+                    }
                     return;
                 }
                 GetDanhSachSanPhamListTheoTenVaLoai();
-            }
-            if (radioSearchByText.equals("Tên sản phẩm")) {
+            } else if (radioSearchByText.equals("Tên sản phẩm")) {
                 GetDanhSachSanPhamListTheoTen();
+            } else if (radioSearchByText.equals("Xem tất cả")) {
+                // Thêm dữ liệu vào lưới dsLoaiSPNavigation
+                GetDanhSachSanPhamList();
+                // Thêm dữ liệu vào lưới dsLoaiSPNavigation
+                GetDanhSachDanhMucList();
             }
         });
 
@@ -160,7 +170,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbDanhMuc.DocDL().size() <= 0) {
-            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
@@ -180,7 +190,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbSanPham.DocDL().size() <= 0) {
-            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
@@ -264,7 +274,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbSanPham.DocDL().size() <= 0) {
-            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
@@ -309,6 +319,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         radMaLoaiSP = findViewById(R.id.radMaLoaiSP);
         radTenSP = findViewById(R.id.radTenSP);
         rgSearchBy = findViewById(R.id.rgSearchBy);
+        radAllSanPham = findViewById(R.id.radAllSanPham);
         btnTimKiem = findViewById(R.id.btnTimKiem);
         ivProduct = findViewById(R.id.ivProduct);
         // anh xa ô tìm kiếm theo loại từ khóa
@@ -324,6 +335,13 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         // hien thi len listview
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
         listviewSanPhamSearch.setAdapter(productItemAdapter);
+
+        // tìm kiếm theo loại theo ten sản phẩm
+        rgSearchBy.clearCheck();
+        radMaLoaiSP.setChecked(true);
+        radTenSP.setChecked(false);
+        radAllSanPham.setChecked(false);
+        radioSearchByText = radMaLoaiSP.getText().toString();
     }
 
 

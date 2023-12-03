@@ -321,6 +321,16 @@ public class ViewNavigation extends AppCompatActivity {
         btnBaoCao = findViewById(id.btnBaoCao);
         btnBaiVietTinTucSanPham = findViewById(id.btnBaiVietTinTucSanPham);
         btnQuanLyHoSo = findViewById(id.btnQuanLyHoSo);
+
+        //  cài đặt tất cả menu
+        mnDanhSachDanhMuc = menuNav.findItem(R.id.mnDanhSachDanhMuc);
+        mnDanhSachSanPham = menuNav.findItem(R.id.mnDanhSachSanPham);
+        mnSearchSanPham = menuNav.findItem(R.id.mnSearchSanPham);
+        mnHoaDon = menuNav.findItem(R.id.mnHoaDon);
+        mnExit = menuNav.findItem(R.id.mnExit);
+        mnBaiVietTinTucSP = menuNav.findItem(R.id.mnBaiVietTinTucSP);
+        mnLogout = menuNav.findItem(R.id.mnLogout);
+        mnQuanLyHoSo = menuNav.findItem(R.id.mnQuanLyHoSo);
     }
 
     @Override

@@ -11,6 +11,7 @@
         android:gravity="center"
         android:text="Tìm kiếm sản phẩm theo loại"
         android:textColor="@color/white"
+        android:padding="4dp"
         android:textSize="30sp" />
     <!--tim kiem-->
     <LinearLayout
@@ -21,25 +22,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:gravity="center"
-                android:text="Tìm theo: "
+                android:hint="Tìm theo: "
                 android:textSize="16sp" />
 
             <RadioGroup
                 android:id="@+id/rgSearchBy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radMaLoaiSP"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Loại sản phẩm"
@@ -47,10 +48,17 @@
 
                 <RadioButton
                     android:id="@+id/radTenSP"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Tên sản phẩm"
+                    android:textSize="16sp" />
+                <RadioButton
+                    android:id="@+id/radAllSanPham"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Xem tất cả"
                     android:textSize="16sp" />
             </RadioGroup>
         </LinearLayout>
