@@ -48,6 +48,10 @@ public class ViewAccountLogin extends AppCompatActivity {
         KhoiTao();
         ClickEventImageView();
         ClickEventLevelAccount();
+        // cap do tai khoan
+        rbAdmin.setChecked(true);//quản lý
+        edtCapDoTaiKhoan.setText("0");
+        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void ClickEventLevelAccount() {
@@ -63,12 +67,6 @@ public class ViewAccountLogin extends AppCompatActivity {
             } else if (checkedId == rbGuest.getId()) {
                 // Hiện cấp độ   khi RadioButton được nhấn
                 accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
-            } else {
-                rgCapDoTaiKhoan.clearCheck();
-                rbAdmin.setChecked(true);
-                rbUser.setChecked(false);
-                rbGuest.setChecked(false);
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
             }
         });
     }
@@ -218,13 +216,5 @@ public class ViewAccountLogin extends AppCompatActivity {
         rbAdmin = findViewById(R.id.rbAdmin);
         rbUser = findViewById(R.id.rbUser);
         rbGuest = findViewById(R.id.rbGuest);
-
-        // cap do tai khoan
-        rgCapDoTaiKhoan.clearCheck();
-        rbUser.setChecked(true);//khách hàng
-        rbAdmin.setChecked(false);
-        rbGuest.setChecked(false);
-        edtCapDoTaiKhoan.setText("0");
-        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
     }
 }

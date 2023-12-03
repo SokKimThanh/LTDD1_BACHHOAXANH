@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 import tdc.edu.danhsachsp.R;
 
 public class ViewAccountSearch extends AppCompatActivity {
+    LinearLayout radioGroupConditionPhanQuyen;
     RadioGroup rgCapDoTaiKhoan, rgSearchBy;
     RadioButton rbAdmin, rbUser, rbGuest;
     RadioButton rbLoaiTK, rbTenTK, rbXemTatCa;
@@ -33,7 +35,7 @@ public class ViewAccountSearch extends AppCompatActivity {
     // Database account
     DBAccount dbUserAccount;
     // Account item Adapter
-    AccountAdapter accountListAdapter;
+    AccountAdapter accountAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,10 @@ public class ViewAccountSearch extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
         setControl();
         setEvent();
-        rbLoaiTK.setChecked(true);
+
+        // set default value control
+        rgCapDoTaiKhoan.clearCheck();
+        rgSearchBy.clearCheck();
     }
 
     /**
@@ -68,13 +73,13 @@ public class ViewAccountSearch extends AppCompatActivity {
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (rbLoaiTK.isChecked()) {
                 // Hiện khi RadioButton được nhấn
-                rgCapDoTaiKhoan.setVisibility(View.GONE);
+                radioGroupConditionPhanQuyen.setVisibility(View.VISIBLE);
             } else if (rbTenTK.isChecked()) {
                 // Hiện  khi RadioButton được nhấn
-                rgCapDoTaiKhoan.setVisibility(View.VISIBLE);
+                radioGroupConditionPhanQuyen.setVisibility(View.GONE);
             } else if (rbXemTatCa.isChecked()) {
                 // Hiện khi RadioButton được nhấn
-                rgCapDoTaiKhoan.setVisibility(View.VISIBLE);
+                radioGroupConditionPhanQuyen.setVisibility(View.GONE);
             }
         });
     }
@@ -83,29 +88,36 @@ public class ViewAccountSearch extends AppCompatActivity {
         KhoiTao();
         ClickEventShowRadioGroupLevelAccount();
         CLickEventListViewAccountItem();
+        ClickEventTimKiem();
+    }
+
+    /**
+     * click event tim kiem search by loai
+     */
+    private void ClickEventTimKiem() {
         btnTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClickEventTimKiem();
+                int i = 0;
+                if (rbUser.isChecked()) {
+                    i = 1;// user
+                } else if (rbAdmin.isChecked()) {
+                    i = 0;// admin
+                } else if (rbGuest.isChecked()) {
+                    i = 2;// guest
+                }else{
+                    i = -1;// view all
+                }
+                if(accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i))){
+                    accountAdapter = new AccountAdapter(v.getContext(), R.layout.layout_login_item, accounts);
+                    // hien thi len listview
+                    listViewDSTaiKhoan.setAdapter(accountAdapter);
+                    accountAdapter.notifyDataSetChanged();
+                }
             }
         });
-    }
 
-    private void ClickEventTimKiem() {
-        int i = 0;
-        if (rbUser.isChecked()) {
-            i = 1;// user
-        } else if (rbAdmin.isChecked()) {
-            i = 0;// admin
-        } else if (rbGuest.isChecked()) {
-            i = 2;// guest
-        }
-        accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i));
-        accountListAdapter = new AccountAdapter(this, R.layout.layout_login_item, accounts);
-        // hien thi len listview
-        listViewDSTaiKhoan.setAdapter(accountListAdapter);
-        accountListAdapter.notifyDataSetChanged();
-     }
+    }
 
     private void CLickEventListViewAccountItem() {
         listViewDSTaiKhoan.setOnItemClickListener((parent, view, position, id) -> {
@@ -142,12 +154,12 @@ public class ViewAccountSearch extends AppCompatActivity {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
-        accounts.addAll(dbUserAccount.DocDL());
-        // gan san pham bang menu item layout(gan template item)
-        accountListAdapter = new AccountAdapter(this, R.layout.layout_login_item, accounts);
-        // hien thi len listview
-        listViewDSTaiKhoan.setAdapter(accountListAdapter);
-        accountListAdapter.notifyDataSetChanged();
+        if(accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1))){
+            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
+            // hien thi len listview
+            listViewDSTaiKhoan.setAdapter(accountAdapter);
+            accountAdapter.notifyDataSetChanged();
+        }
     }
 
     private void setControl() {
@@ -164,17 +176,8 @@ public class ViewAccountSearch extends AppCompatActivity {
         edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
         edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
         listViewDSTaiKhoan = findViewById(R.id.lvDanhSachTaiKhoan);
-
-        //default value control
-        rgCapDoTaiKhoan.clearCheck();
-        rbAdmin.setChecked(true);
-//        rbUser.setChecked(true);
-//        rbGuest.setChecked(true);
-
-        rgSearchBy.clearCheck();
-//        rbLoaiTK.setChecked(true);
-        rbTenTK.setChecked(true);
-//        rbXemTatCa.setChecked(false);
+        // ẩn thân
+        radioGroupConditionPhanQuyen = findViewById(R.id.radioGroupConditionPhanQuyen);
     }
 
     // gan menu add vao danh sach

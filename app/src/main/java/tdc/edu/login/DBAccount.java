@@ -46,7 +46,6 @@ public class DBAccount extends SQLiteOpenHelper {
                 db.close();
                 flag = true;
             } catch (Exception ex) {
-                flag = false;
                 try {
                     throw new Exception(ex.getMessage());
                 } catch (Exception e) {
@@ -88,7 +87,7 @@ public class DBAccount extends SQLiteOpenHelper {
                 String ngayhethantruycap = cursor.getString(i3);
                 int capdotaikhoan = cursor.getInt(i4);
                 String email = cursor.getString(i5);
-                boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
+                boolean isEmailValidation = Boolean.parseBoolean(cursor.getString(i6));
 
                 // set du lieu cho user account
                 account.setMataikhoan(mataikhoan);
@@ -109,6 +108,11 @@ public class DBAccount extends SQLiteOpenHelper {
     }
 
     public List<Account> DocDLByCapDoTaiKhoan(int levelaccount) {
+        if (levelaccount == -1) {
+            // read all data
+            return DocDL();
+        }
+        // read by capdotaikhoan
         List<Account> accounts = new ArrayList<>();
         // get by cap do tai khoan
         String sql = "Select * from UserAccount where capdotaikhoan = ?";
@@ -133,7 +137,7 @@ public class DBAccount extends SQLiteOpenHelper {
                 String ngayhethantruycap = cursor.getString(i3);
                 int capdotaikhoan = cursor.getInt(i4);
                 String email = cursor.getString(i5);
-                boolean isEmailValidation = Boolean.valueOf(cursor.getString(i6));
+                boolean isEmailValidation = Boolean.parseBoolean(cursor.getString(i6));
 
                 // set du lieu cho user account
                 account.setMataikhoan(mataikhoan);
