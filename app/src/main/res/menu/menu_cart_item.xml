@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/cart_menu_icon"
-        android:icon="@drawable/giohang"
+        android:icon="@drawable/icon_giohang_green"
         android:tooltipText="Thêm vào giỏ hàng"
         android:title="Thêm"
         app:showAsAction="always"/>

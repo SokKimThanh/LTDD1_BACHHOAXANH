@@ -4,25 +4,30 @@
 
     <item
         android:id="@+id/mnDanhSachDanhMuc"
-        android:icon="@drawable/list_navigation"
+        android:icon="@drawable/icon_list"
         android:title="Danh sách danh mục" />
     <item
         android:id="@+id/mnDanhSachSanPham"
-        android:icon="@drawable/giohangicon"
+        android:icon="@drawable/icon_sanpham_pink"
         android:title="Danh sách sản phẩm" />
     <item
         android:id="@+id/mnHoaDon"
-        android:icon="@drawable/hoadonicon"
+        android:icon="@drawable/icon_hoadon_pink"
         android:title="Danh sách hóa đơn"
         tools:ignore="HardcodedText" />
     <item
+        android:id="@+id/mnQuanLyHoSo"
+        android:icon="@drawable/icon_users"
+        android:title="Quản lý hồ sơ" />
+    <item
         android:id="@+id/mnSearchSanPham"
-        android:icon="@drawable/search"
+        android:icon="@drawable/icon_search"
         android:title="Tìm kiếm sản phẩm" />
     <item
         android:id="@+id/mnBaiVietTinTucSP"
-        android:icon="@drawable/news"
+        android:icon="@drawable/icon_news_pink"
         android:title="Bài viết, tin tức" />
+
     <item
         android:id="@+id/mnLogout"
         android:icon="@drawable/btn_exit_green"

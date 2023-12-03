@@ -74,16 +74,16 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 selectedMaDM = selectedDanhmucSpinner.getMa();
                 // Xử lý mã đã chọn...
                 if (selectedMaDM.equals("dm001")) {
-                    ivHinhAdd.setImageResource(R.drawable.thit);
+                    ivHinhAdd.setImageResource(R.drawable.img_thit);
                 }
                 if (selectedMaDM.equals("dm002")) {
-                    ivHinhAdd.setImageResource(R.drawable.ca);
+                    ivHinhAdd.setImageResource(R.drawable.img_ca);
                 }
                 if (selectedMaDM.equals("dm003")) {
-                    ivHinhAdd.setImageResource(R.drawable.trung);
+                    ivHinhAdd.setImageResource(R.drawable.img_trung);
                 }
                 if (selectedMaDM.equals("dm004")) {
-                    ivHinhAdd.setImageResource(R.drawable.sua);
+                    ivHinhAdd.setImageResource(R.drawable.img_sua);
                 }
             }
 
@@ -127,7 +127,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
 
 
                 // Dữ liệu tĩnh tham gia
-                if (ViewSanPhamList.dataSp.add(sanPham)) {
+                if (ViewSanPhamList.hangHoas.add(sanPham)) {
                     // Thêm đối tượng HangHoa vào cơ sở dữ liệu
                     dbHangHoa.ThemDL(sanPham);
                     Toast.makeText(ViewSanPhamAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();

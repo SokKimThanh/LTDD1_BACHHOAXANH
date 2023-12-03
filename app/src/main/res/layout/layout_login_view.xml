@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tdc.edu.login.ViewLogin">
+    tools:context="tdc.edu.login.ViewAccountLogin">
 
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
-        android:src="@drawable/bhxlogo"
+        android:src="@drawable/logo_bhx"
         tools:ignore="ContentDescription" />
     <!--login password-->
     <LinearLayout
@@ -23,6 +23,70 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="0dp">
+        <!--        cap do tai khoan-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_boder_primary_green"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cấp độ tài khoản"
+                android:paddingLeft="6dp"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgCapDoTaiKhoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Khách hàng"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbAdmin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="Quản lý"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGuest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Khách thường"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+            <!--Giấu luôn cái cấp độ tài khoản luôn không cho ai thấy-->
+            <EditText
+                android:id="@+id/edtCapDoTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:enabled="false"
+                android:hint="Level Acc"
+                android:inputType="number"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -37,7 +101,7 @@
                 android:contentDescription="username"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:src="@drawable/key"
+                android:src="@drawable/icon_key"
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
             <EditText
@@ -66,7 +130,7 @@
                 android:contentDescription="password"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:src="@drawable/password"
+                android:src="@drawable/icon_password_green"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <EditText
@@ -85,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/showpassword"
+                android:src="@drawable/icon_showpassword"
                 tools:ignore="ContentDescription,RtlHardcoded" />
         </FrameLayout>
 
@@ -137,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/greenPrimary"
-            android:src="@drawable/btn_dangnhap"
+            android:src="@drawable/btn_user_dangnhap"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 </LinearLayout>

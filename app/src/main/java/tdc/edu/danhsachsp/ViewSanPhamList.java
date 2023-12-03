@@ -20,8 +20,8 @@ public class ViewSanPhamList extends AppCompatActivity {
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static List<HangHoa> dataSp = new ArrayList<>();
-    static SanPhamListAdapter spAdapter;
+    static List<HangHoa> hangHoas = new ArrayList<>();
+    static SanPhamListAdapter sanPhamListAdapter;
 
     ListView lvDanhSachSp;
 
@@ -66,16 +66,16 @@ public class ViewSanPhamList extends AppCompatActivity {
             // các trường và phương thức của bạn ở đây
             // }
 
-            intent.putExtra("item", dataSp.get(position));
+            intent.putExtra("item", hangHoas.get(position));
             startActivity(intent);
         });
 
         //su kien long click de xoa item
         lvDanhSachSp.setOnItemLongClickListener((parent, view, position, id) -> {
-            HangHoa hh = dataSp.get(position);
+            HangHoa hh = hangHoas.get(position);
             dbSanPham.XoaDL(hh);
-            dataSp.remove(position);
-            spAdapter.notifyDataSetChanged();
+            hangHoas.remove(position);
+            sanPhamListAdapter.notifyDataSetChanged();
             Toast.makeText(ViewSanPhamList.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
             return false;
         });
@@ -85,7 +85,7 @@ public class ViewSanPhamList extends AppCompatActivity {
     private void KhoiTao() {
         // dbsinhvien truy cập dữ liệu DB
         dbSanPham = new DBHangHoa(this);
-        dataSp.clear();
+        hangHoas.clear();
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbSanPham.DocDL().size() <= 0) {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
@@ -93,20 +93,20 @@ public class ViewSanPhamList extends AppCompatActivity {
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
         for (HangHoa sanpham: dbSanPham.DocDL()) {
-            dataSp.add(sanpham);
+            hangHoas.add(sanpham);
         }
 
         // gan san pham bang menu item layout(gan template item)
-        spAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, dataSp);
+        sanPhamListAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, hangHoas);
         // hien thi len listview
-        lvDanhSachSp.setAdapter(spAdapter);
-        spAdapter.notifyDataSetChanged();
+        lvDanhSachSp.setAdapter(sanPhamListAdapter);
+        sanPhamListAdapter.notifyDataSetChanged();
     }
 
     // gan menu vao danh sach
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_layout, menu);
+        getMenuInflater().inflate(R.menu.menu_add_item, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

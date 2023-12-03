@@ -48,16 +48,16 @@ public class DanhMucListAdapter extends ArrayAdapter<DanhMuc> {
         tvGhiChuDM.setText(dm.getGhichu());
         // hien thi hinh`
         if(dm.getMa().equals("dm001")){
-            ivHinhDM.setImageResource(R.drawable.thit);
+            ivHinhDM.setImageResource(R.drawable.img_thit);
         }
         if(dm.getMa().equals("dm002")){
-            ivHinhDM.setImageResource(R.drawable.ca);
+            ivHinhDM.setImageResource(R.drawable.img_ca);
         }
         if(dm.getMa().equals("dm003")){
-            ivHinhDM.setImageResource(R.drawable.trung);
+            ivHinhDM.setImageResource(R.drawable.img_trung);
         }
         if(dm.getMa().equals("dm004")){
-            ivHinhDM.setImageResource(R.drawable.sua);
+            ivHinhDM.setImageResource(R.drawable.img_sua);
         }
         // hien thi toan bo du lieu len view hop le
         return convertView;

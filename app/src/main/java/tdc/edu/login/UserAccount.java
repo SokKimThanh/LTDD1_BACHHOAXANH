@@ -1,8 +1,9 @@
 package tdc.edu.login;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserAccount {
+public class UserAccount implements Serializable {
 
 
     private int mataikhoan = 0;

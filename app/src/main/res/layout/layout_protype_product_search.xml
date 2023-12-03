@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,9 +10,10 @@
         android:layout_height="wrap_content"
         android:background="@color/greenPrimary"
         android:gravity="center"
-        android:text="Tìm kiếm sản phẩm theo loại"
+        android:padding="8dp"
+        android:text="@string/t_m_ki_m_s_n_ph_m_theo_lo_i"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
     <!--tim kiem-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,37 +23,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:gravity="center"
-                android:text="Tìm theo: "
-                android:textSize="16sp" />
+                android:hint="Tìm theo: "
+                android:textColorHint="#8D6E63"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <RadioGroup
                 android:id="@+id/rgSearchBy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radMaLoaiSP"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Loại sản phẩm"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
 
                 <RadioButton
                     android:id="@+id/radTenSP"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Tên sản phẩm"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <RadioButton
+                    android:id="@+id/radAllSanPham"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Xem tất cả"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
             </RadioGroup>
         </LinearLayout>
         <!--keyword tim kiem-->
@@ -62,11 +77,14 @@
 
             <EditText
                 android:id="@+id/edtSearchKeyword"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:textSize="20sp" />
+                android:autofillHints=""
+                android:inputType="text"
+                android:textSize="20sp"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,TextFields" />
 
             <Button
                 android:id="@+id/btnTimKiem"
@@ -75,13 +93,15 @@
                 android:layout_margin="4dp"
                 android:backgroundTint="@color/greenPrimary"
                 android:text="Tìm kiếm"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
     <!--danh sach ket qua tim kiem-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:orientation="horizontal">
         <!--        danh sach loai san pham-->
         <ListView
@@ -90,8 +110,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:choiceMode="singleChoice"
-            android:listSelector="@drawable/layout_protype_selector_background"
-            android:textColor="@drawable/layout_protype_selector_color" />
+            android:listSelector="@drawable/bg_protype_selector"
+            android:textColor="@drawable/bg_border_protype_black" />
         <!--danh sách sản phẩm-->
         <ListView
             android:id="@+id/dsSanPhamNavigation"

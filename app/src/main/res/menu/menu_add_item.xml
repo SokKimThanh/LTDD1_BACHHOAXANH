@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/mnThem"
-        android:icon="@drawable/green_plus"
+        android:icon="@drawable/icon_plus_green"
         android:title="Thêm"
         android:tooltipText="Thêm"
         app:showAsAction="always" />

@@ -1,6 +1,7 @@
 package tdc.edu.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,16 +23,18 @@ import java.util.List;
 import tdc.edu.danhsachsp.R;
 import tdc.edu.navigation.ViewNavigation;
 
-public class ViewLogin extends AppCompatActivity {
+public class ViewAccountLogin extends AppCompatActivity {
 
     ImageView btnDangNhap, btnShowPassword;
-    EditText edtUserName, edtPassword;
+    EditText edtUserName, edtPassword, edtCapDoTaiKhoan;
     TextView tvMessageStatus, tvDangKy, tvQuenMatKhau;
     DBUserAccount dbUserAccount;
 
     List<UserAccount> userAccounts = new ArrayList<>();
 
-    public static UserAccount currentUserAccount;
+    RadioGroup rgCapDoTaiKhoan;
+    RadioButton rbAdmin, rbUser, rbGuest;
+    public static UserAccount currentUserAccount = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +47,36 @@ public class ViewLogin extends AppCompatActivity {
     private void setEvent() {
         KhoiTao();
         ClickEventImageView();
+        ClickEventLevelAccount();
+    }
 
+    private void ClickEventLevelAccount() {
+        rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
+            userAccounts.clear();
+            // Xử lý sự kiện khi chọn radio button khác nhau
+            if (checkedId == rbAdmin.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
+            } else if (checkedId == rbUser.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+            } else if (checkedId == rbGuest.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.GUEST.getLevelCode()));
+            } else {
+                rgCapDoTaiKhoan.clearCheck();
+                rbAdmin.setChecked(true);
+                rbUser.setChecked(false);
+                rbGuest.setChecked(false);
+                userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
+            }
+        });
     }
 
     private void KhoiTao() {
-        dbUserAccount = new DBUserAccount(ViewLogin.this);
-        userAccounts.addAll(dbUserAccount.DocDL());
+        dbUserAccount = new DBUserAccount(ViewAccountLogin.this);
+        userAccounts.clear();
+        userAccounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.USER.getLevelCode()));
     }
 
     boolean isChecked = true;//tắt mật khẩu
@@ -89,12 +118,8 @@ public class ViewLogin extends AppCompatActivity {
         boolean isExist = false;
 
 
-        // cập nhật dữ liệu mới
-        userAccounts = dbUserAccount.DocDL();
-
         // check thông tin
         for (UserAccount user : userAccounts) {
-            user.toString();
             if (user.getTentaikhoan().equals(usernameToCheck)) {
                 if (user.getMatkhau().equals(passwordToCheck)) {
                     currentUserAccount = user;// tìm thấy thông tin
@@ -114,8 +139,8 @@ public class ViewLogin extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewLogin sang ViewNavigation
-                    Intent intent = new Intent(ViewLogin.this, ViewNavigation.class);
+                    // Nếu đăng nhập thành công, tạo một Intent để chuyển từ ViewAccountLogin sang ViewNavigation
+                    Intent intent = new Intent(ViewAccountLogin.this, ViewNavigation.class);
                     startActivity(intent);
                     finish();  // Đóng Activity hiện tại
                 }
@@ -170,12 +195,12 @@ public class ViewLogin extends AppCompatActivity {
     }
 
     private void DangKy() {
-        Intent intent = new Intent(ViewLogin.this, ViewDangKyTaiKhoan.class);
+        Intent intent = new Intent(ViewAccountLogin.this, ViewAccountRegister.class);
         startActivity(intent);
     }
 
     private void QuenMatKhau() {
-        Intent intent = new Intent(ViewLogin.this, ViewQuenMatKhau.class);
+        Intent intent = new Intent(ViewAccountLogin.this, ViewAccountForgotten.class);
         startActivity(intent);
     }
 
@@ -187,5 +212,19 @@ public class ViewLogin extends AppCompatActivity {
         tvMessageStatus = findViewById(R.id.tvMessageStatus);
         tvDangKy = findViewById(R.id.tvDangKy);
         tvQuenMatKhau = findViewById(R.id.tvQuenMatKhau);
+        edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
+
+        rgCapDoTaiKhoan = findViewById(R.id.rgCapDoTaiKhoan);
+        rbAdmin = findViewById(R.id.rbAdmin);
+        rbUser = findViewById(R.id.rbUser);
+        rbGuest = findViewById(R.id.rbGuest);
+
+        // cap do tai khoan
+        rgCapDoTaiKhoan.clearCheck();
+        rbUser.setChecked(true);//khách hàng
+        rbAdmin.setChecked(false);
+        rbGuest.setChecked(false);
+        edtCapDoTaiKhoan.setText("0");
+        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
     }
 }

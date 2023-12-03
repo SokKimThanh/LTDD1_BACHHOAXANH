@@ -112,7 +112,7 @@ public class ViewDanhMucList extends AppCompatActivity {
     // gan menu vao danh sach
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_layout, menu);
+        getMenuInflater().inflate(R.menu.menu_add_item, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

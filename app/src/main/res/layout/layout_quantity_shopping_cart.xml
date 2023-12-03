@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:src="@drawable/giohang" />
+            android:src="@drawable/icon_giohang_green" />
 
         <!-- Số lượng -->
         <TextView
@@ -24,7 +24,7 @@
             android:layout_margin="3dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/textview_quantity_shoppingcart"
+            android:background="@drawable/icon_textview_quantity_shoppingcart"
             android:textColor="@color/greenPrimary"
             android:textSize="16sp" />
     </LinearLayout>
