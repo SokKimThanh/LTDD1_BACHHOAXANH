@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8sp">
+    android:background="@drawable/bg_border_xam"
+    android:layout_margin="16sp">
 
 
 <!-- Layout tài khoản item-->

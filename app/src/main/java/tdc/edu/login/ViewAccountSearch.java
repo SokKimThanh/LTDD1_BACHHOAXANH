@@ -24,7 +24,7 @@ import tdc.edu.danhsachsp.R;
 public class ViewAccountSearch extends AppCompatActivity {
     LinearLayout radioGroupConditionPhanQuyen;
     RadioGroup rgCapDoTaiKhoan, rgSearchBy;
-    RadioButton rbAdmin, rbUser, rbGuest;
+    RadioButton rbAdmin, rbCustomer, rbEmployee;
     RadioButton rbLoaiTK, rbTenTK, rbXemTatCa;
     Button btnTimKiem;
     EditText edtSearchKeyword, edtCapDoTaiKhoan;
@@ -54,20 +54,7 @@ public class ViewAccountSearch extends AppCompatActivity {
      * Show hide radio group button cap do tai khoan
      */
     private void ClickEventShowRadioGroupLevelAccount() {
-        rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
-            accounts.clear();
-            // Xử lý sự kiện khi chọn radio button khác nhau
-            if (checkedId == rbAdmin.getId()) {
-                // Hiện cấp độ   khi RadioButton được nhấn
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
-            } else if (checkedId == rbUser.getId()) {
-                // Hiện cấp độ   khi RadioButton được nhấn
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
-            } else if (checkedId == rbGuest.getId()) {
-                // Hiện cấp độ   khi RadioButton được nhấn
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
-            }
-        });
+        // ẩn thân chi thuật
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
             accounts.clear();
             // Xử lý sự kiện khi chọn radio button khác nhau
@@ -77,11 +64,40 @@ public class ViewAccountSearch extends AppCompatActivity {
             } else if (rbTenTK.isChecked()) {
                 // Hiện  khi RadioButton được nhấn
                 radioGroupConditionPhanQuyen.setVisibility(View.GONE);
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1));
             } else if (rbXemTatCa.isChecked()) {
                 // Hiện khi RadioButton được nhấn
                 radioGroupConditionPhanQuyen.setVisibility(View.GONE);
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1));
             }
+            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
+            // hien thi len listview
+            listViewDSTaiKhoan.setAdapter(accountAdapter);
+            accountAdapter.notifyDataSetChanged();
+
+            rgCapDoTaiKhoan.clearCheck();// không gọi thêm db
         });
+        // tìm kiếm theo loại
+        rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
+            accounts.clear();
+            // Xử lý sự kiện khi chọn radio button khác nhau
+            if (checkedId == rbAdmin.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.ADMIN.getLevelCode()));
+            } else if (checkedId == rbCustomer.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.CUSTOMER.getLevelCode()));
+            } else if (checkedId == rbEmployee.getId()) {
+                // Hiện cấp độ   khi RadioButton được nhấn
+                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
+            }
+
+            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
+            // hien thi len listview
+            listViewDSTaiKhoan.setAdapter(accountAdapter);
+            accountAdapter.notifyDataSetChanged();
+        });
+
     }
 
     private void setEvent() {
@@ -99,11 +115,11 @@ public class ViewAccountSearch extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int i = 0;
-                if (rbUser.isChecked()) {
+                if (rbCustomer.isChecked()) {
                     i = 1;// user
                 } else if (rbAdmin.isChecked()) {
                     i = 0;// admin
-                } else if (rbGuest.isChecked()) {
+                } else if (rbEmployee.isChecked()) {
                     i = 2;// guest
                 }else{
                     i = -1;// view all
@@ -167,8 +183,8 @@ public class ViewAccountSearch extends AppCompatActivity {
         rgCapDoTaiKhoan = findViewById(R.id.rgCapDoTaiKhoan);
         rgSearchBy = findViewById(R.id.rgSearchBy);
         rbAdmin = findViewById(R.id.rbAdmin);
-        rbUser = findViewById(R.id.rbUser);
-        rbGuest = findViewById(R.id.rbGuest);
+        rbCustomer = findViewById(R.id.rbUser);
+        rbEmployee = findViewById(R.id.rbGuest);
         rbLoaiTK = findViewById(R.id.rbLoaiTK);
         rbTenTK = findViewById(R.id.rbTenTK);
         rbXemTatCa = findViewById(R.id.rbXemTatCa);
