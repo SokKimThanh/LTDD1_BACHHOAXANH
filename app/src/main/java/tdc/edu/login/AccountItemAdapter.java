@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +12,6 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import tdc.edu.ShoppingSearch.OnAddToCartClickListener;
-import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
 public class AccountItemAdapter {
@@ -24,10 +20,9 @@ public class AccountItemAdapter {
 
     int resource;//id cua control
 
-    List<UserAccount> userAccounts;//danh sách hàng hóa
-    // Tạo giỏ hàng mới để thêm sản phẩm
+    List<UserAccount> userAccounts;//danh sách tài khoản
 
-    public AccountItemAdapter(Context context, int resource, List<UserAccount> userAccounts ) {
+    public AccountItemAdapter(Context context, int resource, List<UserAccount> userAccounts) {
         super();
         this.context = context;
         this.resource = resource;
@@ -45,11 +40,13 @@ public class AccountItemAdapter {
         }
 
         // danh sach hien thi len tung item
-        ImageView ivProduct = convertView.findViewById(R.id.ivProduct);
-        TextView tvProductName = convertView.findViewById(R.id.tvProductCartName);
-        TextView tvGiaSPSearch = convertView.findViewById(R.id.tvGiaSPSearch);
-        TextView tvSoLuongSPSearch = convertView.findViewById(R.id.tvSoLuongSPSearch);
-        Button btnAddToCart = convertView.findViewById(R.id.btnAddToCartProductItemAdapter);
+        TextView tvMaTK = convertView.findViewById(R.id.tvMaTK);
+        TextView tvTenTK = convertView.findViewById(R.id.tvTenTK);
+        TextView tvEmailTK = convertView.findViewById(R.id.tvEmailTK);
+        TextView tvNgayHetHan = convertView.findViewById(R.id.tvNgayHetHan);
+        TextView tvLoaiTK = convertView.findViewById(R.id.tvLoaiTK);
+        TextView tvKichHoatEmail = convertView.findViewById(R.id.tvKichHoatEmail);
+
 
         // kiểm tra xem position có lớn hơn hoặc bằng kích thước của hangHoaList hay không, vì chỉ số của danh sách bắt đầu từ 0
         if (position >= userAccounts.size()) {
@@ -59,10 +56,12 @@ public class AccountItemAdapter {
 
 
         // Hiển thị thông tin
-//        tvProductName.setText(userAccount.getTenSp());
-//        tvGiaSPSearch.setText(String.valueOf(userAccount.getGiaSp()));
-//        tvSoLuongSPSearch.setText(String.valueOf(userAccount.getSoLuongTonKho()));
-
+        tvMaTK.setText(userAccount.getMataikhoan());
+        tvTenTK.setText(userAccount.getTentaikhoan());
+        tvEmailTK.setText(userAccount.getEmail());
+        tvNgayHetHan.setText(userAccount.getNgayhethantruycap());
+        tvLoaiTK.setText(userAccount.getCapdotaikhoan() == AccountLevel.ADMIN.getLevelCode() ? "Quản lý" : userAccount.getCapdotaikhoan() == AccountLevel.USER.getLevelCode() ? "Khách hàng" : userAccount.getCapdotaikhoan() == AccountLevel.GUEST.getLevelCode() ? "Khách vãng lai" : "Unknow");
+        tvKichHoatEmail.setText(userAccount.isEmailVerified() == false ? "Chưa kích hoạt" : "Đã kích hoạt");
 
 
         // Return the completed view to render on screen
