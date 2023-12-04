@@ -12,9 +12,10 @@ import tdc.edu.danhsachsp.R;
 
 
 public class BaoCao extends AppCompatActivity {
-Button btnQuayLai;
-TextView tvTongThit, tvTongCa,tvTongTrung, tvTongSua,tvTongThitBan, tvTongCaBan,tvTongTrungBan, tvTongSuaBan;
-DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
+    Button btnQuayLai;
+    TextView tvTongThit, tvTongCa, tvTongTrung, tvTongSua, tvTongThitBan, tvTongCaBan, tvTongTrungBan, tvTongSuaBan;
+    DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +38,16 @@ DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
         int trung = 0;
         int sua = 0;
         for (int i = 0; i < dbHangHoa.DocDL().size(); i++) {
-            if (dbHangHoa.DocDL().get(i).getLoaiSp().equals("dm001")) {
+            if (dbHangHoa.DocDL().get(i).getLoaiSp() == 1) {
                 thit += dbHangHoa.DocDL().get(i).getSoLuongTonKho();
             }
-            if (dbHangHoa.DocDL().get(i).getLoaiSp().equals("dm002")) {
+            if (dbHangHoa.DocDL().get(i).getLoaiSp() == 2) {
                 ca += dbHangHoa.DocDL().get(i).getSoLuongTonKho();
             }
-            if (dbHangHoa.DocDL().get(i).getLoaiSp().equals("dm003")) {
+            if (dbHangHoa.DocDL().get(i).getLoaiSp() == 3) {
                 trung += dbHangHoa.DocDL().get(i).getSoLuongTonKho();
             }
-            if (dbHangHoa.DocDL().get(i).getLoaiSp().equals("dm004")) {
+            if (dbHangHoa.DocDL().get(i).getLoaiSp() == 4) {
                 sua += dbHangHoa.DocDL().get(i).getSoLuongTonKho();
             }
         }
@@ -78,16 +79,17 @@ DBHangHoa dbHangHoa = new DBHangHoa(BaoCao.this);
 //      tvTongThit.setText(thitBan+"");
 //    }
     }
+
     private void setConTrol() {
 
         btnQuayLai = findViewById(R.id.btnQuayLai);
-        tvTongThit =findViewById(R.id.tvTongThit);
-        tvTongTrung =findViewById(R.id.tvTongTrung);
-        tvTongCa =findViewById(R.id.tvTongCa);
-        tvTongSua =findViewById(R.id.tvTongSua);
-        tvTongThitBan =findViewById(R.id.tvTongThitBan);
-        tvTongTrungBan =findViewById(R.id.tvTongTrungBan);
-        tvTongCaBan =findViewById(R.id.tvTongCaBan);
-        tvTongSuaBan =findViewById(R.id.tvTongSuaBan);
+        tvTongThit = findViewById(R.id.tvTongThit);
+        tvTongTrung = findViewById(R.id.tvTongTrung);
+        tvTongCa = findViewById(R.id.tvTongCa);
+        tvTongSua = findViewById(R.id.tvTongSua);
+        tvTongThitBan = findViewById(R.id.tvTongThitBan);
+        tvTongTrungBan = findViewById(R.id.tvTongTrungBan);
+        tvTongCaBan = findViewById(R.id.tvTongCaBan);
+        tvTongSuaBan = findViewById(R.id.tvTongSuaBan);
     }
 }

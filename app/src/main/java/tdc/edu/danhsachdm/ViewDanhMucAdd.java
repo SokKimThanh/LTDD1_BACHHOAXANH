@@ -65,6 +65,7 @@ public class ViewDanhMucAdd extends AppCompatActivity {
     }
 
     private void updateListviewDanhMuc() {
+        ViewDanhMucList.danhMucList.getDanhMucList().clear();
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
         ViewDanhMucList.danhMucList.setDanhMucList(dbDanhMuc.DocDL());
 

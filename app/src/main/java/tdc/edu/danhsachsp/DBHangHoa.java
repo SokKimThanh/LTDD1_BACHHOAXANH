@@ -48,7 +48,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
         db.execSQL(sql, new String[]{o.getTenSp(), String.valueOf(o.getGiaSp()), String.valueOf(o.getSoLuongTonKho())
-                , o.getLoaiSp()});
+                , o.getLoaiSp() + ""});
     }
 
     /**
@@ -83,7 +83,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
         // o.getTen() và o.getGioitinh() sẽ thay thế cho ?, o.getMa() sẽ thay thế cho ?
         db.execSQL(sql, new String[]{o.getTenSp(), String.valueOf(o.getGiaSp()),
-                String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp(), o.getMaSp() + ""});
+                String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp() + "", o.getMaSp() + ""});
     }
 
 
@@ -115,7 +115,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
                 hanghoa.setSoLuongTonKho(cursor.getInt(3));
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
-                hanghoa.setLoaiSp(cursor.getString(4).toString());
+                hanghoa.setLoaiSp(cursor.getInt(4));
                 // Thêm đối tượng hàng hóa vào danh sách
                 listHangHoa.add(hanghoa);
             } while (cursor.moveToNext()); // Di chuyển con trỏ đến hàng tiếp theo
@@ -148,7 +148,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 // Đọc dữ liệu từ cột 3 (Số lượng) và cập nhật vào đối tượng
                 hanghoa.setSoLuongTonKho(cursor.getInt(3));
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
-                hanghoa.setLoaiSp(cursor.getString(4).toString());
+                hanghoa.setLoaiSp(cursor.getInt(4));
                 // Thêm đối tượng hàng hóa vào danh sách
                 listHangHoa.add(hanghoa);
             } while (cursor.moveToNext()); // Di chuyển con trỏ đến hàng tiếp theo
@@ -193,7 +193,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
-                hanghoa.setLoaiSp(cursor.getString(4).toString());
+                hanghoa.setLoaiSp(cursor.getInt(4));
 
                 // Thêm đối tượng hàng hóa vào danh sách
                 listHangHoa.add(hanghoa);
@@ -269,7 +269,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 hanghoa.setSoLuongTonKho(cursor.getInt(3));
 
                 // Đọc dữ liệu từ cột 4 (loại sản phẩm) và cập nhật vào đối tượng
-                hanghoa.setLoaiSp(cursor.getString(4).toString());
+                hanghoa.setLoaiSp(cursor.getInt(4));
 
                 // Thêm đối tượng hàng hóa vào danh sách
                 listHangHoa.add(hanghoa);

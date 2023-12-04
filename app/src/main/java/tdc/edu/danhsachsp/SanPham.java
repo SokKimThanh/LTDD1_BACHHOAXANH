@@ -3,14 +3,14 @@ package tdc.edu.danhsachsp;
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
-    String tenSp, loaiSp;
-    int maSp;
+    String tenSp;
+    int maSp,loaiSp;
     double giaSp;
 
     public SanPham() {
     }
 
-    public SanPham(String tenSp, String loaiSp, double giaSp ) {
+    public SanPham(String tenSp, int loaiSp, double giaSp ) {
         this.tenSp = tenSp;
         this.loaiSp = loaiSp;
         this.giaSp = giaSp;
@@ -25,11 +25,11 @@ public class SanPham implements Serializable {
         this.tenSp = tenSp;
     }
 
-    public String getLoaiSp() {
+    public int getLoaiSp() {
         return loaiSp;
     }
 
-    public void setLoaiSp(String loaiSp) {
+    public void setLoaiSp(int loaiSp) {
         this.loaiSp = loaiSp;
     }
 

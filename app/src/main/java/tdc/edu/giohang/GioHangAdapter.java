@@ -63,13 +63,13 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         tvQuantity.setText(String.valueOf(ViewProductSearch.gioHang.getQuantity(hangHoa)));
 
         // hien thi hinh`
-        if (hangHoa.getLoaiSp().equals("dm001")) {
+        if (hangHoa.getLoaiSp() == 1) {
             ivProduct.setImageResource(R.drawable.img_thit);
-        } else if (hangHoa.getLoaiSp().equals("dm002")) {
+        } else if (hangHoa.getLoaiSp() ==2) {
             ivProduct.setImageResource(R.drawable.img_ca);
-        } else if (hangHoa.getLoaiSp().equals("dm003")) {
+        } else if (hangHoa.getLoaiSp()==3) {
             ivProduct.setImageResource(R.drawable.img_trung);
-        } else if (hangHoa.getLoaiSp().equals("dm004")) {
+        } else if (hangHoa.getLoaiSp()==4) {
             ivProduct.setImageResource(R.drawable.img_sua);
         }
 

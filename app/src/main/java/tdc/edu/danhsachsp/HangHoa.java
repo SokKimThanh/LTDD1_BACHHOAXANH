@@ -25,12 +25,12 @@ public class HangHoa extends SanPham {
         this.soluongNhapkho = soluongNhapkho;
     }
 
-    public HangHoa(String tenSp, String loaiSp, double giaSp,  int soluongNhapkho) {
+    public HangHoa(String tenSp, int loaiSp, double giaSp,  int soluongNhapkho) {
         super(tenSp, loaiSp, giaSp );
         this.soluongNhapkho = soluongNhapkho;
     }
 
-    public HangHoa(String tenSp, String loaiSp, double giaSp ) {
+    public HangHoa(String tenSp, int loaiSp, double giaSp ) {
         super(tenSp, loaiSp, giaSp );
     }
 

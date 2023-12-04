@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import tdc.edu.danhsachdm.DanhMucListAdapter;
+import tdc.edu.danhsachdm.ViewDanhMucList;
+
 public class ViewSanPhamList extends AppCompatActivity {
     //3 thanh phan hien thi danh sach
 
@@ -23,7 +26,7 @@ public class ViewSanPhamList extends AppCompatActivity {
     static List<HangHoa> hangHoas = new ArrayList<>();
     static SanPhamListAdapter sanPhamListAdapter;
 
-    ListView lvDanhSachSp;
+    static ListView lvDanhSachSp;
 
     ImageView ivHinh;
 
@@ -100,6 +103,8 @@ public class ViewSanPhamList extends AppCompatActivity {
         sanPhamListAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, hangHoas);
         // hien thi len listview
         lvDanhSachSp.setAdapter(sanPhamListAdapter);
+
+
      }
 
     // gan menu vao danh sach
@@ -124,4 +129,5 @@ public class ViewSanPhamList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

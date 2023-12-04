@@ -120,16 +120,30 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 // Thêm số lượng nhập kho
                 sanPham.setSoLuongTonKho(Integer.parseInt(edtSoLuongSP.getText().toString()));
                 // thêm loại sp(lưu mã loại sản phẩm)
-                sanPham.setLoaiSp(selectedMaDM+"");
+                sanPham.setLoaiSp(selectedMaDM);
 
                 // Dữ liệu tĩnh tham gia
                 if (ViewSanPhamList.hangHoas.add(sanPham)) {
                     // Thêm đối tượng HangHoa vào cơ sở dữ liệu
                     dbHangHoa.ThemDL(sanPham);
                     Toast.makeText(ViewSanPhamAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-                    ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();// Cập nhật ListView
 
+                    updateListView();
                 }
+            }
+
+            private void updateListView() {
+                ViewSanPhamList.hangHoas.clear();
+                // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+                ViewSanPhamList.hangHoas.addAll(dbHangHoa.DocDL());
+
+                // gan san pham bang menu item layout(gan template item)
+                ViewSanPhamList.sanPhamListAdapter = new SanPhamListAdapter(ViewSanPhamAdd.this, R.layout.layout_sanpham_item, ViewSanPhamList.hangHoas);
+                // hien thi len listview
+                ViewSanPhamList.lvDanhSachSp.setAdapter(ViewSanPhamList.sanPhamListAdapter);
+
+                // Sau khi cập nhật dữ liệu
+                ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();
             }
         });
 
