@@ -78,8 +78,13 @@ public class ViewSanPhamList extends AppCompatActivity {
             HangHoa hh = hangHoas.get(position);
             dbSanPham.XoaDL(hh);
             hangHoas.remove(position);
-            sanPhamListAdapter.notifyDataSetChanged();
+
             Toast.makeText(ViewSanPhamList.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+            // gan san pham bang menu item layout(gan template item)
+            sanPhamListAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, dbSanPham.DocDL());
+            // hien thi len listview
+            lvDanhSachSp.setAdapter(sanPhamListAdapter);
+
             return false;
         });
     }

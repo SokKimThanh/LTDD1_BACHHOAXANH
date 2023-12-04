@@ -403,7 +403,6 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
     }
 
     public void updateListSanPham(List<HangHoa> listHangHoa) {
-
         // gan san pham bang menu item layout(gan template item)
         productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
         // hien thi len listview
