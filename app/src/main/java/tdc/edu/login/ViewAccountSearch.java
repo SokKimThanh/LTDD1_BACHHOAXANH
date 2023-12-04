@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -27,8 +28,8 @@ public class ViewAccountSearch extends AppCompatActivity {
     RadioButton rbAdmin, rbCustomer, rbEmployee;
     RadioButton rbLoaiTK, rbTenTK, rbXemTatCa;
     Button btnTimKiem;
-    EditText edtSearchKeyword, edtCapDoTaiKhoan;
-    ListView listViewDSTaiKhoan;
+    EditText edtAccountName, edtAccountLevel;
+    ListView lvDanhSachTaiKhoan;
 
     // List data account
     List<Account> accounts = new ArrayList<>();
@@ -37,6 +38,8 @@ public class ViewAccountSearch extends AppCompatActivity {
     // Account item Adapter
     AccountAdapter accountAdapter;
 
+    ImageView ivSearchNull;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,38 +47,49 @@ public class ViewAccountSearch extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
         setControl();
         setEvent();
-
-        // set default value control
-        rgCapDoTaiKhoan.clearCheck();
-        rgSearchBy.clearCheck();
     }
 
     /**
      * Show hide radio group button cap do tai khoan
      */
     private void ClickEventShowRadioGroupLevelAccount() {
-        // ẩn thân chi thuật
+        // lần đầu chạy xóa hết lựa chọn radiobutton
+        rgSearchBy.clearCheck();
+        rgCapDoTaiKhoan.clearCheck();
+
+        // ẩn radio lựa chọn tìm kiếm theo loại tài khoản
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
             accounts.clear();
             // Xử lý sự kiện khi chọn radio button khác nhau
             if (rbLoaiTK.isChecked()) {
                 // Hiện khi RadioButton được nhấn
                 radioGroupConditionPhanQuyen.setVisibility(View.VISIBLE);
+                int accountLevel = -1;
+                if (rbAdmin.isChecked()) {
+                    accountLevel = 0;// admin
+                } else if (rbCustomer.isChecked()) {
+                    accountLevel = 1;// user
+                } else if (rbEmployee.isChecked()) {
+                    accountLevel = 2;// guest
+                }
+                // Nếu có keyword thì tìm theo keyword
+                if (edtAccountName.getText().length() > 0) {
+                    accounts.addAll(dbUserAccount.DocDLByAccountNameAndLevel(accountLevel, edtAccountName.getText().toString()));
+                } else {
+                    // không có keyword
+                    accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(accountLevel));
+                }
+                ShowThongBaoTrangThaiSearch();
             } else if (rbTenTK.isChecked()) {
                 // Hiện  khi RadioButton được nhấn
                 radioGroupConditionPhanQuyen.setVisibility(View.GONE);
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1));
+                accounts.addAll(dbUserAccount.DocDL());
             } else if (rbXemTatCa.isChecked()) {
                 // Hiện khi RadioButton được nhấn
                 radioGroupConditionPhanQuyen.setVisibility(View.GONE);
-                accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1));
+                accounts.addAll(dbUserAccount.DocDL());
             }
-            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
-            // hien thi len listview
-            listViewDSTaiKhoan.setAdapter(accountAdapter);
-            accountAdapter.notifyDataSetChanged();
-
-            rgCapDoTaiKhoan.clearCheck();// không gọi thêm db
+            CapNhatAccountList();
         });
         // tìm kiếm theo loại
         rgCapDoTaiKhoan.setOnCheckedChangeListener((group, checkedId) -> {
@@ -91,13 +105,13 @@ public class ViewAccountSearch extends AppCompatActivity {
                 // Hiện cấp độ   khi RadioButton được nhấn
                 accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(AccountLevel.EMPLOYEE.getLevelCode()));
             }
-
-            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
-            // hien thi len listview
-            listViewDSTaiKhoan.setAdapter(accountAdapter);
-            accountAdapter.notifyDataSetChanged();
+            CapNhatAccountList();
         });
+        // execute gut
+    }
 
+    public void CapNhatAccountList() {
+        accountAdapter.notifyDataSetChanged();
     }
 
     private void setEvent() {
@@ -111,32 +125,40 @@ public class ViewAccountSearch extends AppCompatActivity {
      * click event tim kiem search by loai
      */
     private void ClickEventTimKiem() {
-        btnTimKiem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int i = 0;
+        btnTimKiem.setOnClickListener(v -> {
+            accounts.clear();// reset listview
+            int i = -1;// view all
+            if (rbLoaiTK.isChecked()) {
+                // tìm theo loại
                 if (rbCustomer.isChecked()) {
                     i = 1;// user
                 } else if (rbAdmin.isChecked()) {
                     i = 0;// admin
                 } else if (rbEmployee.isChecked()) {
                     i = 2;// guest
-                }else{
-                    i = -1;// view all
                 }
-                if(accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i))){
-                    accountAdapter = new AccountAdapter(v.getContext(), R.layout.layout_login_item, accounts);
-                    // hien thi len listview
-                    listViewDSTaiKhoan.setAdapter(accountAdapter);
-                    accountAdapter.notifyDataSetChanged();
+                // Nếu có keyword thì tìm theo keyword
+                if (edtAccountName.getText().length() > 0) {
+                    accounts.addAll(dbUserAccount.DocDLByAccountNameAndLevel(i, edtAccountName.getText().toString()));
+                } else {
+                    // không có keyword
+                    accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(i));
+                }
+            } else {
+                // tìm tất cả
+                accounts.addAll(dbUserAccount.DocDLByAccountName(edtAccountName.getText().toString()));
+                if (accounts.size() > 0) {
+                    ivSearchNull.setVisibility(View.GONE);
+                } else {
+                    ivSearchNull.setVisibility(View.VISIBLE);
                 }
             }
+            CapNhatAccountList();
         });
-
     }
 
     private void CLickEventListViewAccountItem() {
-        listViewDSTaiKhoan.setOnItemClickListener((parent, view, position, id) -> {
+        lvDanhSachTaiKhoan.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(ViewAccountSearch.this, ViewAccountForgotten.class);
             // bạn cần phải chắc chắn rằng SanPham
             // có thể được chuyển đổi thành CharSequence,
@@ -153,7 +175,7 @@ public class ViewAccountSearch extends AppCompatActivity {
             startActivity(intent);
         });
         //su kien long click de xoa item
-        listViewDSTaiKhoan.setOnItemLongClickListener((parent, view, position, id) -> {
+        lvDanhSachTaiKhoan.setOnItemLongClickListener((parent, view, position, id) -> {
             Account o = accounts.get(position);
             dbUserAccount.XoaDL(String.valueOf(o.getMataikhoan()));
             accounts.remove(position);
@@ -161,21 +183,27 @@ public class ViewAccountSearch extends AppCompatActivity {
             return false;
         });
     }
-
+    public void ShowThongBaoTrangThaiSearch(){
+        if (accounts.size() > 0) {
+            ivSearchNull.setVisibility(View.GONE);
+        } else {
+            ivSearchNull.setVisibility(View.VISIBLE);
+        }
+    }
     private void KhoiTao() {
         dbUserAccount = new DBAccount(ViewAccountSearch.this);
-        accounts.clear();
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
         if ((long) dbUserAccount.DocDL().size() <= 0) {
             Toast.makeText(this, "DB Rỗng không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(accounts.addAll(dbUserAccount.DocDLByCapDoTaiKhoan(-1))){
-            accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
-            // hien thi len listview
-            listViewDSTaiKhoan.setAdapter(accountAdapter);
-            accountAdapter.notifyDataSetChanged();
-        }
+        accounts.addAll(dbUserAccount.DocDL());
+        // cap nhat account list
+        accountAdapter = new AccountAdapter(ViewAccountSearch.this, R.layout.layout_login_item, accounts);
+        // hien thi len listview
+        lvDanhSachTaiKhoan.setAdapter(accountAdapter);
+
+        ShowThongBaoTrangThaiSearch();
     }
 
     private void setControl() {
@@ -189,11 +217,14 @@ public class ViewAccountSearch extends AppCompatActivity {
         rbTenTK = findViewById(R.id.rbTenTK);
         rbXemTatCa = findViewById(R.id.rbXemTatCa);
         btnTimKiem = findViewById(R.id.btnTimKiem);
-        edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
-        edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
-        listViewDSTaiKhoan = findViewById(R.id.lvDanhSachTaiKhoan);
+        edtAccountName = findViewById(R.id.edtAccountName);
+        edtAccountLevel = findViewById(R.id.edtAccountLevel);
+        lvDanhSachTaiKhoan = findViewById(R.id.lvDanhSachTaiKhoan);
         // ẩn thân
         radioGroupConditionPhanQuyen = findViewById(R.id.radioGroupConditionPhanQuyen);
+
+        ivSearchNull = findViewById(R.id.ivSearchNull);
+
     }
 
     // gan menu add vao danh sach

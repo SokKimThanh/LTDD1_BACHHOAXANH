@@ -210,7 +210,7 @@ public class ViewAccountLogin extends AppCompatActivity {
         tvMessageStatus = findViewById(R.id.tvMessageStatus);
         tvDangKy = findViewById(R.id.tvDangKy);
         tvQuenMatKhau = findViewById(R.id.tvQuenMatKhau);
-        edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
+        edtCapDoTaiKhoan = findViewById(R.id.edtAccountLevel);
 
         rgCapDoTaiKhoan = findViewById(R.id.rgCapDoTaiKhoan);
         rbAdmin = findViewById(R.id.rbAdmin);

@@ -58,15 +58,11 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     private void checkTrangThaiNutThanhToan() {
         // xử lý cộng trừ gio hàng
-        if (ViewProductSearch.gioHang.getHangHoaList().size() == 0) {
-//            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
-            // khóa thao tác thanh toán
-            btnThanhToan.setEnabled(false);
-        } else {
-            // tắt thông báo
-            // mở khóa thao tác thanh toán
-            btnThanhToan.setEnabled(true);
-        }
+        //            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
+        // khóa thao tác thanh toán
+        // tắt thông báo
+        // mở khóa thao tác thanh toán
+        btnThanhToan.setEnabled(ViewProductSearch.gioHang.getHangHoaList().size() != 0);
     }
 
     private void btnThanhToan_ClickEvent() {
@@ -182,7 +178,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     public void onDeleteCartItemClicked(HangHoa hangHoa) {
         if (ViewProductSearch.gioHang.remove(hangHoa)) {
             capNhatGioHang();
-            Toast.makeText(ViewGioHangList.this, "Xóa sản phẩm khỏi giỏ hàng thành công! SL:" + ViewProductSearch.gioHang.getQuantity(hangHoa), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewGioHangList.this, "Xóa sản phẩm khỏi giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
             checkTrangThaiNutThanhToan();
         } else {
             Toast.makeText(ViewGioHangList.this, "Sản phẩm không tồn tại trong giỏ hàng!", Toast.LENGTH_SHORT).show();
@@ -212,6 +208,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
         capNhatSoLuongIconGioHang();
     }
 
+    @SuppressLint("SetTextI18n")
     private void capNhatTongThanhTien() {
         ViewGioHangList.tvTongThanhTien.setText((ViewProductSearch.gioHang.getTongThanhTien() + ""));
     }

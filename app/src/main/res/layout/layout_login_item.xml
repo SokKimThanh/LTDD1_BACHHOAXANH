@@ -1,141 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_border_xam"
-    android:layout_margin="16sp">
+    android:padding="1dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/bg_border_xam">
 
 
-<!-- Layout tài khoản item-->
-<!-- Sok Kim Thanh 03/12/2023 1:35PM -->
+    <!-- Layout tài khoản item-->
+    <!-- Sok Kim Thanh 03/12/2023 1:35PM -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_boder_primary_pink"
         android:orientation="vertical">
-<!--        mã tài khoản-->
+        <!--        mã tài khoản-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Mã tài khoản"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvMaTK"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Mã tai khoan"
                 android:textSize="16sp" />
         </LinearLayout>
-<!--        tên tài khoản-->
+        <!--        tên tài khoản-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Tên tài khoản"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvTenTK"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Ten tai khoan"
                 android:textSize="16sp" />
         </LinearLayout>
-<!--        email-->
+        <!--        email-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Email"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvEmailTK"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Email"
                 android:textSize="16sp" />
         </LinearLayout>
-<!--        Thời gian hết hạn-->
+        <!--        Thời gian hết hạn-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Ngày gia hạn"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvNgayHetHan"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Ngày hết hạn tai khoan"
                 android:textSize="16sp" />
         </LinearLayout>
-<!--Loại tài khoản-->
+        <!--Loại tài khoản-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Loại tài khoản"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvLoaiTK"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Loai tai khoan"
                 android:textSize="16sp" />
         </LinearLayout>
-<!--Kích hoạt email-->
+        <!--Kích hoạt email-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="2"
                 android:hint="Email kích hoạt"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvKichHoatEmail"
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:layout_margin="4sp"
+                android:layout_weight="5"
                 android:text="Đã kích hoạt"
                 android:textSize="16sp" />
         </LinearLayout>

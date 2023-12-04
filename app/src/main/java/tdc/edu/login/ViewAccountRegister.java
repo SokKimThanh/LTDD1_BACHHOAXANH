@@ -1,6 +1,5 @@
 package tdc.edu.login;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -158,19 +157,10 @@ public class ViewAccountRegister extends AppCompatActivity {
 
         });
 
-//        cap do tai khoan
-        rgCapDoTaiKhoan.clearCheck();
+        // cap do tai khoan
         rbAdmin.setChecked(true);
-        rbUser.setChecked(false);
-        rbGuest.setChecked(false);
-        edtCapDoTaiKhoan.setText("0");
-        edtCapDoTaiKhoan.setBackgroundColor(Color.TRANSPARENT);
-
         // ngay het han
-        rgNgayHetHan.clearCheck();
         rb1Thang.setChecked(true);
-        rb6Thang.setChecked(false);
-        rb1Nam.setChecked(false);
     }
 
     boolean isChecked = true;//tắt mật khẩu
@@ -212,9 +202,9 @@ public class ViewAccountRegister extends AppCompatActivity {
             thangGH_1Thang = 1;
             namGH_1Thang++;
         }
-        ngayGiaHan_1Thang = dataGH[0] + "/" + String.format("%02d",thangGH_1Thang)+ "/" + namGH_1Thang;
-        ngayGiaHan_6Thang = dataGH[0] + "/" + String.format("%02d",thangGH_6Thang) + "/" + namGH_6Thang;
-        ngayGiaHan_1Nam = dataGH[0] + "/" + String.format("%02d",thangGH_1Nam)  + "/" + namGH_1Nam;
+        ngayGiaHan_1Thang = dataGH[0] + "/" + String.format("%02d", thangGH_1Thang) + "/" + namGH_1Thang;
+        ngayGiaHan_6Thang = dataGH[0] + "/" + String.format("%02d", thangGH_6Thang) + "/" + namGH_6Thang;
+        ngayGiaHan_1Nam = dataGH[0] + "/" + String.format("%02d", thangGH_1Nam) + "/" + namGH_1Nam;
 
     }
 
@@ -223,7 +213,7 @@ public class ViewAccountRegister extends AppCompatActivity {
         btnShowPassword = findViewById(R.id.btnShowPassword);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edtNgayHetHanTaiKhoan = findViewById(R.id.edtNgayHetHanTaiKhoan);
-        edtCapDoTaiKhoan = findViewById(R.id.edtCapDoTaiKhoan);
+        edtCapDoTaiKhoan = findViewById(R.id.edtAccountLevel);
         edtTenTaiKhoan = findViewById(R.id.edtTenTaiKhoan);
 
         tvMessageStatus = findViewById(R.id.tvMessageStatusDangKy);

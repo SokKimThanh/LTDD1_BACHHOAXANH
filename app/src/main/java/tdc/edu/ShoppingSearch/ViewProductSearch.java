@@ -330,7 +330,7 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
         btnTimKiem = findViewById(R.id.btnTimKiem);
         ivProduct = findViewById(R.id.ivProduct);
         // anh xa ô tìm kiếm theo loại từ khóa
-        edtSearchKeyword = findViewById(R.id.edtSearchKeyword);
+        edtSearchKeyword = findViewById(R.id.edtAccountName);
         // ánh xạ view holder button add to cart
         btnAddToCartViewHolder = findViewById(R.id.btnAddToCartProductItemAdapter);
         // ánh xạ listview hiển thị danh sách
