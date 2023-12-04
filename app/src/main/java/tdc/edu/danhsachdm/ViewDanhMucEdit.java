@@ -31,7 +31,7 @@ public class ViewDanhMucEdit extends AppCompatActivity {
     private void setEvent() {
         KhoiTao();
         btnSua.setOnClickListener(v -> {
- 
+
             if (edtTenDM.getText().length() <= 0) {
                 edtTenDM.setError("Vui long nhap ten");
                 return;
@@ -49,7 +49,16 @@ public class ViewDanhMucEdit extends AppCompatActivity {
             if (ViewDanhMucList.danhMucList.Sua(danhmuc)) {
                 dbDanhMuc.SuaDL(danhmuc);
                 Toast.makeText(ViewDanhMucEdit.this, "Sửa Thành Công!", Toast.LENGTH_SHORT).show();
-                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+                // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+                ViewDanhMucList.danhMucList.setDanhMucList(dbDanhMuc.DocDL());
+
+                // gan san pham bang menu item layout(gan template item)
+                ViewDanhMucList.danhMucListAdapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, ViewDanhMucList.danhMucList.getDanhMucList());
+                // hien thi len listview
+                ViewDanhMucList.lvDanhMucList.setAdapter(ViewDanhMucList.danhMucListAdapter);
+
+                // Sau khi cập nhật dữ liệu
+                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();
             }
 
         });
@@ -62,16 +71,27 @@ public class ViewDanhMucEdit extends AppCompatActivity {
                     if (ViewDanhMucList.danhMucList.Xoa(danhmuc)) {
                         dbDanhMuc.XoaDL(danhmuc);
                         Toast.makeText(ViewDanhMucEdit.this, "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
-                        ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+                        // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+                        ViewDanhMucList.danhMucList.setDanhMucList(dbDanhMuc.DocDL());
+
+                        // gan san pham bang menu item layout(gan template item)
+                        ViewDanhMucList.danhMucListAdapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, ViewDanhMucList.danhMucList.getDanhMucList());
+                        // hien thi len listview
+                        ViewDanhMucList.lvDanhMucList.setAdapter(ViewDanhMucList.danhMucListAdapter);
+
+                        // Sau khi cập nhật dữ liệu
+                        ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();
                     }
                 }).setNegativeButton(android.R.string.no, null).show());
         btnQuayVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                onBackPressed();
             }
         });
     }
+
 
     private void KhoiTao() {
         // khoi tao gia tri từ danh sach danh muc

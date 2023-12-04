@@ -46,11 +46,9 @@ public class ViewDanhMucAdd extends AppCompatActivity {
                 // Thêm đối tượng DanhMuc vào cơ sở dữ liệu
                 dbDanhMuc.ThemDL(danhMuc);
                 Toast.makeText(ViewDanhMucAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
-
+                updateListviewDanhMuc();
             } catch (Exception ex) {
                 Toast.makeText(ViewDanhMucAdd.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
             }
         });
         btnLamMoi.setOnClickListener(v -> {
@@ -64,6 +62,19 @@ public class ViewDanhMucAdd extends AppCompatActivity {
             ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
             finish();
         });
+    }
+
+    private void updateListviewDanhMuc() {
+        // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
+        ViewDanhMucList.danhMucList.setDanhMucList(dbDanhMuc.DocDL());
+
+        // gan san pham bang menu item layout(gan template item)
+        ViewDanhMucList.danhMucListAdapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, ViewDanhMucList.danhMucList.getDanhMucList());
+        // hien thi len listview
+        ViewDanhMucList.lvDanhMucList.setAdapter(ViewDanhMucList.danhMucListAdapter);
+
+        // Sau khi cập nhật dữ liệu
+        ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();
     }
 
     private void KhoiTao() {

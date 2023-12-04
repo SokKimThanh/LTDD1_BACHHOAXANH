@@ -1,15 +1,18 @@
 package tdc.edu.danhsachdm;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+import java.util.Objects;
 
 import tdc.edu.danhsachsp.R;
 
@@ -20,25 +23,25 @@ public class ViewDanhMucList extends AppCompatActivity {
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static DanhMucList danhMucList = new DanhMucList();
+    static DanhMucList danhMucList;
 
+    @SuppressLint("StaticFieldLeak")
     static DanhMucListAdapter danhMucListAdapter;
 
-    ListView lvDanhMucList;
-
-    ImageView ivHinhDM;
+    static ListView lvDanhMucList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_danhmuc_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);// hiển thị nút quay lại trang chủ
 
         // anh xa
         setControl();
         setEvent();
     }
+
 
     //hien thi danh sach
     private void setControl() {
@@ -61,31 +64,17 @@ public class ViewDanhMucList extends AppCompatActivity {
             // Một cách để làm điều này là để làm cho lớp
             // DanhMuc triển khai Serializable hoặc Parcelable,
             // sau đó bạn có thể chuyển toàn bộ đối tượng qua Intent.
-            /**
-             * public class DanhMuc implements Serializable {
-             *     // các trường và phương thức của bạn ở đây
-             * }
-             * */
             intent.putExtra("item", danhMucList.getDanhMucList().get(position));
             startActivity(intent);
         });
 
         //su kien long click de xoa item
-//        lvDanhMucList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                dataSp.remove(position);
-//                spAdapter.notifyDataSetChanged();
-//                Toast.makeText(DanhSachDanhMuc.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
     }
 
     // khoi tao danh sach san pham
     private void KhoiTao() {
-        // dbsinhvien truy cập dữ liệu DB
+        danhMucList  = new DanhMucList();
+        // dbDanhMuc truy cập dữ liệu DB
         dbDanhMuc = new DBDanhMuc(this);
 
         danhMucList.getDanhMucList().clear();
@@ -102,6 +91,9 @@ public class ViewDanhMucList extends AppCompatActivity {
         danhMucListAdapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, danhMucList.getDanhMucList());
         // hien thi len listview
         lvDanhMucList.setAdapter(danhMucListAdapter);
+
+        // Sau khi cập nhật dữ liệu
+        this.danhMucListAdapter. notifyDataSetChanged();
     }
 
     // gan menu vao danh sach
@@ -129,4 +121,5 @@ public class ViewDanhMucList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
