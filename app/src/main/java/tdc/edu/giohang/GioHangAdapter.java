@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,7 +50,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         TextView tvName = convertView.findViewById(R.id.tvProductCartName);
         TextView tvPrice = convertView.findViewById(R.id.tvProductCartPrice);
         TextView tvProductStock = convertView.findViewById(R.id.tvProductCartStock);
-        TextView tvQuantity = convertView.findViewById(R.id.tvQuantity);
+        EditText tvQuantity = convertView.findViewById(R.id.tvQuantity);
         ImageView ivProduct = convertView.findViewById(R.id.ivProductCartItem);
         ImageView ivDecrease = convertView.findViewById(R.id.ivDecreaseQuantity);
         ImageView ivIncrease = convertView.findViewById(R.id.ivIncreaseQuantity);

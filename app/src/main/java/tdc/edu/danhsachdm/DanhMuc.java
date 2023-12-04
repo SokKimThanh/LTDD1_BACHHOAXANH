@@ -3,22 +3,25 @@ package tdc.edu.danhsachdm;
 import java.io.Serializable;
 
 public class DanhMuc implements Serializable {
-    private String ma, ten, ghichu;
+    private String ten, ghichu;
+    private int ma;
+
     public DanhMuc() {
+        this.ma++;
     }
 
 
-    public DanhMuc(String ma, String ten, String ghichu) {
-        this.ma = ma;
+    public DanhMuc(String ten, String ghichu) {
         this.ten = ten;
         this.ghichu = ghichu;
+        this.ma++;
     }
 
-    public String getMa() {
+    public int getMa() {
         return ma;
     }
 
-    public void setMa(String ma) {
+    public void setMa(int ma) {
         this.ma = ma;
     }
 

@@ -1,6 +1,5 @@
 package tdc.edu.danhsachdm;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,56 +30,41 @@ public class ViewDanhMucEdit extends AppCompatActivity {
 
     private void setEvent() {
         KhoiTao();
-        btnSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tvMaDM.getText().length() <= 0) {
-                    tvMaDM.setError("Vui long nhap ma");
-                    return;
-                }
-                if (edtTenDM.getText().length() <= 0) {
-                    edtTenDM.setError("Vui long nhap ten");
-                    return;
-                }
-                if (edtGhiChuDM.getText().length() <= 0) {
-                    edtGhiChuDM.setError("Vui long ghi chu");
-                    return;
-                }
-                //Cập nhật thông tin mới
-                danhmuc.setMa(tvMaDM.getText().toString());
-                danhmuc.setTen(edtTenDM.getText().toString());
-                danhmuc.setGhichu(edtGhiChuDM.getText().toString());
-
-                // Lưu
-                if (ViewDanhMucList.danhMucList.Sua(danhmuc)) {
-                    dbDanhMuc.SuaDL(danhmuc);
-                    Toast.makeText(ViewDanhMucEdit.this, "Sửa Thành Công!", Toast.LENGTH_SHORT).show();
-                    ViewDanhMucList.adapter.notifyDataSetChanged();// Cập nhật ListView
-                }
-
+        btnSua.setOnClickListener(v -> {
+ 
+            if (edtTenDM.getText().length() <= 0) {
+                edtTenDM.setError("Vui long nhap ten");
+                return;
             }
-        });
-        btnXoa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(ViewDanhMucEdit.this)
-                        .setTitle("Xác nhận xóa")
-                        .setMessage("Bạn có chắc chắn muốn xóa không?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                // Xóa phần tử tại đây
-                                if (ViewDanhMucList.danhMucList.Xoa(danhmuc)) {
-                                    dbDanhMuc.XoaDL(danhmuc);
-                                    Toast.makeText(ViewDanhMucEdit.this, "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
-                                    ViewDanhMucList.adapter.notifyDataSetChanged();// Cập nhật ListView
-                                }
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null).show();
-
+            if (edtGhiChuDM.getText().length() <= 0) {
+                edtGhiChuDM.setError("Vui long ghi chu");
+                return;
             }
+            //Cập nhật thông tin mới
+
+            danhmuc.setTen(edtTenDM.getText().toString());
+            danhmuc.setGhichu(edtGhiChuDM.getText().toString());
+
+            // Lưu
+            if (ViewDanhMucList.danhMucList.Sua(danhmuc)) {
+                dbDanhMuc.SuaDL(danhmuc);
+                Toast.makeText(ViewDanhMucEdit.this, "Sửa Thành Công!", Toast.LENGTH_SHORT).show();
+                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+            }
+
         });
+        btnXoa.setOnClickListener(v -> new AlertDialog.Builder(ViewDanhMucEdit.this)
+                .setTitle("Xác nhận xóa")
+                .setMessage("Bạn có chắc chắn muốn xóa không?")
+                .setIcon(R.drawable.icon_delete)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    // Xóa phần tử tại đây
+                    if (ViewDanhMucList.danhMucList.Xoa(danhmuc)) {
+                        dbDanhMuc.XoaDL(danhmuc);
+                        Toast.makeText(ViewDanhMucEdit.this, "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
+                        ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+                    }
+                }).setNegativeButton(android.R.string.no, null).show());
         btnQuayVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +81,7 @@ public class ViewDanhMucEdit extends AppCompatActivity {
         danhmuc = (DanhMuc) getIntent().getSerializableExtra("item");
 
         //hiển thị dữ liệu lên màn hình sửa
-        tvMaDM.setText(danhmuc.getMa());// mã
+        tvMaDM.setText(danhmuc.getMa() + "");// mã
         edtTenDM.setText(danhmuc.getTen());// tên
         edtGhiChuDM.setText(danhmuc.getGhichu());// ghi chu
 

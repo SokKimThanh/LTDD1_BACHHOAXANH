@@ -2,7 +2,6 @@ package tdc.edu.danhsachdm;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import tdc.edu.danhsachsp.R;
 
 public class ViewDanhMucAdd extends AppCompatActivity {
 
-    EditText edtMaDM, edtTenDM, edtGhiChuDM;
+    EditText edtTenDM, edtGhiChuDM;
     Button btnThem, btnLamMoi, btnQuayVe;
 
     DBDanhMuc dbDanhMuc;
@@ -31,46 +30,39 @@ public class ViewDanhMucAdd extends AppCompatActivity {
 
     private void setEvent() {
         KhoiTao();
-        btnThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edtMaDM.getText().length() <= 0) {
-                    edtMaDM.setError("Vui long nhap ma");
-                    return;
-                }
-                if (edtTenDM.getText().length() <= 0) {
-                    edtTenDM.setError("Vui long nhap ten");
-                    return;
-                }
-                if (edtGhiChuDM.getText().length() <= 0) {
-                    edtGhiChuDM.setError("Vui long ghi chu");
-                    return;
-                }
-                DanhMuc danhMuc = new DanhMuc(edtMaDM.getText().toString(), edtTenDM.getText().toString(), edtGhiChuDM.getText().toString());
+        btnThem.setOnClickListener(v -> {
 
-                if (ViewDanhMucList.danhMucList.Them(danhMuc)) {
-                    // Thêm đối tượng DanhMuc vào cơ sở dữ liệu
-                    dbDanhMuc.ThemDL(danhMuc);
-                    Toast.makeText(ViewDanhMucAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-                    ViewDanhMucList.adapter.notifyDataSetChanged();// Cập nhật ListView
-                }
+            if (edtTenDM.getText().length() <= 0) {
+                edtTenDM.setError("Vui long nhap ten");
+                return;
+            }
+            if (edtGhiChuDM.getText().length() <= 0) {
+                edtGhiChuDM.setError("Vui long ghi chu");
+                return;
+            }
+            DanhMuc danhMuc = new DanhMuc(edtTenDM.getText().toString(), edtGhiChuDM.getText().toString());
 
+            try {
+                // Thêm đối tượng DanhMuc vào cơ sở dữ liệu
+                dbDanhMuc.ThemDL(danhMuc);
+                Toast.makeText(ViewDanhMucAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
+                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+
+            } catch (Exception ex) {
+                Toast.makeText(ViewDanhMucAdd.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
             }
         });
-        btnLamMoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edtMaDM.setText("");
-                edtTenDM.setText("");
-                edtGhiChuDM.setText("");
-                edtGhiChuDM.clearFocus();
-            }
+        btnLamMoi.setOnClickListener(v -> {
+
+            edtTenDM.setText("");
+            edtGhiChuDM.setText("");
+            edtGhiChuDM.clearFocus();
         });
-        btnQuayVe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+
+        btnQuayVe.setOnClickListener(v -> {
+            ViewDanhMucList.danhMucListAdapter.notifyDataSetChanged();// Cập nhật ListView
+            finish();
         });
     }
 
@@ -81,13 +73,14 @@ public class ViewDanhMucAdd extends AppCompatActivity {
     }
 
     private void setControl() {
-        this.edtMaDM = findViewById(R.id.edtDMEditMa);
+        // this.edtMaDM = findViewById(R.id.edtDMEditMa);
         this.edtTenDM = findViewById(R.id.edtDMEditTen);
         this.edtGhiChuDM = findViewById(R.id.edtDMGhiChu);
         this.btnThem = findViewById(R.id.btnDMEditAdd);
         this.btnLamMoi = findViewById(R.id.btnDMEditRefresh);
         this.btnQuayVe = findViewById(R.id.btnDMEditBack);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 

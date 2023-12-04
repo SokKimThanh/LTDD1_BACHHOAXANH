@@ -33,7 +33,7 @@ public class DanhMucList {
 
     public boolean Xoa(DanhMuc dm) {
         for (DanhMuc item : danhMucList) {
-            if (item.getMa().toLowerCase().compareTo(dm.getMa().toLowerCase()) == 0) {
+            if (item.getMa() == dm.getMa()) {
                 danhMucList.remove(item);
                 return true;
             }
@@ -41,11 +41,11 @@ public class DanhMucList {
         return false;
     }
 
-    public boolean Sua(DanhMuc i) {
+    public boolean Sua(DanhMuc dm) {
         for (DanhMuc item : danhMucList) {
-            if (item.getMa().toLowerCase().compareTo(i.getMa().toLowerCase()) == 0) {
-                item.setTen(i.getTen());
-                item.setGhichu(i.getGhichu());
+            if (item.getMa() == dm.getMa()) {
+                item.setTen(dm.getTen());
+                item.setGhichu(dm.getGhichu());
                 return true;
             }
         }
@@ -68,6 +68,6 @@ public class DanhMucList {
     }
 
     public void SapXepDanhMucTheoIDGiamDan() {
-        danhMucList.sort((DanhMuc d1, DanhMuc d2) -> d2.getMa().compareTo(d1.getMa()));
+        danhMucList.sort((DanhMuc d1, DanhMuc d2) -> d2.getMa() - d1.getMa());
     }
 }

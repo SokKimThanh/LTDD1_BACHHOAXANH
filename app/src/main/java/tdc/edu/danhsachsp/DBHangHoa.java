@@ -28,7 +28,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Câu lệnh SQL để tạo bảng HangHoa với các cột ma, ten, gioitinh
-        String sql = "Create Table If not exists HangHoa (ma Text primary key, ten Text, gia double, soluong int, loaisp text)";
+        String sql = "Create Table If not exists HangHoa (ma INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , ten Text, gia double, soluong int, loaisp text)";
 
         // Thực hiện câu lệnh SQL để tạo bảng
         db.execSQL(sql);
@@ -41,13 +41,13 @@ public class DBHangHoa extends SQLiteOpenHelper {
      */
     public void ThemDL(HangHoa o) {
         // Câu lệnh SQL để thêm một dòng vào bảng HangHoa
-        String sql = "Insert into HangHoa(ma, ten, gia, soluong, loaisp) values(?,?,?,?,?)";
+        String sql = "Insert into HangHoa(ten, gia, soluong, loaisp) values(?,?,?,?)";
 
         // Mở cơ sở dữ liệu để ghi
         SQLiteDatabase db = getWritableDatabase();
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
-        db.execSQL(sql, new String[]{o.getMaSp(), o.getTenSp(), String.valueOf(o.getGiaSp()), String.valueOf(o.getSoLuongTonKho())
+        db.execSQL(sql, new String[]{o.getTenSp(), String.valueOf(o.getGiaSp()), String.valueOf(o.getSoLuongTonKho())
                 , o.getLoaiSp()});
     }
 
@@ -64,7 +64,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // Thực hiện câu lệnh SQL với mã hàng hóa từ đối tượng HangHoa
-        db.execSQL(sql, new String[]{o.getMaSp()});
+        db.execSQL(sql, new String[]{o.getMaSp() + ""});
     }
 
 
@@ -83,7 +83,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng HangHoa
         // o.getTen() và o.getGioitinh() sẽ thay thế cho ?, o.getMa() sẽ thay thế cho ?
         db.execSQL(sql, new String[]{o.getTenSp(), String.valueOf(o.getGiaSp()),
-                String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp(), o.getMaSp()});
+                String.valueOf(o.getSoLuongTonKho()), o.getLoaiSp(), o.getMaSp() + ""});
     }
 
 
@@ -107,7 +107,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 // Khởi tạo đối tượng hàng hóa mới
                 HangHoa hanghoa = new HangHoa();
                 // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
-                hanghoa.setMaSp(cursor.getString(0).toString());
+                hanghoa.setMaSp(cursor.getInt(0));
                 // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
                 hanghoa.setTenSp(cursor.getString(1).toString());
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
@@ -122,11 +122,6 @@ public class DBHangHoa extends SQLiteOpenHelper {
         }
         // Trả về danh sách hàng hóa
         return listHangHoa;
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public List<HangHoa> DocDLByLoaiSP(String loaisp) {
@@ -145,7 +140,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 // Khởi tạo đối tượng hàng hóa mới
                 HangHoa hanghoa = new HangHoa();
                 // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
-                hanghoa.setMaSp(cursor.getString(0).toString());
+                hanghoa.setMaSp(cursor.getInt(0));
                 // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
                 hanghoa.setTenSp(cursor.getString(1).toString());
                 // Đọc dữ liệu từ cột 2 (Giá) và cập nhật vào đối tượng
@@ -186,7 +181,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 HangHoa hanghoa = new HangHoa();
 
                 // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
-                hanghoa.setMaSp(cursor.getString(0).toString());
+                hanghoa.setMaSp(cursor.getInt(0));
 
                 // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
                 hanghoa.setTenSp(cursor.getString(1).toString());
@@ -210,13 +205,13 @@ public class DBHangHoa extends SQLiteOpenHelper {
         return listHangHoa;
     }
 
-    public List<HangHoa> DocDLByTenSPVaLoaiSP(String tensp, String loaisp) {
+    public List<HangHoa> DocDLByTenSPVaLoaiSP(String tensp, int maloaisp) {
         // Khởi tạo danh sách hàng hóa
         List<HangHoa> listHangHoa = new ArrayList<>();
         String sql = "";
         String[] selectionArgs;
         // Câu lệnh SQL để lấy tất cả dữ liệu từ bảng HangHoa
-        boolean isLoaiSPNullOrEmpty = String.valueOf(loaisp).isEmpty() || loaisp == null;
+        boolean isLoaiSPNullOrEmpty = String.valueOf(maloaisp).isEmpty();
         if (String.valueOf(tensp).isEmpty()) {
             // không có tên sp
             if (isLoaiSPNullOrEmpty) {
@@ -227,24 +222,20 @@ public class DBHangHoa extends SQLiteOpenHelper {
             } else {
                 // có loại sp
                 sql = "Select * from HangHoa where loaisp like ?";
-                selectionArgs = new String[]{
-                        "%" + loaisp + "%",
-                };
+                selectionArgs = new String[]{"%" + maloaisp + "%",};
             }
         } else {
             // có tên sp
             if (isLoaiSPNullOrEmpty) {
                 // không có loại sp
                 sql = "Select * from HangHoa where ten like ?";
-                selectionArgs = new String[]{
-                        "%" + tensp + "%"
-                };
+                selectionArgs = new String[]{"%" + tensp + "%"};
             } else {
                 // có loại sp
                 sql = "Select * from HangHoa where ten like ? and loaisp like ?";
                 selectionArgs = new String[]{
                         "%" + tensp + "%",
-                        "%" + loaisp + "%"
+                        "%" + maloaisp + "%"
                 };
             }
         }
@@ -266,7 +257,7 @@ public class DBHangHoa extends SQLiteOpenHelper {
                 HangHoa hanghoa = new HangHoa();
 
                 // Đọc dữ liệu từ cột 0 (Mã hàng hóa) và cập nhật vào đối tượng
-                hanghoa.setMaSp(cursor.getString(0).toString());
+                hanghoa.setMaSp(cursor.getInt(0));
 
                 // Đọc dữ liệu từ cột 1 (Tên hàng hóa) và cập nhật vào đối tượng
                 hanghoa.setTenSp(cursor.getString(1).toString());
@@ -288,5 +279,13 @@ public class DBHangHoa extends SQLiteOpenHelper {
 
         // Trả về danh sách hàng hóa
         return listHangHoa;
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Xóa bảng
+        db.execSQL("DROP TABLE IF EXISTS HangHoa");
+        // Tạo lại bảng
+        onCreate(db);
     }
 }

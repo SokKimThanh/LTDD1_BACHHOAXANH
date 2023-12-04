@@ -18,6 +18,7 @@
         android:id="@+id/tvMaSp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:hint="Mã sản phẩm"
         android:textSize="20sp" />
 

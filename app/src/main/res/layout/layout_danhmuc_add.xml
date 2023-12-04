@@ -22,29 +22,29 @@
         android:text="Thông tin danh mục"
         android:textSize="20sp" />
 
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="4dp"-->
+<!--        android:gravity="start"-->
+<!--        android:text="Mã danh mục"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/edtDMEditMa"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Nhập mã danh mục"-->
+<!--        android:inputType="text"-->
+<!--        android:padding="16dp"-->
+<!--        android:textSize="16sp" />-->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:gravity="start"
-        android:text="Mã danh mục"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/edtDMEditMa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nhập mã danh mục"
-        android:inputType="text"
-        android:padding="16dp"
-        android:textSize="16sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:gravity="start"
-        android:text="Tên danh mục"
+        android:hint="Tên danh mục"
         android:textSize="18sp" />
 
     <EditText
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:gravity="start"
-        android:text="Ghi chú"
+        android:hint="Ghi chú"
         android:textSize="18sp" />
 
     <EditText

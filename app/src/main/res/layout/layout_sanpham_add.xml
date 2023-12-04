@@ -15,11 +15,11 @@
         android:text="Thêm Sản Phẩm"
         android:textColor="@color/white"
         android:textSize="30sp" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtMaSP"
-        android:hint="Nhập mã sản phẩm"/>
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/edtMaSP"-->
+<!--        android:hint="Nhập mã sản phẩm"/>-->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

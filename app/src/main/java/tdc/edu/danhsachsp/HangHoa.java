@@ -18,20 +18,20 @@ public class HangHoa extends SanPham {
 
 
     public HangHoa() {
-
+        maSp++;
     }
 
     public HangHoa(int soluongNhapkho) {
         this.soluongNhapkho = soluongNhapkho;
     }
 
-    public HangHoa(String tenSp, String loaiSp, double giaSp, String maSp, int soluongNhapkho) {
-        super(tenSp, loaiSp, giaSp, maSp);
+    public HangHoa(String tenSp, String loaiSp, double giaSp,  int soluongNhapkho) {
+        super(tenSp, loaiSp, giaSp );
         this.soluongNhapkho = soluongNhapkho;
     }
 
-    public HangHoa(String tenSp, String loaiSp, double giaSp, String maSp) {
-        super(tenSp, loaiSp, giaSp, maSp);
+    public HangHoa(String tenSp, String loaiSp, double giaSp ) {
+        super(tenSp, loaiSp, giaSp );
     }
 
     public int getSoLuongTonKho() {

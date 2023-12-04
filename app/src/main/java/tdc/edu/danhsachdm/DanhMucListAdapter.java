@@ -21,7 +21,7 @@ public class DanhMucListAdapter extends ArrayAdapter<DanhMuc> {
 
     int resource;//id cua control
 
-    List<DanhMuc> data;// danh sach san pham (dau vao+ dau ra)
+    List<DanhMuc> data;// danh sach danh muc (dau vao+ dau ra)
     public DanhMucListAdapter(Context context, int resource, List<DanhMuc> data){
         super(context,resource,data);
         this.context = context;
@@ -40,23 +40,23 @@ public class DanhMucListAdapter extends ArrayAdapter<DanhMuc> {
         TextView tvGhiChuDM = convertView.findViewById(R.id.tvGhiChuDM);
         // dau vao position set gia tri cho control
         DanhMuc dm = data.get(position);
-        // hien thi ten san pham
+        // hien thi ten danh muc
         tvTenDM.setText(dm.getTen());
-        // hien thi gia san pham
-        tvMaDM.setText(dm.getMa());
+        // hien thi ma danh muc
+        tvMaDM.setText(dm.getMa()+"");
         // hien thi ghi chú danh mục
         tvGhiChuDM.setText(dm.getGhichu());
         // hien thi hinh`
-        if(dm.getMa().equals("dm001")){
+        if(dm.getMa()==0){
             ivHinhDM.setImageResource(R.drawable.img_thit);
         }
-        if(dm.getMa().equals("dm002")){
+        if(dm.getMa()==1){
             ivHinhDM.setImageResource(R.drawable.img_ca);
         }
-        if(dm.getMa().equals("dm003")){
+        if(dm.getMa()==2){
             ivHinhDM.setImageResource(R.drawable.img_trung);
         }
-        if(dm.getMa().equals("dm004")){
+        if(dm.getMa()==3){
             ivHinhDM.setImageResource(R.drawable.img_sua);
         }
         // hien thi toan bo du lieu len view hop le

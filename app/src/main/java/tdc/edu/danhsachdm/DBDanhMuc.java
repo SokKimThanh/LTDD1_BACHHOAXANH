@@ -28,7 +28,7 @@ public class DBDanhMuc extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Câu lệnh SQL để tạo bảng tblDanhMuc với các cột ma, ten, ghichu
-        String sql = "Create Table If not exists tblDanhMuc(ma Text, ten Text, ghichu text)";
+        String sql = "Create Table If not exists tblDanhMuc(ma INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ten Text, ghichu text)";
 
         // Thực hiện câu lệnh SQL để tạo bảng
         db.execSQL(sql);
@@ -41,15 +41,16 @@ public class DBDanhMuc extends SQLiteOpenHelper {
      */
     public void ThemDL(DanhMuc sv) {
         // Câu lệnh SQL để thêm một dòng vào bảng tblDanhMuc
-        String sql = "Insert into tblDanhMuc values(?,?,?)";
+        String sql = "Insert into tblDanhMuc( ten, ghichu) values( ?,?)";
 
         // Mở cơ sở dữ liệu để ghi
         SQLiteDatabase db = getWritableDatabase();
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng DanhMuc
-        db.execSQL(sql, new String[]{sv.getMa(), sv.getTen(), sv.getGhichu()});
+        db.execSQL(sql, new String[]{sv.getTen(), sv.getGhichu()});
     }
-//xxxxxx
+
+
     /**
      * Xóa danh mục
      *
@@ -63,7 +64,7 @@ public class DBDanhMuc extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // Thực hiện câu lệnh SQL với mã danh mục từ đối tượng DanhMuc
-        db.execSQL(sql, new String[]{sv.getMa()});
+        db.execSQL(sql, new String[]{sv.getMa() + ""});
     }
 
 
@@ -81,7 +82,7 @@ public class DBDanhMuc extends SQLiteOpenHelper {
 
         // Thực hiện câu lệnh SQL với các tham số từ đối tượng DanhMuc
         // sv.getTen() và sv.getGhichu() sẽ thay thế cho ?, sv.getMa() sẽ thay thế cho ?
-        db.execSQL(sql, new String[]{sv.getTen(), sv.getGhichu(), sv.getMa()});
+        db.execSQL(sql, new String[]{sv.getTen(), sv.getGhichu(), sv.getMa() + ""});
     }
 
 
@@ -110,7 +111,7 @@ public class DBDanhMuc extends SQLiteOpenHelper {
                 DanhMuc danhMuc = new DanhMuc();
 
                 // Đọc dữ liệu từ cột 0 (Mã danh mục) và cập nhật vào đối tượng
-                danhMuc.setMa(cursor.getString(0).toString());
+                danhMuc.setMa(cursor.getInt(0));
 
                 // Đọc dữ liệu từ cột 1 (Tên danh mục) và cập nhật vào đối tượng
                 danhMuc.setTen(cursor.getString(1).toString());
@@ -129,6 +130,9 @@ public class DBDanhMuc extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // Xóa bảng
+        db.execSQL("DROP TABLE IF EXISTS tblDanhMuc");
+        // Tạo lại bảng
+        onCreate(db);
     }
 }

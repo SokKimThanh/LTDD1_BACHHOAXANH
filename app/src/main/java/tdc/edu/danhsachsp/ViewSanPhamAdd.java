@@ -21,7 +21,8 @@ import tdc.edu.danhsachdm.DBDanhMuc;
 import tdc.edu.danhsachdm.DanhMuc;
 
 public class ViewSanPhamAdd extends AppCompatActivity {
-    EditText edtMaSp, edtGiaSP, edtTenSP, edtSoLuongSP;
+    EditText edtGiaSP, edtTenSP, edtSoLuongSP;
+
     Spinner spinnerDanhMuc;
     Button btnAdd, btnRefresh, btnBack;
 
@@ -35,7 +36,8 @@ public class ViewSanPhamAdd extends AppCompatActivity {
     DBDanhMuc dbDanhMuc;
 
     DanhMuc selectedDanhmucSpinner = new DanhMuc();
-    String selectedMaDM = "";
+    int selectedMaDM = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
     }
 
     private void setControl() {
-        this.edtMaSp = findViewById(R.id.edtMaSP);
+//        this.edtMaSp = findViewById(R.id.edtMaSP);
         this.edtGiaSP = findViewById(R.id.edtGiaSP);
         this.edtTenSP = findViewById(R.id.edtTenSP);
         this.spinnerDanhMuc = findViewById(R.id.spinnerDanhMuc);
@@ -73,16 +75,16 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
                 selectedMaDM = selectedDanhmucSpinner.getMa();
                 // Xử lý mã đã chọn...
-                if (selectedMaDM.equals("dm001")) {
+                if (selectedMaDM == 0) {
                     ivHinhAdd.setImageResource(R.drawable.img_thit);
                 }
-                if (selectedMaDM.equals("dm002")) {
+                if (selectedMaDM == 1) {
                     ivHinhAdd.setImageResource(R.drawable.img_ca);
                 }
-                if (selectedMaDM.equals("dm003")) {
+                if (selectedMaDM == 2) {
                     ivHinhAdd.setImageResource(R.drawable.img_trung);
                 }
-                if (selectedMaDM.equals("dm004")) {
+                if (selectedMaDM == 3) {
                     ivHinhAdd.setImageResource(R.drawable.img_sua);
                 }
             }
@@ -96,10 +98,6 @@ public class ViewSanPhamAdd extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtMaSp.getText().length() <= 0) {
-                    edtMaSp.setError("Vui long nhap ma");
-                    return;
-                }
                 if (edtGiaSP.getText().length() <= 0) {
                     edtGiaSP.setError("Vui long nhap gia");
                     return;
@@ -114,8 +112,7 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 }
                 // Tạo sản phẩm mới
                 HangHoa sanPham = new HangHoa();
-                // thêm mã sp
-                sanPham.setMaSp(edtMaSp.getText().toString());
+
                 // thêm tên sp
                 sanPham.setTenSp(edtTenSP.getText().toString());
                 // thêm giá sp
@@ -123,25 +120,23 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 // Thêm số lượng nhập kho
                 sanPham.setSoLuongTonKho(Integer.parseInt(edtSoLuongSP.getText().toString()));
                 // thêm loại sp(lưu mã loại sản phẩm)
-                sanPham.setLoaiSp(selectedMaDM);
-
+                sanPham.setLoaiSp(selectedMaDM+"");
 
                 // Dữ liệu tĩnh tham gia
                 if (ViewSanPhamList.hangHoas.add(sanPham)) {
                     // Thêm đối tượng HangHoa vào cơ sở dữ liệu
                     dbHangHoa.ThemDL(sanPham);
                     Toast.makeText(ViewSanPhamAdd.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-//                    ViewSanPhamList.spAdapter.notifyDataSetChanged();// Cập nhật ListView
+                    ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();// Cập nhật ListView
+
                 }
             }
         });
 
 
-
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtMaSp.setText("");
                 edtGiaSP.setText("");
                 edtTenSP.setText("");
                 spinnerDanhMuc.setSelection(0);
@@ -152,7 +147,6 @@ public class ViewSanPhamAdd extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
                 Toast.makeText(ViewSanPhamAdd.this, "Quay lai Thành công", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -165,16 +159,14 @@ public class ViewSanPhamAdd extends AppCompatActivity {
         dbDanhMuc = new DBDanhMuc(this);
 
         // Danh sách các đối tượng DanhMuc
-        List<DanhMuc> list =  dbDanhMuc.DocDL();
-        adapter_lsp  = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
+        List<DanhMuc> list = dbDanhMuc.DocDL();
+        adapter_lsp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
         spinnerDanhMuc.setAdapter(adapter_lsp);
-
-
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

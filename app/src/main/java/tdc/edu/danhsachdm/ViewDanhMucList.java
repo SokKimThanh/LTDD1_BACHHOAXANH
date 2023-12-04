@@ -20,8 +20,9 @@ public class ViewDanhMucList extends AppCompatActivity {
     //1 danh sach san pham
     //2 sanphamadapter
     //3 listview
-    static DanhMucList danhMucList;
-    static DanhMucListAdapter adapter;
+    static DanhMucList danhMucList = new DanhMucList();
+
+    static DanhMucListAdapter danhMucListAdapter;
 
     ListView lvDanhMucList;
 
@@ -49,7 +50,7 @@ public class ViewDanhMucList extends AppCompatActivity {
     private void setEvent() {
         // khoi tao san pham
         KhoiTao();
-        
+
         // su kien click vao item de update
         lvDanhMucList.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(ViewDanhMucList.this, ViewDanhMucEdit.class);
@@ -84,8 +85,6 @@ public class ViewDanhMucList extends AppCompatActivity {
 
     // khoi tao danh sach san pham
     private void KhoiTao() {
-
-        danhMucList = new DanhMucList();
         // dbsinhvien truy cập dữ liệu DB
         dbDanhMuc = new DBDanhMuc(this);
 
@@ -97,16 +96,12 @@ public class ViewDanhMucList extends AppCompatActivity {
             return;
         }
         // Thêm dữ liệu từ cơ sở dữ liệu vào danh sách và cập nhật giao diện
-        for (DanhMuc danhMuc: dbDanhMuc.DocDL()) {
-            danhMucList.Them(danhMuc);
-        }
+        danhMucList.setDanhMucList(dbDanhMuc.DocDL());
 
         // gan san pham bang menu item layout(gan template item)
-        adapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, danhMucList.getDanhMucList());
+        danhMucListAdapter = new DanhMucListAdapter(this, R.layout.layout_danhmuc_item, danhMucList.getDanhMucList());
         // hien thi len listview
-        lvDanhMucList.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
+        lvDanhMucList.setAdapter(danhMucListAdapter);
     }
 
     // gan menu vao danh sach
@@ -128,7 +123,7 @@ public class ViewDanhMucList extends AppCompatActivity {
 
         // Xử lý sự kiện khi nhấn vào nút hỗ trợ
         // Nếu id của item là android.R.id.home, tức là nút hỗ trợ
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             // Gọi phương thức onBackPressed() để quay về màn hình trước đó
             onBackPressed();
         }

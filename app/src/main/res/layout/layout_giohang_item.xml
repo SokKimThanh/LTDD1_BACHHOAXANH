@@ -129,7 +129,7 @@
                     android:src="@drawable/icon_plminus_pink"
                     android:textColor="@color/greenPrimary" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tvQuantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

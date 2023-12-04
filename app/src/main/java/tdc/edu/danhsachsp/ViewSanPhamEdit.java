@@ -42,7 +42,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
 
     DanhMuc selectedDanhmucSpinner = new DanhMuc();
 
-    String selectedMaDM = "";
+    int selectedMaDM = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +77,19 @@ public class ViewSanPhamEdit extends AppCompatActivity {
                 selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
                 selectedMaDM = selectedDanhmucSpinner.getMa();
 // Xử lý mã đã chọn...
-                if (selectedMaDM.equals("dm001")) {
+                if (selectedMaDM == 0) {
                     spinnerDanhMuc.setSelection(0);
                     ivHinhEdit.setImageResource(R.drawable.img_thit);
                 }
-                if (selectedMaDM.equals("dm002")) {
+                if (selectedMaDM == 1) {
                     spinnerDanhMuc.setSelection(1);
                     ivHinhEdit.setImageResource(R.drawable.img_ca);
                 }
-                if (selectedMaDM.equals("dm003")) {
+                if (selectedMaDM == 2) {
                     spinnerDanhMuc.setSelection(2);
                     ivHinhEdit.setImageResource(R.drawable.img_trung);
                 }
-                if (selectedMaDM.equals("dm004")) {
+                if (selectedMaDM == 3) {
                     spinnerDanhMuc.setSelection(3);
                     ivHinhEdit.setImageResource(R.drawable.img_sua);
                 }
@@ -105,7 +105,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         sanPham = (HangHoa) getIntent().getSerializableExtra("item");
 
         //hiển thị dữ liệu lên màn hình sửa
-        tvMaSp.setText(sanPham.getMaSp());// mã sp
+        tvMaSp.setText(sanPham.getMaSp() + "");// mã sp
         edtTenSP.setText(sanPham.getTenSp());// tên sp
         edtGiaSP.setText(String.valueOf(sanPham.getGiaSp()));// giá sp
         String soluong = String.valueOf(sanPham.getSoLuongTonKho());
@@ -113,13 +113,13 @@ public class ViewSanPhamEdit extends AppCompatActivity {
         edtSoLuongSPNhapKho.setText(soluong);// soluong sp nhập kho
 
         // loại sản phẩm
-        if (sanPham.getLoaiSp().equals("dm001"))
+        if (sanPham.getLoaiSp().equals("0"))
             spinnerDanhMuc.setSelection(0);
-        if (sanPham.getLoaiSp().equals("dm002"))
+        if (sanPham.getLoaiSp().equals("1"))
             spinnerDanhMuc.setSelection(1);
-        if (sanPham.getLoaiSp().equals("dm003"))
+        if (sanPham.getLoaiSp().equals("2"))
             spinnerDanhMuc.setSelection(2);
-        if (sanPham.getLoaiSp().equals("dm004"))
+        if (sanPham.getLoaiSp().equals("3"))
             spinnerDanhMuc.setSelection(3);
         // sự kiện update
         // Sử dụng dữ liệu tĩnh của chính nó(adapter_lsp)
@@ -129,16 +129,17 @@ public class ViewSanPhamEdit extends AppCompatActivity {
             public void onClick(View v) {
                 for (HangHoa sp : ViewSanPhamList.hangHoas) {
                     //tim ma san pham de cap nhat
-                    if (sp.getMaSp().equals(sanPham.getMaSp())) {
+                    if (sp.getMaSp() == sanPham.getMaSp()) {
                         // sua
                         sp.setTenSp(edtTenSP.getText().toString());
                         sp.setGiaSp(Double.valueOf(edtGiaSP.getText().toString()));
                         sp.setSoLuongTonKho(Integer.parseInt(edtSoLuongSPNhapKho.getText().toString()));
-                        sp.setLoaiSp(selectedMaDM);
+                        sp.setLoaiSp(selectedMaDM + "");
                         // thong bao
                         dbHangHoa.SuaDL(sp);
                         ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();
                         Toast.makeText(ViewSanPhamEdit.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
@@ -150,7 +151,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
             public void onClick(View v) {
                 for (HangHoa sp : ViewSanPhamList.hangHoas) {
                     //tim ma san pham de cap nhat
-                    if (sp.getMaSp().equals(sanPham.getMaSp())) {
+                    if (sp.getMaSp() == sanPham.getMaSp()) {
                         // xoa
 
                         ViewSanPhamList.hangHoas.remove(sp);
@@ -158,6 +159,7 @@ public class ViewSanPhamEdit extends AppCompatActivity {
                         dbHangHoa.XoaDL(sp);
                         ViewSanPhamList.sanPhamListAdapter.notifyDataSetChanged();
                         Toast.makeText(ViewSanPhamEdit.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
@@ -170,7 +172,6 @@ public class ViewSanPhamEdit extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
                 Toast.makeText(ViewSanPhamEdit.this, "Quay lai Thành công", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
