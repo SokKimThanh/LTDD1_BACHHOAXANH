@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import tdc.edu.ShoppingSearch.OnDeleteFromCartClickListener;
+import tdc.edu.ShoppingSearch.ProductItemAdapter;
 import tdc.edu.ShoppingSearch.ViewProductSearch;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
@@ -58,7 +59,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     private void checkTrangThaiNutThanhToan() {
         // xử lý cộng trừ gio hàng
-        //            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
         // khóa thao tác thanh toán
         // tắt thông báo
         // mở khóa thao tác thanh toán
@@ -76,10 +77,12 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
                 lamMoiGioHang();
                 checkTrangThaiNutThanhToan();
 
-                // Khởi tạo đối tượng viewprotypeproductSearch
-                ViewProductSearch productSearch = new ViewProductSearch();
-                //Cập nhật số lượng hàng trên hàng hóa list
-                productSearch.updateListSanPham(ViewProductSearch.gioHang.getHangHoaList());
+//                // gan san pham bang menu item layout(gan template item)
+//                ProductItemAdapter productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, dbHangHoa.DocDL(), this);
+//                // hien thi len listview
+//                ViewProductSearch.listviewSanPhamSearch.setAdapter(productItemAdapter);
+                ViewProductSearch.productItemAdapter.notifyDataSetChanged();
+
                 onBackPressed();
             }
         });

@@ -43,15 +43,15 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
     RadioGroup rgSearchBy;
     Button btnTimKiem, btnAddToCartViewHolder;
 
-    ListView listViewDanhMucSearch, listviewSanPhamSearch;
+    public static ListView listViewDanhMucSearch, listviewSanPhamSearch;
 
     EditText edtSearchKeyword;
     ImageView ivProduct;
 
 
     // cập nhật lại listview bằng adapter
-    ProductItemAdapter productItemAdapter;
-    ProtypeItemAdapter protypeItemAdapter;
+    public static ProductItemAdapter productItemAdapter;
+    public static ProtypeItemAdapter protypeItemAdapter;
 
 
     //3 thanh phan hien thi danh sach
@@ -187,7 +187,7 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
         protypeItemAdapter = new ProtypeItemAdapter(this, R.layout.layout_protype_item, listDanhMuc);
         // hien thi len listview
         listViewDanhMucSearch.setAdapter(protypeItemAdapter);
-        protypeItemAdapter.notifyDataSetChanged();
+
     }
 
     public void GetDanhSachSanPhamList() {

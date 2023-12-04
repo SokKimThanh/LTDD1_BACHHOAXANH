@@ -14,7 +14,6 @@ public class SanPham implements Serializable {
         this.tenSp = tenSp;
         this.loaiSp = loaiSp;
         this.giaSp = giaSp;
-        this.maSp++;
     }
 
     public String getTenSp() {
