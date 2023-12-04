@@ -59,7 +59,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     private void checkTrangThaiNutThanhToan() {
         // xử lý cộng trừ gio hàng
         if (ViewProductSearch.gioHang.getHangHoaList().size() == 0) {
-            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
             // khóa thao tác thanh toán
             btnThanhToan.setEnabled(false);
         } else {
@@ -76,10 +76,10 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
                 ChiTietGioHang chiTietGioHang = taoChiTietGioHang(date);
                 capNhatSoLuongTonKho();
                 dbGioHang.ThemDL(chiTietGioHang);
-                Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewGioHangList.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
                 lamMoiGioHang();
                 checkTrangThaiNutThanhToan();
-                
+
                 // Khởi tạo đối tượng viewprotypeproductSearch
                 ViewProductSearch productSearch = new ViewProductSearch();
                 //Cập nhật số lượng hàng trên hàng hóa list
