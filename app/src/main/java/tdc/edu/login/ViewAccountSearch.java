@@ -66,11 +66,11 @@ public class ViewAccountSearch extends AppCompatActivity {
                 radioGroupConditionPhanQuyen.setVisibility(View.VISIBLE);
                 int accountLevel = -1;
                 if (rbAdmin.isChecked()) {
-                    accountLevel = 0;// admin
+                    accountLevel = AccountLevel.ADMIN.getLevelCode();
                 } else if (rbCustomer.isChecked()) {
-                    accountLevel = 1;// user
+                    accountLevel = AccountLevel.CUSTOMER.getLevelCode();
                 } else if (rbEmployee.isChecked()) {
-                    accountLevel = 2;// guest
+                    accountLevel = AccountLevel.EMPLOYEE.getLevelCode();
                 }
                 // Nếu có keyword thì tìm theo keyword
                 if (edtAccountName.getText().length() > 0) {
@@ -183,13 +183,15 @@ public class ViewAccountSearch extends AppCompatActivity {
             return false;
         });
     }
-    public void ShowThongBaoTrangThaiSearch(){
+
+    public void ShowThongBaoTrangThaiSearch() {
         if (accounts.size() > 0) {
             ivSearchNull.setVisibility(View.GONE);
         } else {
             ivSearchNull.setVisibility(View.VISIBLE);
         }
     }
+
     private void KhoiTao() {
         dbUserAccount = new DBAccount(ViewAccountSearch.this);
         // Kiểm tra xem cơ sở dữ liệu có rỗng không
