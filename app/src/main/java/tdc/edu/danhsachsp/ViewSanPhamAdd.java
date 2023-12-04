@@ -75,16 +75,16 @@ public class ViewSanPhamAdd extends AppCompatActivity {
                 selectedDanhmucSpinner = (DanhMuc) parent.getItemAtPosition(position);
                 selectedMaDM = selectedDanhmucSpinner.getMa();
                 // Xử lý mã đã chọn...
-                if (selectedMaDM == 0) {
+                if (selectedMaDM == 1) {
                     ivHinhAdd.setImageResource(R.drawable.img_thit);
                 }
-                if (selectedMaDM == 1) {
+                if (selectedMaDM == 2) {
                     ivHinhAdd.setImageResource(R.drawable.img_ca);
                 }
-                if (selectedMaDM == 2) {
+                if (selectedMaDM == 3) {
                     ivHinhAdd.setImageResource(R.drawable.img_trung);
                 }
-                if (selectedMaDM == 3) {
+                if (selectedMaDM == 4) {
                     ivHinhAdd.setImageResource(R.drawable.img_sua);
                 }
             }
