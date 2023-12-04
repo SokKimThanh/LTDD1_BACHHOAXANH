@@ -39,7 +39,7 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
-    RadioButton radMaLoaiSP, radTenSP, radAllSanPham, radSearchBy;
+    RadioButton rbXemLoaiSP, rbXemTenSP, rbXemTatCa, rbKetQua;
     RadioGroup rgSearchBy;
     Button btnTimKiem, btnAddToCartViewHolder;
 
@@ -79,12 +79,11 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
      * TextView tvCartCounting
      */
     public static TextView tvCartCounting;
+
     /**
-     *
      * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
-     *
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,29 +100,25 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
 
     private void setEvent() {
         KhoiTao();
+        rgSearchBy.clearCheck();
+
         // kiểm tra chọn tiêu chí
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
             // Xử lý sự kiện khi chọn radio button khác nhau
-            radSearchBy = findViewById(checkedId);
-            radioSearchByText = radSearchBy.getText().toString();
-            if (checkedId == radMaLoaiSP.getId()) {
+            rbKetQua = findViewById(checkedId);
+            radioSearchByText = rbKetQua.getText().toString();
+            if (checkedId == rbXemLoaiSP.getId()) {
                 // Hiện ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.VISIBLE);
             }
             // tên sản phẩm
-            else if (checkedId == radTenSP.getId()) {
+            else if (checkedId == rbXemTenSP.getId()) {
                 // Ẩn ListView khi RadioButton được nhấn
                 listViewDanhMucSearch.setVisibility(View.GONE);
-            } else if (checkedId == radAllSanPham.getId()) {
+            } else if (checkedId == rbXemTatCa.getId()) {
                 // Ẩn ListView khi RadioButton được nhấn
-                listViewDanhMucSearch.setVisibility(View.VISIBLE);
-            } else {
-                rgSearchBy.clearCheck();
-                radMaLoaiSP.setChecked(true);
-                radTenSP.setChecked(false);
-                listViewDanhMucSearch.setVisibility(View.VISIBLE);
+                listViewDanhMucSearch.setVisibility(View.GONE);
             }
-
         });
 
         listViewDanhMucSearch.setOnItemClickListener((parent, view, position, id) -> {
@@ -131,6 +126,7 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
             // 'position' là vị trí của item đã chọn trong ListView
             // 'id' là ID dòng của item đã chọn (nếu Adapter có)
             this.danhMucSelector = (DanhMuc) parent.getItemAtPosition(position);
+            updateListSanPham(dbSanPham.DocDLByLoaiSP(this.danhMucSelector.getMa()+""));
         });
 
         listviewSanPhamSearch.setOnItemClickListener((parent, view, position, id) -> {
@@ -163,6 +159,8 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
             }
         });
 
+        // Thực thi xem tất cả
+        rbXemTatCa.setChecked(true);
     }
 
     private void KhoiTao() {
@@ -323,10 +321,10 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
      */
     private void setControl() {
         // ánh xạ các nút điều khiển
-        radMaLoaiSP = findViewById(R.id.radMaLoaiSP);
-        radTenSP = findViewById(R.id.radTenSP);
+        rbXemLoaiSP = findViewById(R.id.radMaLoaiSP);
+        rbXemTenSP = findViewById(R.id.radTenSP);
         rgSearchBy = findViewById(R.id.rgSearchBy);
-        radAllSanPham = findViewById(R.id.radAllSanPham);
+        rbXemTatCa = findViewById(R.id.radAllSanPham);
         btnTimKiem = findViewById(R.id.btnTimKiem);
         ivProduct = findViewById(R.id.ivProduct);
         // anh xa ô tìm kiếm theo loại từ khóa
@@ -345,10 +343,10 @@ public class ViewProductSearch extends AppCompatActivity implements OnAddToCartC
 
         // tìm kiếm theo loại theo ten sản phẩm
         rgSearchBy.clearCheck();
-        radMaLoaiSP.setChecked(true);
-        radTenSP.setChecked(false);
-        radAllSanPham.setChecked(false);
-        radioSearchByText = radMaLoaiSP.getText().toString();
+        rbXemLoaiSP.setChecked(true);
+        rbXemTenSP.setChecked(false);
+        rbXemTatCa.setChecked(false);
+        radioSearchByText = rbXemLoaiSP.getText().toString();
     }
 
 
