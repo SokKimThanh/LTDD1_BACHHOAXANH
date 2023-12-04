@@ -56,6 +56,8 @@ public class ViewAccountSearch extends AppCompatActivity {
         // lần đầu chạy xóa hết lựa chọn radiobutton
         rgSearchBy.clearCheck();
         rgCapDoTaiKhoan.clearCheck();
+        // ẩn radiogroup phân quyền
+        radioGroupConditionPhanQuyen.setVisibility(View.GONE);
 
         // ẩn radio lựa chọn tìm kiếm theo loại tài khoản
         rgSearchBy.setOnCheckedChangeListener((group, checkedId) -> {
@@ -107,7 +109,8 @@ public class ViewAccountSearch extends AppCompatActivity {
             }
             CapNhatAccountList();
         });
-        // execute gut
+        // Thực hiện xem tất cả
+        rbXemTatCa.setChecked(true);
     }
 
     public void CapNhatAccountList() {

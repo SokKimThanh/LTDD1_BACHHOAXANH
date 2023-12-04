@@ -100,8 +100,7 @@ public class ViewSanPhamList extends AppCompatActivity {
         sanPhamListAdapter = new SanPhamListAdapter(this, R.layout.layout_sanpham_item, hangHoas);
         // hien thi len listview
         lvDanhSachSp.setAdapter(sanPhamListAdapter);
-        sanPhamListAdapter.notifyDataSetChanged();
-    }
+     }
 
     // gan menu vao danh sach
     @Override
