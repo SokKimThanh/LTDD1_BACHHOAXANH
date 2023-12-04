@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import tdc.edu.ShoppingSearch.OnDeleteFromCartClickListener;
-import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
+import tdc.edu.ShoppingSearch.ViewProductSearch;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
 
@@ -59,7 +59,7 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         tvName.setText(hangHoa.getTenSp());
         tvPrice.setText(String.valueOf(hangHoa.getGiaSp()));
         tvProductStock.setText(String.valueOf(hangHoa.getSoLuongTonKho()));
-        tvQuantity.setText(String.valueOf(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)));
+        tvQuantity.setText(String.valueOf(ViewProductSearch.gioHang.getQuantity(hangHoa)));
 
         // hien thi hinh`
         if (hangHoa.getLoaiSp().equals("dm001")) {
@@ -75,12 +75,12 @@ public class GioHangAdapter extends ArrayAdapter<HangHoa> {
         ivDecrease.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
             this.listener.onDecreaseCartItemClicked(hangHoa);
-            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)+"");
+            tvQuantity.setText(ViewProductSearch.gioHang.getQuantity(hangHoa)+"");
         });
         ivIncrease.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(v.getContext(), R.anim.image_click));
             this.listener.onIncreaseCartItemClicked(hangHoa);
-            tvQuantity.setText(ViewProtypeProductSearch.gioHang.getQuantity(hangHoa)+"");
+            tvQuantity.setText(ViewProductSearch.gioHang.getQuantity(hangHoa)+"");
         });
 
 

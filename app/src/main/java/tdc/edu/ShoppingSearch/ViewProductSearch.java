@@ -33,7 +33,7 @@ import tdc.edu.danhsachsp.R;
 import tdc.edu.giohang.GioHang;
 import tdc.edu.giohang.ViewGioHangList;
 
-public class ViewProtypeProductSearch extends AppCompatActivity implements OnAddToCartClickListener {
+public class ViewProductSearch extends AppCompatActivity implements OnAddToCartClickListener {
 
     public static GioHang gioHang = new GioHang();
 
@@ -192,7 +192,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         protypeItemAdapter.notifyDataSetChanged();
     }
 
-    private void GetDanhSachSanPhamList() {
+    public void GetDanhSachSanPhamList() {
         // dbsinhvien truy cập dữ liệu DB
         dbSanPham = new DBHangHoa(this);
 
@@ -229,7 +229,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         if (gioHang.getHangHoaList() != null) {
             if (gioHang.contains(hangHoa)) {
                 // Nếu có, hiển thị một hộp thoại xác nhận
-                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProtypeProductSearch.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProductSearch.this);
                 builder.setMessage(ketqua);
                 builder.setPositiveButton("Có", (dialog, which) -> {
                     if (hangHoa.getSoLuongTonKho() >= 1) {
@@ -239,11 +239,11 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
                         // Cập nhật biểu tượng giỏ hàng
                         updateCartIcon(customMenu);
                         // Thông báo cho người dùng
-                        Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     } else {
                         // không đủ số lượng cung cấp
                         // Thông báo cho người dùng
-                        Toast.makeText(ViewProtypeProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("Không", (dialog, which) -> {
@@ -256,16 +256,14 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
                 if (hangHoa.getSoLuongTonKho() >= 1) {
                     // đủ số lượng cung cấp
                     gioHang.add(hangHoa);
-                    // Giảm số lượng tồn kho
-                    hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - 1);
                     // Cập nhật biểu tượng giỏ hàng
                     updateCartIcon(customMenu);
                     // Thông báo cho người dùng
-                    Toast.makeText(ViewProtypeProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewProductSearch.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                 } else {
                     // không đủ số lượng cung cấp
                     // Thông báo cho người dùng
-                    Toast.makeText(ViewProtypeProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewProductSearch.this, "Số lượng sản phẩm không đủ để cung cấp", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -383,7 +381,7 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
 
         tvCartCounting.setOnClickListener(v ->
         {
-            Intent intent = new Intent(ViewProtypeProductSearch.this, ViewGioHangList.class);
+            Intent intent = new Intent(ViewProductSearch.this, ViewGioHangList.class);
             startActivity(intent);
         });
 
@@ -404,5 +402,14 @@ public class ViewProtypeProductSearch extends AppCompatActivity implements OnAdd
         customMenu = updateCartIcon(menu);
         // hiển thị menu
         return super.onCreateOptionsMenu(customMenu);
+    }
+
+    public void updateListSanPham(List<HangHoa> listHangHoa) {
+
+        // gan san pham bang menu item layout(gan template item)
+        productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, listHangHoa, this);
+        // hien thi len listview
+        listviewSanPhamSearch.setAdapter(productItemAdapter);
+        productItemAdapter.notifyDataSetChanged();
     }
 }

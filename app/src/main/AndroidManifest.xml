@@ -37,7 +37,7 @@
             android:name="tdc.edu.navigation.ViewNavigation"
             android:exported="true"></activity>
         <activity
-            android:name="tdc.edu.ShoppingSearch.ViewProtypeProductSearch"
+            android:name="tdc.edu.ShoppingSearch.ViewProductSearch"
             android:exported="true" />
         <activity
             android:name="tdc.edu.danhsachdm.ViewDanhMucAdd"

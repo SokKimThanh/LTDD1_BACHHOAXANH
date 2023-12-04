@@ -25,7 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
+import tdc.edu.ShoppingSearch.ViewProductSearch;
 import tdc.edu.ThongKe.BaoCao;
 import tdc.edu.danhsachdh.DS_DonHang;
 import tdc.edu.danhsachdm.ViewDanhMucList;
@@ -201,7 +201,7 @@ public class ViewNavigation extends AppCompatActivity {
                     }
                     // Tìm kiếm sản phẩm
                     if (item.getItemId() == id.mnSearchSanPham) {
-                        Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
+                        Intent intent = new Intent(ViewNavigation.this, ViewProductSearch.class);
                         startActivity(intent);
                     }
                     // Đăng nhập
@@ -232,7 +232,7 @@ public class ViewNavigation extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    Intent intent = new Intent(ViewNavigation.this, ViewProtypeProductSearch.class);
+                    Intent intent = new Intent(ViewNavigation.this, ViewProductSearch.class);
                     startActivity(intent);
                 }
             }, 500); // Độ trễ là 0.5 giây

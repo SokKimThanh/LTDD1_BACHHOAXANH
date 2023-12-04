@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import tdc.edu.ShoppingSearch.OnDeleteFromCartClickListener;
-import tdc.edu.ShoppingSearch.ViewProtypeProductSearch;
+import tdc.edu.ShoppingSearch.ViewProductSearch;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
 import tdc.edu.danhsachsp.R;
@@ -58,7 +58,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     private void checkTrangThaiNutThanhToan() {
         // xử lý cộng trừ gio hàng
-        if (ViewProtypeProductSearch.gioHang.getHangHoaList().size() == 0) {
+        if (ViewProductSearch.gioHang.getHangHoaList().size() == 0) {
             Toast.makeText(this, "Giỏ hàng rỗng", Toast.LENGTH_SHORT).show();
             // khóa thao tác thanh toán
             btnThanhToan.setEnabled(false);
@@ -79,6 +79,12 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
                 Toast.makeText(ViewGioHangList.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 lamMoiGioHang();
                 checkTrangThaiNutThanhToan();
+                
+                // Khởi tạo đối tượng viewprotypeproductSearch
+                ViewProductSearch productSearch = new ViewProductSearch();
+                //Cập nhật số lượng hàng trên hàng hóa list
+                productSearch.updateListSanPham(ViewProductSearch.gioHang.getHangHoaList());
+                onBackPressed();
             }
         });
     }
@@ -106,7 +112,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     private String taoHoaDon() {
         StringBuilder msg = new StringBuilder();
-        for (Map.Entry<HangHoa, Integer> entry : ViewProtypeProductSearch.gioHang.getGiohang().entrySet()) {
+        for (Map.Entry<HangHoa, Integer> entry : ViewProductSearch.gioHang.getGiohang().entrySet()) {
             HangHoa hangHoa = entry.getKey();
             int quantity = entry.getValue();
             msg.append("Tên sp: ").append(hangHoa.getTenSp());
@@ -116,7 +122,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     }
 
     private void capNhatSoLuongTonKho() {
-        for (Map.Entry<HangHoa, Integer> entry : ViewProtypeProductSearch.gioHang.getGiohang().entrySet()) {
+        for (Map.Entry<HangHoa, Integer> entry : ViewProductSearch.gioHang.getGiohang().entrySet()) {
             HangHoa hangHoa = entry.getKey();
             int quantity = entry.getValue();
             hangHoa.setSoLuongTonKho(hangHoa.getSoLuongTonKho() - quantity);
@@ -125,27 +131,24 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     }
 
     private void lamMoiGioHang() {
-        ViewProtypeProductSearch.gioHang.clear();
-        gioHangAdapter = new GioHangAdapter(ViewGioHangList.this, R.layout.layout_giohang_item, ViewProtypeProductSearch.gioHang.getHangHoaList(), this);
+        ViewProductSearch.gioHang.clear();
+        gioHangAdapter = new GioHangAdapter(ViewGioHangList.this, R.layout.layout_giohang_item, ViewProductSearch.gioHang.getHangHoaList(), this);
         listView.setAdapter(gioHangAdapter);
         gioHangAdapter.notifyDataSetChanged();
-        ViewProtypeProductSearch.tvCartCounting.setText(String.valueOf(ViewProtypeProductSearch.gioHang.getQuantity()));
+        ViewProductSearch.tvCartCounting.setText(String.valueOf(ViewProductSearch.gioHang.getQuantity()));
     }
 
 
     private void KhoiTao() {
         // Lấy danh sách hàng hóa từ giỏ hàng
-
-
         // Tính tổng số tiền và cập nhật tvTongThanhTien
-        double tongThanhTien = ViewProtypeProductSearch.gioHang.getTongThanhTien();
+        double tongThanhTien = ViewProductSearch.gioHang.getTongThanhTien();
         tvTongThanhTien.setText(String.valueOf(tongThanhTien));
 
         // Khởi tạo adapter với danh sách GioHang
-        gioHangAdapter = new GioHangAdapter(this, R.layout.layout_giohang_item, ViewProtypeProductSearch.gioHang.getHangHoaList(), this);
+        gioHangAdapter = new GioHangAdapter(this, R.layout.layout_giohang_item, ViewProductSearch.gioHang.getHangHoaList(), this);
         listView.setAdapter(gioHangAdapter);
         gioHangAdapter.notifyDataSetChanged();
-        // Định dạng chuỗi ngày tháng năm
     }
 
     private void setControl() {
@@ -177,9 +180,9 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     @Override
     public void onDeleteCartItemClicked(HangHoa hangHoa) {
-        if (ViewProtypeProductSearch.gioHang.remove(hangHoa)) {
+        if (ViewProductSearch.gioHang.remove(hangHoa)) {
             capNhatGioHang();
-            Toast.makeText(ViewGioHangList.this, "Xóa sản phẩm khỏi giỏ hàng thành công! SL:" + ViewProtypeProductSearch.gioHang.getQuantity(hangHoa), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewGioHangList.this, "Xóa sản phẩm khỏi giỏ hàng thành công! SL:" + ViewProductSearch.gioHang.getQuantity(hangHoa), Toast.LENGTH_SHORT).show();
             checkTrangThaiNutThanhToan();
         } else {
             Toast.makeText(ViewGioHangList.this, "Sản phẩm không tồn tại trong giỏ hàng!", Toast.LENGTH_SHORT).show();
@@ -189,7 +192,7 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     @SuppressLint("SetTextI18n")
     @Override
     public void onIncreaseCartItemClicked(HangHoa hangHoa) {
-        ViewProtypeProductSearch.gioHang.increaseQuantity(hangHoa);
+        ViewProductSearch.gioHang.increaseQuantity(hangHoa);
         capNhatTongThanhTien();
         capNhatSoLuongIconGioHang();
     }
@@ -197,24 +200,24 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
     @SuppressLint("SetTextI18n")
     @Override
     public void onDecreaseCartItemClicked(HangHoa hangHoa) {
-        ViewProtypeProductSearch.gioHang.decreaseQuantity(hangHoa);
+        ViewProductSearch.gioHang.decreaseQuantity(hangHoa);
         capNhatGioHang();
         checkTrangThaiNutThanhToan();
     }
 
     private void capNhatGioHang() {
-        gioHangAdapter = new GioHangAdapter(ViewGioHangList.this, R.layout.layout_giohang_item, ViewProtypeProductSearch.gioHang.getHangHoaList(), this);
+        gioHangAdapter = new GioHangAdapter(ViewGioHangList.this, R.layout.layout_giohang_item, ViewProductSearch.gioHang.getHangHoaList(), this);
         listView.setAdapter(gioHangAdapter);
         gioHangAdapter.notifyDataSetChanged();
         capNhatSoLuongIconGioHang();
     }
 
     private void capNhatTongThanhTien() {
-        ViewGioHangList.tvTongThanhTien.setText((ViewProtypeProductSearch.gioHang.getTongThanhTien() + ""));
+        ViewGioHangList.tvTongThanhTien.setText((ViewProductSearch.gioHang.getTongThanhTien() + ""));
     }
 
     private void capNhatSoLuongIconGioHang() {
-        ViewProtypeProductSearch.tvCartCounting.setText(String.valueOf(ViewProtypeProductSearch.gioHang.getQuantity()));
+        ViewProductSearch.tvCartCounting.setText(String.valueOf(ViewProductSearch.gioHang.getQuantity()));
     }
 
 }
