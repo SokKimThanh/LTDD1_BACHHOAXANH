@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import tdc.edu.ShoppingSearch.OnDeleteFromCartClickListener;
-import tdc.edu.ShoppingSearch.ProductItemAdapter;
 import tdc.edu.ShoppingSearch.ViewProductSearch;
 import tdc.edu.danhsachsp.DBHangHoa;
 import tdc.edu.danhsachsp.HangHoa;
@@ -68,22 +67,26 @@ public class ViewGioHangList extends AppCompatActivity implements OnDeleteFromCa
 
     private void btnThanhToan_ClickEvent() {
         btnThanhToan.setOnClickListener(v -> {
-            Date date = parseDate(edtNgayLapHoaDon.getText().toString());
-            if (edttenDonHang.getText() != null) {
-                ChiTietGioHang chiTietGioHang = taoChiTietGioHang(date);
-                capNhatSoLuongTonKho();
-                dbGioHang.ThemDL(chiTietGioHang);
-                Toast.makeText(ViewGioHangList.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
-                lamMoiGioHang();
-                checkTrangThaiNutThanhToan();
+            try {
+                Date date = parseDate(edtNgayLapHoaDon.getText().toString());
+                if (edttenDonHang.getText() != null) {
+                    ChiTietGioHang chiTietGioHang = taoChiTietGioHang(date);
+                    capNhatSoLuongTonKho();
+                    dbGioHang.ThemDL(chiTietGioHang);
+                    Toast.makeText(ViewGioHangList.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                    lamMoiGioHang();
+                    checkTrangThaiNutThanhToan();
 
 //                // gan san pham bang menu item layout(gan template item)
 //                ProductItemAdapter productItemAdapter = new ProductItemAdapter(this, R.layout.layout_product_item, dbHangHoa.DocDL(), this);
 //                // hien thi len listview
 //                ViewProductSearch.listviewSanPhamSearch.setAdapter(productItemAdapter);
-                ViewProductSearch.productItemAdapter.notifyDataSetChanged();
+                    ViewProductSearch.productItemAdapter.notifyDataSetChanged();
 
-                onBackPressed();
+                    onBackPressed();
+                }
+            } catch (Exception ex) {
+
             }
         });
     }

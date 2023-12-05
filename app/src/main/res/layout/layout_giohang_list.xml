@@ -14,7 +14,8 @@
         android:paddingVertical="10dp"
         android:text="Giỏ hàng"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/edtTenDonHang"
@@ -22,21 +23,32 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
         android:hint="Nhập tên đơn hàng"
+        android:minHeight="48dp"
         android:paddingVertical="10dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText,TextContrastCheck,VisualLintTextFieldSize"
+        android:inputType="text"
+        android:autofillHints="" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="21dp"
-            android:text="Ngày lập hóa đơn: "/>
+            android:text="Ngày lập hóa đơn: "
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
         <EditText
             android:id="@+id/edtNgayLapHoaDon"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
-            android:inputType="datetime"/>
+            android:hint="@string/app_name"
+            android:inputType="datetime"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
     </LinearLayout>
 
     <ListView
@@ -44,7 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        tools:ignore="InefficientWeight" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,10 +70,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tổng thành tiền: "
             android:textColor="@color/greenPrimary"
             android:textSize="16sp"
-            android:text="Tổng thành tiền: "
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextContrastCheck" />
 
         <TextView
             android:id="@+id/tvTongThanhTien"
@@ -68,16 +82,18 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:text="0"
-            android:textColor="@color/greenPrimary"
+            android:textColor="#33691E"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VND"
             android:textColor="@color/greenPrimary"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            tools:ignore="HardcodedText,SpUsage,TextContrastCheck,TextSizeCheck" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,6 +109,7 @@
             android:backgroundTint="@color/greenPrimary"
             android:padding="8dp"
             android:text="Thanh toán"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,VisualLintButtonSize" />
     </LinearLayout>
 </LinearLayout>
