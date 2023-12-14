@@ -19,7 +19,9 @@ import tdc.edu.danhsachsp.R;
 
 public class GioHangAdapter extends ArrayAdapter<HangHoa> {
     // Khai báo interface
-    private OnDeleteFromCartClickListener listener;//Triển khai interface để bắt sự kiện của adapter con từ lớp cha
+    private OnDeleteFromCartClickListener listener;
+    //Triển khai interface để bắt sự kiện của lớp con
+    // và viết định nghĩa sự kiện đó ở lớp cha
 
     Context context;//tham chiếu đến bộ nhớ trong quá trình app chạy
 
